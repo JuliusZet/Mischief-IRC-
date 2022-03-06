@@ -1,5 +1,8 @@
 #pragma once
 
+#include <WinSock2.h>
+#include <ws2tcpip.h>
+
 class IrcSocket
 {
 public:
@@ -15,6 +18,6 @@ public:
 	};
 
 private:
-	int _socket;
-	bool _isConnected;
+	SOCKET _socket{};
+	bool _isConnected{};
 };
