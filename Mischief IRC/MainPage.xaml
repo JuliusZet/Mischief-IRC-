@@ -27,7 +27,7 @@
                 </MenuFlyoutItem>
             </MenuBarItem>
             <MenuBarItem Title="IRC Client">
-                <MenuFlyoutItem Text="Connect">
+                <MenuFlyoutItem Text="Connect" x:Name="MenuFlyoutItemIrcClientConnect" Click="MenuFlyoutItemIrcClientConnect_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="O"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
@@ -44,7 +44,11 @@
                 </MenuFlyoutItem>
             </MenuBarItem>
             <MenuBarItem Title="Help">
-                <MenuFlyoutItem Text="About"/>
+                <MenuFlyoutItem Text="About">
+                    <MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="I"/>
+                    </MenuFlyoutItem.KeyboardAccelerators>
+                </MenuFlyoutItem>
                 <MenuFlyoutItem Text="Changelog"/>
                 <MenuFlyoutItem Text="Check for Updates"/>
             </MenuBarItem>

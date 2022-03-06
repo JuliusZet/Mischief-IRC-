@@ -17,5 +17,7 @@ namespace Mischief_IRC
 	public:
 		MainPage();
 
+	private:
+		void MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }
