@@ -5,6 +5,7 @@
     xmlns:local="using:Mischief_IRC"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -27,17 +28,17 @@
                 </MenuFlyoutItem>
             </MenuBarItem>
             <MenuBarItem Title="IRC Client">
-                <MenuFlyoutItem Text="Connect" x:Name="MenuFlyoutItemIrcClientConnect" Click="MenuFlyoutItemIrcClientConnect_Click">
+                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientConnect" Text="Connect" Click="MenuFlyoutItemIrcClientConnect_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="O"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-                <MenuFlyoutItem Text="Reconnect">
+                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientReconnect" Text="Reconnect" Click="MenuFlyoutItemIrcClientReconnect_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="R"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-                <MenuFlyoutItem Text="Disconnect">
+                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientDisconnect" Text="Disconnect" Click="MenuFlyoutItemIrcClientDisconnect_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="D"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
