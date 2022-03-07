@@ -6,10 +6,9 @@
 class IrcSocket
 {
 public:
-	int Init();
-	int Connect(std::string host, int port);
-	void Disconnect();
-	int SendData(std::string data);
+	byte Connect(PCSTR host, PCSTR port);
+	byte Disconnect();
+	byte SendData(std::string data);
 	std::string ReceiveData();
 
 	bool IsConnected()

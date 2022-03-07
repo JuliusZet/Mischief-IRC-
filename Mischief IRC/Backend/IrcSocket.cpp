@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "IrcSocket.h"
 
-int IrcSocket::Init()
+byte IrcSocket::Connect(PCSTR host, PCSTR port)
 {
 	WSADATA wsaData{};
 
@@ -20,7 +20,7 @@ int IrcSocket::Init()
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	if (getaddrinfo("bouncer.lan", "6667", &hints, &result))
+	if (getaddrinfo(host, port, &hints, &result))
 	{
 		// ToDo: Output error message to the user.
 		WSACleanup();
@@ -38,4 +38,38 @@ int IrcSocket::Init()
 		WSACleanup();
 		return 3;
 	}
+
+	if (connect(_socket, ptr->ai_addr, (int)ptr->ai_addrlen) == SOCKET_ERROR)
+	{
+		closesocket(_socket);
+		_socket = INVALID_SOCKET;
+	}
+
+	freeaddrinfo(result);
+
+	if (_socket == INVALID_SOCKET)
+	{
+		// ToDo: Output error message to the user.
+		WSACleanup();
+		return 4;
+	}
+
+	// ToDo: Output success message to the user.
+	return 0;
+}
+
+byte IrcSocket::Disconnect()
+{
+
+	if (shutdown(_socket, SD_SEND) == SOCKET_ERROR)
+	{
+		// ToDo: Output error message to the user.
+		closesocket(_socket);
+		WSACleanup();
+		return 1;
+	}
+
+	closesocket(_socket);
+	WSACleanup();
+	return 0;
 }
