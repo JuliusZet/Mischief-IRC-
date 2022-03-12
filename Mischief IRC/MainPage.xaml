@@ -54,8 +54,8 @@
                 <MenuFlyoutItem Text="Check for Updates"/>
             </MenuBarItem>
         </MenuBar>
-        <RichTextBlock Grid.Row="1">
-
-        </RichTextBlock>
+        <Grid Grid.Row="1" Margin="10">
+            <Button x:Name="ButtonTest" Content="Test" Click="ButtonTest_Click"/>
+        </Grid>
     </Grid>
 </Page>

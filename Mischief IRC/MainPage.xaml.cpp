@@ -44,3 +44,9 @@ void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientDisconnect_Click(Platform::O
 {
 	ircSocket.Disconnect();
 }
+
+
+void Mischief_IRC::MainPage::ButtonTest_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	ircSocket.SendData("Test");
+}

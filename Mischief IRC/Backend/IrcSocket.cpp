@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "IrcSocket.h"
 
+#define MAXDATASIZE 4096
+
 byte IrcSocket::Connect(PCSTR host, PCSTR port)
 {
 	WSADATA wsaData{};
@@ -54,12 +56,16 @@ byte IrcSocket::Connect(PCSTR host, PCSTR port)
 		return 4;
 	}
 
+	_isConnected = true;
+
 	// ToDo: Output success message to the user.
 	return 0;
 }
 
 byte IrcSocket::Disconnect()
 {
+
+	_isConnected = false;
 
 	if (shutdown(_socket, SD_SEND) == SOCKET_ERROR)
 	{
@@ -72,4 +78,45 @@ byte IrcSocket::Disconnect()
 	closesocket(_socket);
 	WSACleanup();
 	return 0;
+}
+
+byte IrcSocket::SendData(std::string data)
+{
+	if (_isConnected)
+	{
+		const char* dataCStr = data.c_str();
+
+		if (send(_socket, dataCStr, strlen(dataCStr), 0) != SOCKET_ERROR)
+		{
+			return 0;
+		}
+
+		else
+		{
+			return 2;
+		}
+	}
+
+	else
+	{
+		return 1;
+	}
+}
+
+std::string IrcSocket::ReceiveData()
+{
+	char buffer[MAXDATASIZE]{};
+
+	int bytes = recv(_socket, buffer, MAXDATASIZE - 1, 0);
+
+	if (bytes > 0)
+	{
+		return std::string(buffer);
+	}
+
+	else
+	{
+		Disconnect();
+		return "";
+	}
 }
