@@ -9,9 +9,14 @@ public:
 	byte Disconnect(std::string quitMessage);
 	byte Disconnect();
 	byte Send(std::string data);
+	bool IsConnected()
+	{
+		return _isConnected;
+	}
 
 private:
-	IrcSocket _ircSocket;
+	IrcSocket _ircSocket{};
+	bool _isConnected{};
 };
 
 struct IrcMessage

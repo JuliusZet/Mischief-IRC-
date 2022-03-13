@@ -11,6 +11,8 @@ byte IrcClient::Connect(std::string host, std::string port, std::string pass, st
 			{
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
+					_isConnected = true;
+
 					return 0;
 				}
 
@@ -41,14 +43,31 @@ byte IrcClient::Connect(std::string host, std::string port, std::string pass, st
 
 byte IrcClient::Disconnect(std::string quitMessage)
 {
-	Send("QUIT :" + quitMessage);
-	return _ircSocket.Disconnect();
+	if (_isConnected)
+	{
+		if (!quitMessage.empty())
+		{
+			Send("QUIT :" + quitMessage);
+		}
+
+		else
+		{
+			Send("QUIT");
+		}
+
+		_isConnected = false;
+		return _ircSocket.Disconnect();
+	}
+
+	else
+	{
+		return _ircSocket.Disconnect();
+	}
 }
 
 byte IrcClient::Disconnect()
 {
-	Send("QUIT");
-	return _ircSocket.Disconnect();
+	return Disconnect("");
 }
 
 byte IrcClient::Send(std::string data)
