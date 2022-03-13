@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "IrcSocket.h"
 
-#define MAXDATASIZE 4096
+#define DEFAULT_BUFLEN 4096
 
-byte IrcSocket::Connect(PCSTR host, PCSTR port)
+byte IrcSocket::Connect(std::string host, std::string port)
 {
 	WSADATA wsaData{};
 
@@ -22,7 +22,7 @@ byte IrcSocket::Connect(PCSTR host, PCSTR port)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	if (getaddrinfo(host, port, &hints, &result))
+	if (getaddrinfo(PCSTR(host.c_str()), PCSTR(port.c_str()), &hints, &result))
 	{
 		// ToDo: Output error message to the user.
 		WSACleanup();
@@ -64,7 +64,6 @@ byte IrcSocket::Connect(PCSTR host, PCSTR port)
 
 byte IrcSocket::Disconnect()
 {
-
 	_isConnected = false;
 
 	if (shutdown(_socket, SD_SEND) == SOCKET_ERROR)
@@ -84,32 +83,31 @@ byte IrcSocket::SendData(std::string data)
 {
 	if (_isConnected)
 	{
-		const char* dataCStr = data.c_str();
-
-		if (send(_socket, dataCStr, strlen(dataCStr), 0) != SOCKET_ERROR)
+		if (send(_socket, data.c_str(), int(data.length()), 0) != SOCKET_ERROR)
 		{
 			return 0;
 		}
 
 		else
 		{
+			// ToDo: Output error message to the user.
+			Disconnect();
 			return 2;
 		}
 	}
 
 	else
 	{
+		// ToDo: Output error message to the user.
 		return 1;
 	}
 }
 
 std::string IrcSocket::ReceiveData()
 {
-	char buffer[MAXDATASIZE]{};
+	char buffer[DEFAULT_BUFLEN]{};
 
-	int bytes = recv(_socket, buffer, MAXDATASIZE - 1, 0);
-
-	if (bytes > 0)
+	if (recv(_socket, buffer, DEFAULT_BUFLEN, 0) > 0)
 	{
 		return std::string(buffer);
 	}
