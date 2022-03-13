@@ -26,6 +26,20 @@ MainPage::MainPage()
 	InitializeComponent();
 }
 
+void Mischief_IRC::MainPage::OnIrcClientConnected()
+{
+	MenuFlyoutItemIrcClientConnect->IsEnabled = false;
+	MenuFlyoutItemIrcClientReconnect->IsEnabled = true;
+	MenuFlyoutItemIrcClientDisconnect->IsEnabled = true;
+}
+
+void Mischief_IRC::MainPage::OnIrcClientDisconnected()
+{
+	MenuFlyoutItemIrcClientConnect->IsEnabled = true;
+	MenuFlyoutItemIrcClientReconnect->IsEnabled = false;
+	MenuFlyoutItemIrcClientDisconnect->IsEnabled = false;
+}
+
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
