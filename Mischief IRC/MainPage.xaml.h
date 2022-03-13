@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "Backend/IrcClient.h"
 #include "MainPage.g.h"
 
 namespace Mischief_IRC
@@ -18,6 +19,7 @@ namespace Mischief_IRC
 		MainPage();
 
 	private:
+		IrcClient _ircClient;
 		void MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItemIrcClientReconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItemIrcClientDisconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
