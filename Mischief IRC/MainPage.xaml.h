@@ -17,8 +17,7 @@ namespace Mischief_IRC
 	{
 	public:
 		MainPage();
-		void OnIrcClientConnected();
-		void OnIrcClientDisconnected();
+		void OnIrcClientConnectionStatusChanged();
 
 	private:
 		IrcClient _ircClient;

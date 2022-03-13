@@ -26,36 +26,41 @@ MainPage::MainPage()
 	InitializeComponent();
 }
 
-void Mischief_IRC::MainPage::OnIrcClientConnected()
+void Mischief_IRC::MainPage::OnIrcClientConnectionStatusChanged()
 {
-	MenuFlyoutItemIrcClientConnect->IsEnabled = false;
-	MenuFlyoutItemIrcClientReconnect->IsEnabled = true;
-	MenuFlyoutItemIrcClientDisconnect->IsEnabled = true;
-}
+	if (_ircClient.IsConnected())
+	{
+		MenuFlyoutItemIrcClientConnect->IsEnabled = false;
+		MenuFlyoutItemIrcClientReconnect->IsEnabled = true;
+		MenuFlyoutItemIrcClientDisconnect->IsEnabled = true;
+	}
 
-void Mischief_IRC::MainPage::OnIrcClientDisconnected()
-{
-	MenuFlyoutItemIrcClientConnect->IsEnabled = true;
-	MenuFlyoutItemIrcClientReconnect->IsEnabled = false;
-	MenuFlyoutItemIrcClientDisconnect->IsEnabled = false;
+	else
+	{
+		MenuFlyoutItemIrcClientConnect->IsEnabled = true;
+		MenuFlyoutItemIrcClientReconnect->IsEnabled = false;
+		MenuFlyoutItemIrcClientDisconnect->IsEnabled = false;
+	}
 }
 
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+	OnIrcClientConnectionStatusChanged();
 }
 
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientReconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	_ircClient.Disconnect();
 	_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+	OnIrcClientConnectionStatusChanged();
 }
 
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientDisconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	_ircClient.Disconnect("Bye!");
+	OnIrcClientConnectionStatusChanged();
 }
-
 
 void Mischief_IRC::MainPage::ButtonTest_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {

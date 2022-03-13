@@ -12,7 +12,6 @@ byte IrcClient::Connect(std::string host, std::string port, std::string pass, st
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
 					_isConnected = true;
-
 					return 0;
 				}
 
