@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Backend/IrcSocket.h"
+#include <sstream>
 
 class IrcClient
 {
@@ -9,6 +10,8 @@ public:
 	byte Disconnect(std::string quitMessage);
 	byte Disconnect();
 	byte Send(std::string data);
+	byte Receive();
+	byte Parse(std::string line);
 	bool IsConnected()
 	{
 		return _isConnected;

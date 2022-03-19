@@ -73,3 +73,36 @@ byte IrcClient::Send(std::string data)
 {
 	return _ircSocket.SendData(data + '\n');
 }
+
+byte IrcClient::Receive()
+{
+	std::string buffer = _ircSocket.ReceiveData();
+
+	std::string line{};
+	std::istringstream iStringStream{ buffer };
+
+	while (getline(iStringStream, line))
+	{
+		if (line.back() == '\r')
+		{
+			line.pop_back();
+		}
+	}
+
+	return Parse(line);
+}
+
+byte IrcClient::Parse(std::string line)
+{
+	std::string command = line.substr(0, line.find_first_of(' '));
+
+	std::vector<std::string> parameters{};
+
+	for (size_t currentPosStart = command.size() + 1, currentPosEnd{}; currentPosEnd != std::string::npos; currentPosStart = currentPosEnd + 1)
+	{
+		currentPosEnd = line.find(' ', currentPosStart);
+		parameters.push_back(line.substr(currentPosStart, currentPosEnd - currentPosStart));
+	}
+
+	return 0;
+}
