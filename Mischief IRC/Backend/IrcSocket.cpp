@@ -76,6 +76,8 @@ byte IrcSocket::Disconnect()
 
 	closesocket(_socket);
 	WSACleanup();
+
+	// ToDo: Output success message to the user.
 	return 0;
 }
 
