@@ -46,6 +46,7 @@ void Mischief_IRC::MainPage::OnIrcClientConnectionStatusChanged()
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+	IAsyncAction^ receiveThread = _ircClient.ReceiveAsync();
 	OnIrcClientConnectionStatusChanged();
 }
 

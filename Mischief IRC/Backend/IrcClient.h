@@ -11,7 +11,8 @@ public:
 	byte Disconnect();
 	byte Send(std::string data);
 	byte Receive();
-	byte Parse(std::string line);
+	byte Parse(std::string message);
+	Windows::Foundation::IAsyncAction^ ReceiveAsync();
 	bool IsConnected()
 	{
 		return _isConnected;

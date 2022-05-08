@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "IrcClient.h"
 
+using namespace Concurrency;
+using namespace Windows::Foundation;
+
 byte IrcClient::Connect(std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
 {
 	if (_ircSocket.Connect(host, port) == 0)
@@ -78,31 +81,81 @@ byte IrcClient::Receive()
 {
 	std::string buffer = _ircSocket.ReceiveData();
 
-	std::string line{};
+	std::string message{};
 	std::istringstream iStringStream{ buffer };
 
-	while (getline(iStringStream, line))
+	while (getline(iStringStream, message))
 	{
-		if (line.back() == '\r')
+		if (!message.empty())
 		{
-			line.pop_back();
+			if (message.back() == '\r')
+			{
+				message.pop_back();
+			}
+
+			Parse(message);
 		}
 	}
 
-	return Parse(line);
+	return 0;
 }
 
-byte IrcClient::Parse(std::string line)
+byte IrcClient::Parse(std::string message)
 {
-	std::string command = line.substr(0, line.find_first_of(' '));
-
+	std::string prefix{};
+	std::string command{};
 	std::vector<std::string> parameters{};
 
-	for (size_t currentPosStart = command.size() + 1, currentPosEnd{}; currentPosEnd != std::string::npos; currentPosStart = currentPosEnd + 1)
+	size_t currentPosStart{};
+	size_t currentPosEnd{};
+
+	// If the message has a prefix
+	if (message.front() == ':')
 	{
-		currentPosEnd = line.find(' ', currentPosStart);
-		parameters.push_back(line.substr(currentPosStart, currentPosEnd - currentPosStart));
+
+		// Get prefix
+		currentPosEnd = message.find(' ', currentPosStart);
+		prefix = message.substr(1, currentPosEnd - 1);
+		currentPosStart = currentPosEnd + 1;
+	}
+
+	// Get command
+	currentPosEnd = message.find(' ', currentPosStart);
+	command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
+	currentPosStart = currentPosEnd + 1;
+
+	// Get parameter(s)
+	for (; currentPosStart != message.size() && currentPosEnd != std::string::npos; currentPosStart = currentPosEnd + 1)
+	{
+		if (message.at(currentPosStart) != ':')
+		{
+			currentPosEnd = message.find(' ', currentPosStart);
+			parameters.push_back(message.substr(currentPosStart, currentPosEnd - currentPosStart));
+		}
+
+		else
+		{
+			++currentPosStart;
+			parameters.push_back(message.substr(currentPosStart));
+			break;
+		}
+	}
+
+	if (command == "PING")
+	{
+		Send("PONG :" + parameters.front());
 	}
 
 	return 0;
+}
+
+IAsyncAction^ IrcClient::ReceiveAsync()
+{
+	return create_async([this]
+		{
+			while (_isConnected)
+			{
+				Receive();
+			}
+		});
 }

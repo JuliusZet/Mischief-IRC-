@@ -109,9 +109,25 @@ std::string IrcSocket::ReceiveData()
 {
 	char buffer[DEFAULT_BUFLEN]{};
 
-	if (recv(_socket, buffer, DEFAULT_BUFLEN, 0) > 0)
+	if (recv(_socket, buffer, DEFAULT_BUFLEN - 1, 0) > 0)
 	{
-		return std::string(buffer);
+		_buffer.append(buffer);
+
+		// If the last message in the buffer is complete
+		if (_buffer.back() == '\n')
+		{
+			return _buffer;
+		}
+
+		// If the last message in the buffer is not complete
+		else
+		{
+			size_t beginOfLastMessage = _buffer.find_last_of('\n') + 1;
+			std::string bufferPart{ _buffer.substr(0, beginOfLastMessage) };
+			_buffer = _buffer.substr(beginOfLastMessage);
+
+			return bufferPart;
+		}
 	}
 
 	else
