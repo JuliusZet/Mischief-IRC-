@@ -19,5 +19,5 @@ public:
 private:
 	SOCKET _socket{};
 	bool _isConnected{};
-	std::string _buffer{};
+	std::string _bufferRemainder{};
 };

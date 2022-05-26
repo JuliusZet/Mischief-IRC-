@@ -107,27 +107,25 @@ byte IrcSocket::SendData(std::string data)
 
 std::string IrcSocket::ReceiveData()
 {
-	char buffer[DEFAULT_BUFLEN]{};
+	char bufferCurrent[DEFAULT_BUFLEN]{};
+	std::string buffer{};
 
-	if (recv(_socket, buffer, DEFAULT_BUFLEN - 1, 0) > 0)
+	if (recv(_socket, bufferCurrent, DEFAULT_BUFLEN - 1, 0) > 0)
 	{
-		_buffer.append(buffer);
-
-		// If the last message in the buffer is complete
-		if (_buffer.back() == '\n')
-		{
-			return _buffer;
-		}
+		buffer = _bufferRemainder + bufferCurrent;
+		_bufferRemainder.clear();
 
 		// If the last message in the buffer is not complete
-		else
+		if (buffer.back() != '\n')
 		{
-			size_t beginOfLastMessage = _buffer.find_last_of('\n') + 1;
-			std::string bufferPart{ _buffer.substr(0, beginOfLastMessage) };
-			_buffer = _buffer.substr(beginOfLastMessage);
 
-			return bufferPart;
+			// Store the incomplete message for the next buffer and only return the complete message(s) for now
+			size_t beginOfLastMessage = buffer.find_last_of('\n') + 1;
+			_bufferRemainder = buffer.substr(beginOfLastMessage);
+			buffer = buffer.substr(0, beginOfLastMessage);
 		}
+
+		return buffer;
 	}
 
 	else
