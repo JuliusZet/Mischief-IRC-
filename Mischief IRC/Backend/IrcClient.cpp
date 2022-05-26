@@ -72,9 +72,26 @@ byte IrcClient::Disconnect()
 	return Disconnect("");
 }
 
+byte IrcClient::Reconnect(std::string quitMessage, std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
+{
+	Disconnect(quitMessage);
+	return Connect(host, port, pass, nick, user, realname);
+}
+
+byte IrcClient::Reconnect(std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
+{
+	Disconnect();
+	return Connect(host, port, pass, nick, user, realname);
+}
+
 byte IrcClient::Send(std::string data)
 {
 	return _ircSocket.SendData(data + '\n');
+}
+
+byte IrcClient::SendPrivmsg(std::string receiver, std::string text)
+{
+	return Send("PRIVMSG " + receiver + " :" + text);
 }
 
 byte IrcClient::Receive()
@@ -93,14 +110,14 @@ byte IrcClient::Receive()
 				message.pop_back();
 			}
 
-			Parse(message);
+			Process(message);
 		}
 	}
 
 	return 0;
 }
 
-byte IrcClient::Parse(std::string message)
+byte IrcClient::Process(std::string message)
 {
 	std::string prefix{};
 	std::string command{};
@@ -143,7 +160,7 @@ byte IrcClient::Parse(std::string message)
 
 	if (command == "PING")
 	{
-		Send("PONG :" + parameters.front());
+		return Send("PONG :" + parameters.front());
 	}
 
 	return 0;
