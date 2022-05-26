@@ -119,9 +119,8 @@ byte IrcClient::Receive()
 
 byte IrcClient::Process(std::string message)
 {
-	std::string prefix{};
-	std::string command{};
-	std::vector<std::string> parameters{};
+	IrcMessage ircMessage{};
+	ircMessage.time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 
 	size_t currentPosStart{};
 	size_t currentPosEnd{};
@@ -132,13 +131,13 @@ byte IrcClient::Process(std::string message)
 
 		// Get prefix
 		currentPosEnd = message.find(' ', currentPosStart);
-		prefix = message.substr(1, currentPosEnd - 1);
+		ircMessage.prefix = message.substr(1, currentPosEnd - 1);
 		currentPosStart = currentPosEnd + 1;
 	}
 
 	// Get command
 	currentPosEnd = message.find(' ', currentPosStart);
-	command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
+	ircMessage.command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
 	currentPosStart = currentPosEnd + 1;
 
 	// Get parameter(s)
@@ -147,20 +146,22 @@ byte IrcClient::Process(std::string message)
 		if (message.at(currentPosStart) != ':')
 		{
 			currentPosEnd = message.find(' ', currentPosStart);
-			parameters.push_back(message.substr(currentPosStart, currentPosEnd - currentPosStart));
+			ircMessage.parameters.push_back(message.substr(currentPosStart, currentPosEnd - currentPosStart));
 		}
 
 		else
 		{
 			++currentPosStart;
-			parameters.push_back(message.substr(currentPosStart));
+			ircMessage.parameters.push_back(message.substr(currentPosStart));
 			break;
 		}
 	}
 
-	if (command == "PING")
+	_messages.push_back(ircMessage);
+
+	if (ircMessage.command == "PING")
 	{
-		return Send("PONG :" + parameters.front());
+		return Send("PONG :" + ircMessage.parameters.front());
 	}
 
 	return 0;

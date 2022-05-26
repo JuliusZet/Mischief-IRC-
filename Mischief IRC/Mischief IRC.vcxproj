@@ -169,6 +169,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Backend\IrcClient.h" />
+    <ClInclude Include="Backend\IrcMessage.h" />
     <ClInclude Include="Backend\IrcSocket.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">

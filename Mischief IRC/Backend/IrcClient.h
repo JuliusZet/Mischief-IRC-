@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Backend/IrcMessage.h"
 #include "Backend/IrcSocket.h"
 #include <sstream>
 
@@ -24,8 +25,5 @@ public:
 private:
 	IrcSocket _ircSocket{};
 	bool _isConnected{};
-};
-
-struct IrcMessage
-{
+	std::vector<IrcMessage> _messages{};
 };

@@ -21,6 +21,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Backend\IrcClient.h" />
     <ClInclude Include="Backend\IrcSocket.h" />
+    <ClInclude Include="Backend\IrcMessage.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
