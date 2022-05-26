@@ -54,8 +54,8 @@
                 <MenuFlyoutItem Text="Check for Updates"/>
             </MenuBarItem>
         </MenuBar>
-        <Grid Grid.Row="1" Margin="10">
-            <Button x:Name="ButtonTest" Content="Test" Click="ButtonTest_Click"/>
-        </Grid>
+        <ScrollViewer  Grid.Row="1">
+            <TextBlock x:Name="TextBlockLog"></TextBlock>
+        </ScrollViewer>
     </Grid>
 </Page>

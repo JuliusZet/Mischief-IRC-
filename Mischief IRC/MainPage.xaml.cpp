@@ -52,8 +52,7 @@ void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientConnect_Click(Platform::Obje
 
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientReconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	_ircClient.Disconnect();
-	_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+	_ircClient.Reconnect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
 	OnIrcClientConnectionStatusChanged();
 }
 
@@ -61,9 +60,4 @@ void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientDisconnect_Click(Platform::O
 {
 	_ircClient.Disconnect("Bye!");
 	OnIrcClientConnectionStatusChanged();
-}
-
-void Mischief_IRC::MainPage::ButtonTest_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-
 }
