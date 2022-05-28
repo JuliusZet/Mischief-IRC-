@@ -8,20 +8,33 @@
       <UniqueIdentifier>b218bc5d-1a24-4f37-831a-a755a0f54f78</UniqueIdentifier>
       <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
     </Filter>
+    <Filter Include="Backend">
+      <UniqueIdentifier>{65225da3-d5bd-457a-9d82-d0757213c4e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Backend\IrcClient.cpp" />
-    <ClCompile Include="Backend\IrcSocket.cpp" />
+    <ClCompile Include="Backend\IrcClient.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Backend\IrcSocket.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Backend\IrcClient.h" />
-    <ClInclude Include="Backend\IrcSocket.h" />
-    <ClInclude Include="Backend\IrcMessage.h" />
+    <ClInclude Include="Backend\IrcClient.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Backend\IrcMessage.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Backend\IrcSocket.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
