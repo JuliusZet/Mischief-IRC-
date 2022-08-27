@@ -6,6 +6,7 @@
 #pragma once
 
 #include "Backend/IrcClient.h"
+#include "Backend/Settings.h"
 #include "MainPage.g.h"
 
 namespace Mischief_IRC
