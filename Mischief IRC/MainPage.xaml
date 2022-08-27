@@ -16,12 +16,12 @@
         </Grid.RowDefinitions>
         <MenuBar Grid.Row="0">
             <MenuBarItem Title="Mischief IRC">
-                <MenuFlyoutItem Text="Settings">
+                <MenuFlyoutItem x:Name="MenuFlyoutItemMischiefIrcSettings" Text="Settings" Click="MenuFlyoutItemMischiefIrcSettings_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="P"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-                <MenuFlyoutItem Text="Exit">
+                <MenuFlyoutItem x:Name="MenuFlyoutItemMischiefIrcExit" Text="Exit" Click="MenuFlyoutItemMischiefIrcExit_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="E"/>
                     </MenuFlyoutItem.KeyboardAccelerators>

@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Common">
-      <UniqueIdentifier>62c08dc1-e779-460a-9ebc-62df74691c1d</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>b218bc5d-1a24-4f37-831a-a755a0f54f78</UniqueIdentifier>
-      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
-    </Filter>
-    <Filter Include="Backend">
-      <UniqueIdentifier>{65225da3-d5bd-457a-9d82-d0757213c4e3}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
@@ -52,13 +40,13 @@
     <Image Include="Assets\SplashScreen.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\Square150x150Logo.scale-200.png">
-      <Filter>Assets</Filter>
-    </Image>
     <Image Include="Assets\Square44x44Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\StoreLogo.png">
@@ -73,8 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
+    <Page Include="SettingsDialog.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Backend">
+      <UniqueIdentifier>{c8ce129c-ec93-4c53-9ed4-cdb8273b5a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{460bb465-a556-45db-a7a9-805220096740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

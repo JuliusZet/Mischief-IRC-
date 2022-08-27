@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
+#include "SettingsDialog.xaml.h"
 
 using namespace Mischief_IRC;
 
@@ -41,6 +42,17 @@ void Mischief_IRC::MainPage::OnIrcClientConnectionStatusChanged()
 		MenuFlyoutItemIrcClientReconnect->IsEnabled = false;
 		MenuFlyoutItemIrcClientDisconnect->IsEnabled = false;
 	}
+}
+
+void Mischief_IRC::MainPage::MenuFlyoutItemMischiefIrcSettings_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	SettingsDialog settingsDialog;
+	settingsDialog.ShowAsync();
+}
+
+void Mischief_IRC::MainPage::MenuFlyoutItemMischiefIrcExit_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
 }
 
 void Mischief_IRC::MainPage::MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)

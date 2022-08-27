@@ -22,6 +22,8 @@ namespace Mischief_IRC
 
 	private:
 		IrcClient _ircClient;
+		void MenuFlyoutItemMischiefIrcSettings_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void MenuFlyoutItemMischiefIrcExit_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItemIrcClientConnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItemIrcClientReconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void MenuFlyoutItemIrcClientDisconnect_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
