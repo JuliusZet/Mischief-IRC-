@@ -23,6 +23,9 @@
     <ClCompile Include="Backend\IrcSocket.cpp">
       <Filter>Backend</Filter>
     </ClCompile>
+    <ClCompile Include="Backend\Settings.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -33,6 +36,12 @@
       <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="Backend\IrcSocket.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Backend\Settings.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Backend\Setting.h">
       <Filter>Backend</Filter>
     </ClInclude>
   </ItemGroup>
