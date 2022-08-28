@@ -1,10 +1,11 @@
 #include "pch.h"
-#include "Backend/Settings.h"
+#include "Core/Settings/Settings.h"
 
-std::vector<Setting> Settings::_settings{};
+vector<Setting> Settings::_settings{};
 
-std::string Settings::Get(std::string key)
+string Settings::Get(string key)
 {
+
 	// Check if the setting exists
 	for (size_t i{}; i != _settings.size(); ++i)
 	{
@@ -20,15 +21,15 @@ std::string Settings::Get(std::string key)
 	return GetDefault(key);
 }
 
-std::string Settings::GetDefault(std::string key)
+string Settings::GetDefault(string key)
 {
 	// ToDo: Add default values
 	return "";
 }
 
-byte Settings::Set(std::string key, std::string value)
+byte Settings::Set(string key, string value)
 {
-	
+
 	// Check if the setting already exists
 	for (size_t i{}; i != _settings.size(); ++i)
 	{
@@ -38,7 +39,7 @@ byte Settings::Set(std::string key, std::string value)
 		{
 			_settings.at(i).previousValue = _settings.at(i).value;
 			_settings.at(i).value = value;
-			_settings.at(i).modified = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+			_settings.at(i).modified = system_clock::to_time_t(system_clock::now());
 			return 0;
 		}
 	}
@@ -49,7 +50,7 @@ byte Settings::Set(std::string key, std::string value)
 	return 0;
 }
 
-byte Settings::SetToDefault(std::string key)
+byte Settings::SetToDefault(string key)
 {
 	return Set(key, GetDefault(key));
 }

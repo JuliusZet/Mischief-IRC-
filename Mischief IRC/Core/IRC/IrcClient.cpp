@@ -1,10 +1,7 @@
 #include "pch.h"
-#include "Backend/IrcClient.h"
+#include "Core/IRC/IrcClient.h"
 
-using namespace Concurrency;
-using namespace Windows::Foundation;
-
-byte IrcClient::Connect(std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
+byte IrcClient::Connect(string host, string port, string pass, string nick, string user, string realname)
 {
 	if (_ircSocket.Connect(host, port) == 0)
 	{
@@ -43,7 +40,7 @@ byte IrcClient::Connect(std::string host, std::string port, std::string pass, st
 	}
 }
 
-byte IrcClient::Disconnect(std::string quitMessage)
+byte IrcClient::Disconnect(string quitMessage)
 {
 	if (_isConnected)
 	{
@@ -72,34 +69,33 @@ byte IrcClient::Disconnect()
 	return Disconnect("");
 }
 
-byte IrcClient::Reconnect(std::string quitMessage, std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
+byte IrcClient::Reconnect(string quitMessage, string host, string port, string pass, string nick, string user, string realname)
 {
 	Disconnect(quitMessage);
 	return Connect(host, port, pass, nick, user, realname);
 }
 
-byte IrcClient::Reconnect(std::string host, std::string port, std::string pass, std::string nick, std::string user, std::string realname)
+byte IrcClient::Reconnect(string host, string port, string pass, string nick, string user, string realname)
 {
-	Disconnect();
-	return Connect(host, port, pass, nick, user, realname);
+	return Reconnect("", host, port, pass, nick, user, realname);
 }
 
-byte IrcClient::Send(std::string data)
+byte IrcClient::Send(string data)
 {
 	return _ircSocket.SendData(data + '\n');
 }
 
-byte IrcClient::SendPrivmsg(std::string receiver, std::string text)
+byte IrcClient::SendPrivmsg(string receiver, string text)
 {
 	return Send("PRIVMSG " + receiver + " :" + text);
 }
 
 byte IrcClient::Receive()
 {
-	std::string buffer = _ircSocket.ReceiveData();
+	string buffer = _ircSocket.ReceiveData();
 
-	std::string message{};
-	std::istringstream iStringStream{ buffer };
+	string message{};
+	istringstream iStringStream{ buffer };
 
 	while (getline(iStringStream, message))
 	{
@@ -117,10 +113,10 @@ byte IrcClient::Receive()
 	return 0;
 }
 
-byte IrcClient::Process(std::string message)
+byte IrcClient::Process(string message)
 {
 	IrcMessage ircMessage{};
-	ircMessage.time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	ircMessage.time = system_clock::to_time_t(system_clock::now());
 
 	size_t currentPosStart{};
 	size_t currentPosEnd{};
@@ -141,7 +137,7 @@ byte IrcClient::Process(std::string message)
 	currentPosStart = currentPosEnd + 1;
 
 	// Get parameter(s)
-	for (; currentPosStart != message.size() && currentPosEnd != std::string::npos; currentPosStart = currentPosEnd + 1)
+	for (; currentPosStart != message.size() && currentPosEnd != string::npos; currentPosStart = currentPosEnd + 1)
 	{
 		if (message.at(currentPosStart) != ':')
 		{
@@ -167,13 +163,17 @@ byte IrcClient::Process(std::string message)
 	return 0;
 }
 
-IAsyncAction^ IrcClient::ReceiveAsync()
+thread IrcClient::ReceiveAsync()
 {
-	return create_async([this]
+	return thread{ [this] {
+		while (_isConnected)
 		{
-			while (_isConnected)
-			{
-				Receive();
-			}
-		});
+			Receive();
+		}
+	} };
+}
+
+bool IrcClient::IsConnected()
+{
+	return _isConnected;
 }

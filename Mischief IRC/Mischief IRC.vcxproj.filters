@@ -5,32 +5,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Backend\IrcClient.cpp">
-      <Filter>Backend</Filter>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="Core\IRC\IrcSocket.cpp">
+      <Filter>Core\IRC</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\IrcSocket.cpp">
-      <Filter>Backend</Filter>
+    <ClCompile Include="Core\IRC\IrcClient.cpp">
+      <Filter>Core\IRC</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\Settings.cpp">
-      <Filter>Backend</Filter>
+    <ClCompile Include="Core\Settings\Settings.cpp">
+      <Filter>Core\Settings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Backend\IrcClient.h">
-      <Filter>Backend</Filter>
+    <ClInclude Include="Core\IRC\IrcMessage.h">
+      <Filter>Core\IRC</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\IrcMessage.h">
-      <Filter>Backend</Filter>
+    <ClInclude Include="Core\IRC\IrcSocket.h">
+      <Filter>Core\IRC</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\IrcSocket.h">
-      <Filter>Backend</Filter>
+    <ClInclude Include="Core\IRC\IrcClient.h">
+      <Filter>Core\IRC</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\Settings.h">
-      <Filter>Backend</Filter>
+    <ClInclude Include="Core\Settings\Setting.h">
+      <Filter>Core\Settings</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\Setting.h">
-      <Filter>Backend</Filter>
+    <ClInclude Include="Core\Settings\Settings.h">
+      <Filter>Core\Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,18 +61,27 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Include="MainPage.xaml" />
     <Page Include="SettingsDialog.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Backend">
-      <UniqueIdentifier>{c8ce129c-ec93-4c53-9ed4-cdb8273b5a3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets">
-      <UniqueIdentifier>{460bb465-a556-45db-a7a9-805220096740}</UniqueIdentifier>
+      <UniqueIdentifier>{dd51f70e-c8f5-48a6-b052-fef4832dc06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{f474ba7f-7275-4214-b4f9-0b77fcd17365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\IRC">
+      <UniqueIdentifier>{720ff08d-4c1c-4734-8228-5df806f07394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Settings">
+      <UniqueIdentifier>{559cbe9a-c19f-4566-a198-214259565a21}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,48 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
-<Package
-  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
-
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity
-    Name="35b73487-1569-4149-9fc7-33034b2bb5fa"
-    Publisher="CN=Julius"
+    Name="7f549176-8342-49d9-bf42-77be6fa581a2"
+    Publisher="CN=juliuszet"
     Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="35b73487-1569-4149-9fc7-33034b2bb5fa" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
-
+  <mp:PhoneIdentity PhoneProductId="7f549176-8342-49d9-bf42-77be6fa581a2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>Mischief IRC</DisplayName>
-    <PublisherDisplayName>Julius</PublisherDisplayName>
+    <PublisherDisplayName>juliuszet</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="Mischief_IRC.App">
-      <uap:VisualElements
-        DisplayName="Mischief IRC"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Mischief IRC"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Mischief_IRC.App">
+      <uap:VisualElements DisplayName="Mischief IRC" Description="Project for a single page C++/WinRT Universal Windows Platform (UWP) app with no predefined layout"
+        Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
-
   <Capabilities>
     <Capability Name="internetClient" />
   </Capabilities>

@@ -5,17 +5,16 @@
     xmlns:local="using:Mischief_IRC"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Custom="using:Microsoft.UI.Xaml.Controls"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <MenuBar Grid.Row="0">
-            <MenuBarItem Title="Mischief IRC">
+        <mux:MenuBar Grid.Row="0">
+            <mux:MenuBarItem Title="Mischief IRC">
                 <MenuFlyoutItem x:Name="MenuFlyoutItemMischiefIrcSettings" Text="Settings" Click="MenuFlyoutItemMischiefIrcSettings_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="P"/>
@@ -26,8 +25,8 @@
                         <KeyboardAccelerator Modifiers="Control" Key="E"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-            </MenuBarItem>
-            <MenuBarItem Title="IRC Client">
+            </mux:MenuBarItem>
+            <mux:MenuBarItem Title="IRC Client">
                 <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientConnect" Text="Connect" Click="MenuFlyoutItemIrcClientConnect_Click">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="O"/>
@@ -43,8 +42,8 @@
                         <KeyboardAccelerator Modifiers="Control" Key="D"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
                 </MenuFlyoutItem>
-            </MenuBarItem>
-            <MenuBarItem Title="Help">
+            </mux:MenuBarItem>
+            <mux:MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="I"/>
@@ -52,9 +51,9 @@
                 </MenuFlyoutItem>
                 <MenuFlyoutItem Text="Changelog"/>
                 <MenuFlyoutItem Text="Check for Updates"/>
-            </MenuBarItem>
-        </MenuBar>
-        <ScrollViewer  Grid.Row="1">
+            </mux:MenuBarItem>
+        </mux:MenuBar>
+        <ScrollViewer Grid.Row="1">
             <TextBlock x:Name="TextBlockLog"></TextBlock>
         </ScrollViewer>
     </Grid>

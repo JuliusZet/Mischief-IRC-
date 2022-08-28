@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "Backend/IrcSocket.h"
+#include "Core/IRC/IrcSocket.h"
 
 #define DEFAULT_BUFLEN 4096
 
-byte IrcSocket::Connect(std::string host, std::string port)
+byte IrcSocket::Connect(string host, string port)
 {
 	WSADATA wsaData{};
 
@@ -81,7 +81,7 @@ byte IrcSocket::Disconnect()
 	return 0;
 }
 
-byte IrcSocket::SendData(std::string data)
+byte IrcSocket::SendData(string data)
 {
 	if (_isConnected)
 	{
@@ -105,14 +105,13 @@ byte IrcSocket::SendData(std::string data)
 	}
 }
 
-std::string IrcSocket::ReceiveData()
+string IrcSocket::ReceiveData()
 {
 	char bufferCurrent[DEFAULT_BUFLEN]{};
-	std::string buffer{};
 
 	if (recv(_socket, bufferCurrent, DEFAULT_BUFLEN - 1, 0) > 0)
 	{
-		buffer = _bufferRemainder + bufferCurrent;
+		string buffer = _bufferRemainder + bufferCurrent;
 		_bufferRemainder.clear();
 
 		// If the last message in the buffer is not complete
@@ -133,4 +132,9 @@ std::string IrcSocket::ReceiveData()
 		Disconnect();
 		return "";
 	}
+}
+
+bool IrcSocket::IsConnected()
+{
+	return _isConnected;
 }
