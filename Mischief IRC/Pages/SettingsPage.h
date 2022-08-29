@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include "SettingsDialog.g.h"
+#include "SettingsPage.g.h"
 
 namespace winrt::Mischief_IRC::implementation
 {
-    struct SettingsDialog : SettingsDialogT<SettingsDialog>
+    struct SettingsPage : SettingsPageT<SettingsPage>
     {
-        SettingsDialog() 
+        SettingsPage() 
         {
             // Xaml objects should not call InitializeComponent during construction.
             // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
@@ -16,7 +16,7 @@ namespace winrt::Mischief_IRC::implementation
 
 namespace winrt::Mischief_IRC::factory_implementation
 {
-    struct SettingsDialog : SettingsDialogT<SettingsDialog, implementation::SettingsDialog>
+    struct SettingsPage : SettingsPageT<SettingsPage, implementation::SettingsPage>
     {
     };
 }

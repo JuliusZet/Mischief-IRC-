@@ -113,16 +113,16 @@
     <ClInclude Include="Core\IRC\IrcSocket.h" />
     <ClInclude Include="Core\Settings\Setting.h" />
     <ClInclude Include="Core\Settings\Settings.h" />
+    <ClInclude Include="Pages\SettingsPage.h">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="MainPage.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="SettingsDialog.h">
-      <DependentUpon>SettingsDialog.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +132,7 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingsDialog.xaml">
+    <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -154,6 +154,10 @@
     <ClCompile Include="Core\IRC\IrcClient.cpp" />
     <ClCompile Include="Core\IRC\IrcSocket.cpp" />
     <ClCompile Include="Core\Settings\Settings.cpp" />
+    <ClCompile Include="Pages\SettingsPage.cpp">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -164,10 +168,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="SettingsDialog.cpp">
-      <DependentUpon>SettingsDialog.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
@@ -176,8 +176,8 @@
     <Midl Include="MainPage.idl">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="SettingsDialog.idl">
-      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+    <Midl Include="Pages\SettingsPage.idl">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
   </ItemGroup>

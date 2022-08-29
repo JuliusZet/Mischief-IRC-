@@ -62,13 +62,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
-    <Page Include="SettingsDialog.xaml" />
+    <Page Include="Pages\SettingsPage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">
@@ -82,6 +85,9 @@
     </Filter>
     <Filter Include="Core\Settings">
       <UniqueIdentifier>{559cbe9a-c19f-4566-a198-214259565a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pages">
+      <UniqueIdentifier>{975ff08d-ab11-4fb8-9518-0ef568e812df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

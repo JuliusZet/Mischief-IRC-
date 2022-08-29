@@ -8,53 +8,23 @@
     xmlns:mux="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <mux:MenuBar Grid.Row="0">
-            <mux:MenuBarItem Title="Mischief IRC">
-                <MenuFlyoutItem x:Name="MenuFlyoutItemMischiefIrcSettings" Text="Settings" Click="MenuFlyoutItemMischiefIrcSettings_Click">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="P"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-                <MenuFlyoutItem x:Name="MenuFlyoutItemMischiefIrcExit" Text="Exit" Click="MenuFlyoutItemMischiefIrcExit_Click">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="E"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-            </mux:MenuBarItem>
-            <mux:MenuBarItem Title="IRC Client">
-                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientConnect" Text="Connect" Click="MenuFlyoutItemIrcClientConnect_Click">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="O"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientReconnect" Text="Reconnect" IsEnabled="False" Click="MenuFlyoutItemIrcClientReconnect_Click">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="R"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-                <MenuFlyoutItem x:Name="MenuFlyoutItemIrcClientDisconnect" Text="Disconnect" IsEnabled="False" Click="MenuFlyoutItemIrcClientDisconnect_Click">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="D"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-            </mux:MenuBarItem>
-            <mux:MenuBarItem Title="Help">
-                <MenuFlyoutItem Text="About">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="I"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-                <MenuFlyoutItem Text="Changelog"/>
-                <MenuFlyoutItem Text="Check for Updates"/>
-            </mux:MenuBarItem>
-        </mux:MenuBar>
-        <ScrollViewer Grid.Row="1">
-            <TextBlock x:Name="TextBlockLog"></TextBlock>
-        </ScrollViewer>
-    </Grid>
+    <mux:NavigationView PaneTitle="Mischief IRC" IsBackButtonVisible="Collapsed" SelectionChanged="NavigationView_SelectionChanged">
+        <mux:NavigationView.MenuItems>
+            <mux:NavigationViewItem Content="Home" x:Name="HomePage">
+                <mux:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Home"/>
+                </mux:NavigationViewItem.Icon>
+            </mux:NavigationViewItem>
+            <mux:NavigationViewItem Content="#fuelrats">
+                <mux:NavigationViewItem.Icon>
+                    <FontIcon Glyph="#fr" FontFamily="Segoe UI"/>
+                </mux:NavigationViewItem.Icon>
+            </mux:NavigationViewItem>
+            <mux:NavigationViewItem Content="#ratchat">
+                <mux:NavigationViewItem.Icon>
+                    <FontIcon Glyph="#rc" FontFamily="Segoe UI"/>
+                </mux:NavigationViewItem.Icon>
+            </mux:NavigationViewItem>
+        </mux:NavigationView.MenuItems>
+    </mux:NavigationView>
 </Page>

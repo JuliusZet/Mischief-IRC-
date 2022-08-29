@@ -1,8 +1,0 @@
-namespace Mischief_IRC
-{
-    [default_interface]
-    runtimeclass SettingsDialog : Windows.UI.Xaml.Controls.Page
-    {
-        SettingsDialog();
-    }
-}
