@@ -5,9 +5,9 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 {
 	if (_ircSocket.Connect(host, port) == 0)
 	{
-		if (Send("PASS " + pass) == 0)
+		if (Send("PASS :" + pass) == 0)
 		{
-			if (Send("NICK " + nick) == 0)
+			if (Send("NICK :" + nick) == 0)
 			{
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
