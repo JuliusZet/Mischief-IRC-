@@ -113,6 +113,10 @@
     <ClInclude Include="Core\IRC\IrcSocket.h" />
     <ClInclude Include="Core\Settings\Setting.h" />
     <ClInclude Include="Core\Settings\Settings.h" />
+    <ClInclude Include="HomePage.h">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="Pages\SettingsPage.h">
       <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -129,6 +133,9 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -154,6 +161,10 @@
     <ClCompile Include="Core\IRC\IrcClient.cpp" />
     <ClCompile Include="Core\IRC\IrcSocket.cpp" />
     <ClCompile Include="Core\Settings\Settings.cpp" />
+    <ClCompile Include="HomePage.cpp">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="Pages\SettingsPage.cpp">
       <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -172,6 +183,10 @@
   <ItemGroup>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="HomePage.idl">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
     <Midl Include="MainPage.idl">
       <DependentUpon>MainPage.xaml</DependentUpon>

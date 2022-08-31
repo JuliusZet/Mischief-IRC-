@@ -72,6 +72,9 @@
     <Page Include="Pages\SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="HomePage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

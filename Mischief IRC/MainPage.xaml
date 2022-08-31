@@ -8,9 +8,9 @@
     xmlns:mux="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <mux:NavigationView PaneTitle="Mischief IRC" IsBackButtonVisible="Collapsed" SelectionChanged="NavigationView_SelectionChanged">
+    <mux:NavigationView x:Name="NavigationView" PaneTitle="Mischief IRC" IsBackButtonVisible="Collapsed" IsBackEnabled="False" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged">
         <mux:NavigationView.MenuItems>
-            <mux:NavigationViewItem Content="Home" x:Name="HomePage">
+            <mux:NavigationViewItem Tag="home" Content="Home">
                 <mux:NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Home"/>
                 </mux:NavigationViewItem.Icon>
@@ -26,5 +26,6 @@
                 </mux:NavigationViewItem.Icon>
             </mux:NavigationViewItem>
         </mux:NavigationView.MenuItems>
+        <Frame x:Name="FrameContent" Padding="12,0,12,24" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
     </mux:NavigationView>
 </Page>
