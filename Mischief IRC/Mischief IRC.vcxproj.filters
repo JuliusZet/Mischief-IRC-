@@ -72,7 +72,7 @@
     <Page Include="Pages\SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="HomePage.xaml">
+    <Page Include="Pages\HomePage.xaml">
       <Filter>Pages</Filter>
     </Page>
   </ItemGroup>
