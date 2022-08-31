@@ -69,10 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
-    <Page Include="Pages\SettingsPage.xaml">
+    <Page Include="HomePage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="Pages\HomePage.xaml">
+    <Page Include="SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
   </ItemGroup>

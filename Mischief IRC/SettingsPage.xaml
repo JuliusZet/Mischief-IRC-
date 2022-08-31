@@ -34,8 +34,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Save"/>
-            <Button Grid.Column="1" Margin="10,0,0,0" Content="Revert"/>
+            <Button Grid.Column="0" Content="Save" Style="{ThemeResource ButtonRevealStyle}"/>
+            <Button Grid.Column="1" Margin="10,0,0,0" Content="Revert" Style="{ThemeResource ButtonRevealStyle}"/>
         </Grid>
     </Grid>
 </Page>
