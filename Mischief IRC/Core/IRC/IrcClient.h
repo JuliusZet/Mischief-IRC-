@@ -30,4 +30,5 @@ private:
 	IrcSocket _ircSocket{};
 	bool _isConnected{};
 	vector<IrcMessage> _messages{};
+	thread _receiveThread{};
 };

@@ -12,6 +12,8 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
 					_isConnected = true;
+					_receiveThread = ReceiveAsync();
+					_receiveThread.detach();
 					return 0;
 				}
 
@@ -54,6 +56,10 @@ byte IrcClient::Disconnect(string quitMessage)
 			Send("QUIT");
 		}
 
+		if (_receiveThread.joinable())
+		{
+			_receiveThread.join();
+		}
 		_isConnected = false;
 		return _ircSocket.Disconnect();
 	}
