@@ -115,7 +115,7 @@ string IrcSocket::ReceiveData()
 		_bufferRemainder.clear();
 
 		// If the last message in the buffer is not complete
-		if (buffer.back() != '\n')
+		if (!buffer.ends_with('\n'))
 		{
 
 			// Store the incomplete message for the next buffer and only return the complete message(s) for now

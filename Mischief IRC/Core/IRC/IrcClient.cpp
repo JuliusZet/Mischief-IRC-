@@ -101,7 +101,7 @@ byte IrcClient::Receive()
 	{
 		if (!message.empty())
 		{
-			if (message.back() == '\r')
+			if (message.ends_with('\r'))
 			{
 				message.pop_back();
 			}
@@ -122,7 +122,7 @@ byte IrcClient::Process(string message)
 	size_t currentPosEnd{};
 
 	// If the message has a prefix
-	if (message.front() == ':')
+	if (message.starts_with(':'))
 	{
 
 		// Get prefix
