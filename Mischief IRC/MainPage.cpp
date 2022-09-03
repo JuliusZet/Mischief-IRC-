@@ -107,4 +107,14 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		throw winrt::hresult_error(E_FAIL, winrt::hstring(L"Failed to load page ") + e.SourcePageType().Name);
 	}
+
+	void winrt::Mischief_IRC::implementation::MainPage::IrcConnect()
+	{
+		_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+	}
+
+	void winrt::Mischief_IRC::implementation::MainPage::IrcDisconnect()
+	{
+		_ircClient.Disconnect("Bye!");
+	}
 }

@@ -17,8 +17,11 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::HomePage::ButtonIrcConnect_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
-		thread receiveThread = _ircClient.ReceiveAsync();
-		receiveThread.detach();
+		MainPage::Current->IrcConnect();
+	}
+
+	void winrt::Mischief_IRC::implementation::HomePage::ButtonIrcDisconnect_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+		MainPage::Current->IrcDisconnect();
 	}
 }
