@@ -128,16 +128,16 @@ byte IrcClient::Process(string message)
 		// Get prefix
 		currentPosEnd = message.find(' ', currentPosStart);
 		ircMessage.prefix = message.substr(1, currentPosEnd - 1);
-		currentPosStart = currentPosEnd + 1;
+		currentPosStart = message.find_first_not_of(' ', currentPosEnd + 1);
 	}
 
 	// Get command
 	currentPosEnd = message.find(' ', currentPosStart);
 	ircMessage.command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
-	currentPosStart = currentPosEnd + 1;
+	currentPosStart = message.find_first_not_of(' ', currentPosEnd + 1);
 
 	// Get parameter(s)
-	for (; currentPosStart != message.size() && currentPosEnd != string::npos; currentPosStart = currentPosEnd + 1)
+	for (; currentPosStart != message.size() && currentPosEnd != string::npos; currentPosStart = message.find_first_not_of(' ', currentPosEnd + 1))
 	{
 		if (message.at(currentPosStart) != ':')
 		{
