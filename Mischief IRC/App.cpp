@@ -105,6 +105,8 @@ void App::OnLaunched(LaunchActivatedEventArgs const& e)
 void App::OnSuspending([[maybe_unused]] IInspectable const& sender, [[maybe_unused]] SuspendingEventArgs const& e)
 {
     // Save application state and stop any background activity
+
+    MainPage::Current->IrcDisconnect();
 }
 
 /// <summary>
