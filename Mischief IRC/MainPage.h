@@ -1,8 +1,6 @@
 ﻿#pragma once
 
 #include "MainPage.g.h"
-#include "Core/IRC/IrcClient.h"
-#include "Core/Settings/Settings.h"
 
 using std::make_pair;
 using std::pair;
@@ -15,7 +13,6 @@ namespace winrt::Mischief_IRC::implementation
     {
     private:
         vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages;
-        IrcClient _ircClient;
     public:        
         MainPage();
         void NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);

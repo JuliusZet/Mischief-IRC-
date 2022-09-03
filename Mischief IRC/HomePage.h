@@ -1,16 +1,18 @@
 ﻿#pragma once
 
 #include "HomePage.g.h"
+#include "Core/IRC/IrcClient.h"
 
 namespace winrt::Mischief_IRC::implementation
 {
     struct HomePage : HomePageT<HomePage>
     {
-        HomePage()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+    private:
+        IrcClient _ircClient;
+
+    public:
+        HomePage();
+        void ButtonIrcConnect_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
     };
 }
 

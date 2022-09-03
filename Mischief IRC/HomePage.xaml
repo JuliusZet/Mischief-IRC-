@@ -8,6 +8,9 @@
     xmlns:mux="using:Microsoft.UI.Xaml"
     mc:Ignorable="d">
     <Grid>
-        <TextBlock Text="This is the home page"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" x:Name="ButtonIrcConnect" Content="Conntect to IRC" Click="ButtonIrcConnect_Click" Style="{ThemeResource ButtonRevealStyle}"/>
     </Grid>
 </Page>
