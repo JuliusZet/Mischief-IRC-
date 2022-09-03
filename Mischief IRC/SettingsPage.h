@@ -2,15 +2,24 @@
 
 #include "SettingsPage.g.h"
 
+using std::make_pair;
+using std::pair;
+using std::vector;
+using std::wstring;
+
 namespace winrt::Mischief_IRC::implementation
 {
     struct SettingsPage : SettingsPageT<SettingsPage>
     {
-        SettingsPage() 
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+    private:
+        vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages;
+    public:
+        SettingsPage();
+        void NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void NavigationView_SelectionChanged(winrt::Microsoft::UI::Xaml::Controls::NavigationView const& sender, winrt::Microsoft::UI::Xaml::Controls::NavigationViewSelectionChangedEventArgs const& args);
+        void NavigationView_Navigate(wstring navItemTag, winrt::Windows::UI::Xaml::Media::Animation::NavigationTransitionInfo const& navigationTransitionInfo);
+        void On_Navigated(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs const& args);
+        void FrameContent_NavigationFailed(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const& e);
     };
 }
 

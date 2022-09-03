@@ -125,6 +125,10 @@
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="IrcSettingsPage.h">
+      <DependentUpon>IrcSettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -142,6 +146,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="IrcSettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
@@ -173,6 +180,10 @@
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="IrcSettingsPage.cpp">
+      <DependentUpon>IrcSettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -194,6 +205,10 @@
     </Midl>
     <Midl Include="HomePage.idl">
       <DependentUpon>HomePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="IrcSettingsPage.idl">
+      <DependentUpon>IrcSettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="MainPage.idl">

@@ -75,6 +75,9 @@
     <Page Include="SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="IrcSettingsPage.xaml">
+      <Filter>Pages\SettingsPages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">
@@ -91,6 +94,9 @@
     </Filter>
     <Filter Include="Pages">
       <UniqueIdentifier>{975ff08d-ab11-4fb8-9518-0ef568e812df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pages\SettingsPages">
+      <UniqueIdentifier>{da3c9953-95c1-4c4d-b3c0-d5c77e1f5315}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
