@@ -7,10 +7,14 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::Mischief_IRC::implementation
 {
+	winrt::Mischief_IRC::implementation::MainPage* MainPage::Current{ nullptr };
+
 	winrt::Mischief_IRC::implementation::MainPage::MainPage()
 	{
 		// Xaml objects should not call InitializeComponent during construction.
 		// See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
+
+		Current = this;
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"home", winrt::xaml_typename<Mischief_IRC::HomePage>()));
 		//_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircChannelFuelrats", winrt::xaml_typename<Mischief_IRC::IrcPage>()));

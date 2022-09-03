@@ -15,6 +15,7 @@ namespace winrt::Mischief_IRC::implementation
         vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages;
     public:        
         MainPage();
+        static winrt::Mischief_IRC::implementation::MainPage* Current;
         void NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void NavigationView_SelectionChanged(winrt::Microsoft::UI::Xaml::Controls::NavigationView const& sender, winrt::Microsoft::UI::Xaml::Controls::NavigationViewSelectionChangedEventArgs const& args);
         void NavigationView_Navigate(wstring navItemTag, winrt::Windows::UI::Xaml::Media::Animation::NavigationTransitionInfo const& navigationTransitionInfo);
