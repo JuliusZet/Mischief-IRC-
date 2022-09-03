@@ -5,7 +5,7 @@
     xmlns:local="using:Mischief_IRC"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mux="using:Microsoft.UI.Xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
