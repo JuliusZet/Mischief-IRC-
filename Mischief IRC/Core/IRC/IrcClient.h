@@ -19,16 +19,17 @@ public:
 	byte Disconnect();
 	byte Reconnect(string quitMessage, string host, string port, string pass, string nick, string user, string realname);
 	byte Reconnect(string host, string port, string pass, string nick, string user, string realname);
-	byte Send(string data);
 	byte SendPrivmsg(string receiver, string text);
-	byte Receive();
-	byte Process(string message);
-	thread ReceiveAsync();
 	bool IsConnected();
 
 private:
+	byte Send(string data);
+	byte Receive();
+	thread ReceiveAsync();
+	byte Process(string message);
+
 	IrcSocket _ircSocket{};
-	bool _isConnected{};
 	vector<IrcMessage> _messages{};
 	thread _receiveThread{};
+	bool _isConnected{};
 };
