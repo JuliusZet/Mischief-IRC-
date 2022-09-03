@@ -26,6 +26,6 @@
                 </mux:NavigationViewItem.Icon>
             </mux:NavigationViewItem>
         </mux:NavigationView.MenuItems>
-        <Frame x:Name="FrameContent" Padding="12,0,12,24" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
+        <Frame x:Name="FrameContent" Padding="12" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
     </mux:NavigationView>
 </Page>
