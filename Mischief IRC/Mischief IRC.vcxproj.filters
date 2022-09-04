@@ -27,9 +27,6 @@
     <ClInclude Include="Core\IRC\IrcClient.h">
       <Filter>Core\IRC</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Settings\Setting.h">
-      <Filter>Core\Settings</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Settings\Settings.h">
       <Filter>Core\Settings</Filter>
     </ClInclude>
