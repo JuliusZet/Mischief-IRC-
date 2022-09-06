@@ -7,9 +7,7 @@
 
 using std::chrono::system_clock;
 using std::istringstream;
-using std::string;
 using std::thread;
-using std::vector;
 
 class IrcClient
 {
