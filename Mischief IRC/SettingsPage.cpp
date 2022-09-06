@@ -9,11 +9,16 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::Mischief_IRC::implementation
 {
+	winrt::Mischief_IRC::implementation::SettingsPage* SettingsPage::Current{ nullptr };
+
 	winrt::Mischief_IRC::implementation::SettingsPage::SettingsPage()
 	{
 		// Xaml objects should not call InitializeComponent during construction.
 		// See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
 
+		Current = this;
+
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"appearanceSettings", winrt::xaml_typename<Mischief_IRC::AppearanceSettingsPage>()));
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircSettings", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
 	}
 
@@ -84,5 +89,15 @@ namespace winrt::Mischief_IRC::implementation
 	void winrt::Mischief_IRC::implementation::SettingsPage::FrameContent_NavigationFailed(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const& e)
 	{
 		throw winrt::hresult_error(E_FAIL, winrt::hstring(L"Failed to load page ") + e.SourcePageType().Name);
+	}
+
+	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+
+	}
+
+	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+
 	}
 }

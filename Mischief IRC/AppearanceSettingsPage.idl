@@ -1,0 +1,8 @@
+namespace Mischief_IRC
+{
+    [default_interface]
+    runtimeclass AppearanceSettingsPage : Windows.UI.Xaml.Controls.Page
+    {
+        AppearanceSettingsPage();
+    }
+}

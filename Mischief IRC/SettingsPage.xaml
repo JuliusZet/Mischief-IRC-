@@ -7,24 +7,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
-    <muxc:NavigationView x:Name="NavigationView" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsBackEnabled="False" IsSettingsVisible="False" AlwaysShowHeader="False" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged">
-        <muxc:NavigationView.MenuItems>
-            <!--<muxc:NavigationViewItem Tag="generalSettings" Content="General">
-                <muxc:NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Repair"/>
-                </muxc:NavigationViewItem.Icon>
-            </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="appearanceSettings" Content="Appearance">
-                <muxc:NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="View"/>
-                </muxc:NavigationViewItem.Icon>
-            </muxc:NavigationViewItem>-->
-            <muxc:NavigationViewItem Tag="ircSettings" Content="IRC">
-                <muxc:NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="World"/>
-                </muxc:NavigationViewItem.Icon>
-            </muxc:NavigationViewItem>
-        </muxc:NavigationView.MenuItems>
-        <Frame x:Name="FrameContent" Padding="12" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
-    </muxc:NavigationView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <muxc:NavigationView x:Name="NavigationView" Grid.Row="0" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsBackEnabled="False" IsSettingsVisible="False" AlwaysShowHeader="False" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged">
+            <muxc:NavigationView.MenuItems>
+                <!--<muxc:NavigationViewItem Tag="generalSettings" Content="General">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Repair"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>-->
+                <muxc:NavigationViewItem Tag="appearanceSettings" Content="Appearance">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="View"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Tag="ircSettings" Content="IRC">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="World"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.MenuItems>
+            <Frame x:Name="FrameContent" Padding="12" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
+        </muxc:NavigationView>
+        <Grid Grid.Row="1" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonDiscard" Grid.Column="0" Content="Discard" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonDiscard_Click"/>
+            <Button x:Name="ButtonSave" Grid.Column="1" Content="Save" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonSave_Click"/>
+        </Grid>
+    </Grid>
 </Page>
