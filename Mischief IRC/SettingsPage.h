@@ -12,6 +12,19 @@ using std::wstring;
 
 namespace winrt::Mischief_IRC::implementation
 {
+    struct Setting
+    {
+        string key{};
+        hstring savedValue{};
+        hstring newValue{};
+
+        Setting(string key) :
+            key{ key },
+            savedValue{ to_hstring(Settings::Get(key)) },
+            newValue{ savedValue }
+        { }
+    };
+
     struct SettingsPage : SettingsPageT<SettingsPage>
     {
     private:
@@ -27,12 +40,7 @@ namespace winrt::Mischief_IRC::implementation
         void ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
 
-        pair<hstring, hstring> IrcHost{ to_hstring(Settings::Get("ircHost")), to_hstring(Settings::Get("ircHost")) };
-        pair<hstring, hstring> IrcPort{ to_hstring(Settings::Get("ircPort")), to_hstring(Settings::Get("ircPort")) };
-        pair<hstring, hstring> IrcPass{ to_hstring(Settings::Get("ircPass")), to_hstring(Settings::Get("ircPass")) };
-        pair<hstring, hstring> IrcNick{ to_hstring(Settings::Get("ircNick")), to_hstring(Settings::Get("ircNick")) };
-        pair<hstring, hstring> IrcUser{ to_hstring(Settings::Get("ircUser")), to_hstring(Settings::Get("ircUser")) };
-        pair<hstring, hstring> IrcRealname{ to_hstring(Settings::Get("ircRealname")), to_hstring(Settings::Get("ircRealname")) };
+        vector<Setting> settings{};
     };
 }
 

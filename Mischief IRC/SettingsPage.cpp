@@ -20,6 +20,13 @@ namespace winrt::Mischief_IRC::implementation
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"appearanceSettings", winrt::xaml_typename<Mischief_IRC::AppearanceSettingsPage>()));
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircSettings", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
+
+		settings.push_back(Setting("ircHost"));
+		settings.push_back(Setting("ircPort"));
+		settings.push_back(Setting("ircPass"));
+		settings.push_back(Setting("ircNick"));
+		settings.push_back(Setting("ircUser"));
+		settings.push_back(Setting("ircRealname"));
 	}
 
 	void winrt::Mischief_IRC::implementation::SettingsPage::NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

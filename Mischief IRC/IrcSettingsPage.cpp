@@ -17,12 +17,21 @@ namespace winrt::Mischief_IRC::implementation
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxHost_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-        TextBoxHost().Text(SettingsPage::Current->IrcHost.second);
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircHost")
+            {
+                _host = i;
+                break;
+            }
+        }
+
+        TextBoxHost().Text(SettingsPage::Current->settings.at(_host).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxHost_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {
-        if (TextBoxHost().Text() != SettingsPage::Current->IrcHost.first)
+        if (TextBoxHost().Text() != SettingsPage::Current->settings.at(_host).savedValue)
         {
             TextBoxHost().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
         }
@@ -35,7 +44,7 @@ namespace winrt::Mischief_IRC::implementation
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxHost_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-        SettingsPage::Current->IrcHost.second = TextBoxHost().Text();
+        SettingsPage::Current->settings.at(_host).newValue = TextBoxHost().Text();
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxPort_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

@@ -9,6 +9,12 @@ namespace winrt::Mischief_IRC::implementation
     struct IrcSettingsPage : IrcSettingsPageT<IrcSettingsPage>
     {
     private:
+        size_t _host{};
+        size_t _port{};
+        size_t _pass{};
+        size_t _nick{};
+        size_t _user{};
+        size_t _realname{};
 
     public:
         IrcSettingsPage();
