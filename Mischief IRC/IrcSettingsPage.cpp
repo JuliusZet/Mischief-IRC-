@@ -49,17 +49,34 @@ namespace winrt::Mischief_IRC::implementation
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxPort_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircPort")
+            {
+                _port = i;
+                break;
+            }
+        }
 
+        TextBoxPort().Text(SettingsPage::Current->settings.at(_port).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxPort_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {
+        if (TextBoxPort().Text() != SettingsPage::Current->settings.at(_port).savedValue)
+        {
+            TextBoxPort().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
 
+        else
+        {
+            TextBoxPort().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxPort_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-
+        SettingsPage::Current->settings.at(_port).newValue = TextBoxPort().Text();
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::PasswordBoxPass_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
