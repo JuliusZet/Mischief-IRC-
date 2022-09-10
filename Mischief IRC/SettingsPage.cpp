@@ -98,26 +98,122 @@ namespace winrt::Mischief_IRC::implementation
 		throw winrt::hresult_error(E_FAIL, winrt::hstring(L"Failed to load page ") + e.SourcePageType().Name);
 	}
 
-	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	winrt::Windows::Foundation::IAsyncAction winrt::Mischief_IRC::implementation::SettingsPage::ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		for (size_t i{}; i != settings.size(); ++i)
+		bool foundChangedSetting{};
+		hstring changelog{ L"You have changed the following settings:\n\n" };
+
+		for (Setting eachSetting : settings)
 		{
-			settings.at(i).newValue = settings.at(i).savedValue;
+			if (eachSetting.savedValue != eachSetting.newValue)
+			{
+				foundChangedSetting = true;
+
+				if (eachSetting.key != "ircPass")
+				{
+					changelog = changelog + to_hstring(eachSetting.key) + L": \"" + eachSetting.savedValue + L"\" --> \"" + eachSetting.newValue + L"\"\n";
+				}
+
+				else
+				{
+					changelog = changelog + to_hstring(eachSetting.key) + L": \"[REDACTED]\" --> \"[REDACTED]\"\n";
+				}
+			}
 		}
 
-		FrameContent().Navigate(FrameContent().SourcePageType());
+		if (foundChangedSetting)
+		{
+			winrt::Windows::UI::Xaml::Controls::ContentDialog dialogConfirmation;
+			dialogConfirmation.Title(box_value(L"Do you really want to save the changed settings?"));
+			dialogConfirmation.Content(box_value(changelog));
+			dialogConfirmation.PrimaryButtonText(L"Yes, save");
+			dialogConfirmation.CloseButtonText(L"No, do not save");
+			dialogConfirmation.DefaultButton(winrt::Windows::UI::Xaml::Controls::ContentDialogButton::Primary);
+
+			auto result = co_await dialogConfirmation.ShowAsync();
+
+			if (result == winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary)
+			{
+				for (size_t i{}; i != settings.size(); ++i)
+				{
+					if (settings.at(i).savedValue != settings.at(i).newValue)
+					{
+						settings.at(i).savedValue = settings.at(i).newValue;
+						Settings::Set(settings.at(i).key, to_string(settings.at(i).newValue));
+					}
+				}
+
+				FrameContent().Navigate(FrameContent().SourcePageType());
+			}
+		}
+
+		else
+		{
+			winrt::Windows::UI::Xaml::Controls::ContentDialog dialogInformation;
+			dialogInformation.Title(box_value(L"There are no settings to save."));
+			dialogInformation.CloseButtonText(L"OK");
+			dialogInformation.DefaultButton(winrt::Windows::UI::Xaml::Controls::ContentDialogButton::Close);
+
+			auto result = co_await dialogInformation.ShowAsync();
+		}
 	}
 
-	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	winrt::Windows::Foundation::IAsyncAction winrt::Mischief_IRC::implementation::SettingsPage::ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		bool foundChangedSetting{};
+		hstring changelog{ L"You have changed the following settings:\n\n" };
+
 		for (Setting eachSetting : settings)
 		{
 			if (eachSetting.newValue != eachSetting.savedValue)
 			{
-				Settings::Set(eachSetting.key, to_string(eachSetting.newValue));
+				foundChangedSetting = true;
+
+				if (eachSetting.key != "ircPass")
+				{
+					changelog = changelog + to_hstring(eachSetting.key) + L": \"" + eachSetting.savedValue + L"\" --> \"" + eachSetting.newValue + L"\"\n";
+				}
+
+				else
+				{
+					changelog = changelog + to_hstring(eachSetting.key) + L": \"[REDACTED]\" --> \"[REDACTED]\"\n";
+				}
 			}
 		}
 
-		FrameContent().Navigate(FrameContent().SourcePageType());
+		if (foundChangedSetting)
+		{
+			winrt::Windows::UI::Xaml::Controls::ContentDialog dialogConfirmation;
+			dialogConfirmation.Title(box_value(L"Do you really want to discard the changed settings?"));
+			dialogConfirmation.Content(box_value(changelog));
+			dialogConfirmation.PrimaryButtonText(L"Yes, discard");
+			dialogConfirmation.CloseButtonText(L"No, do not discard");
+			dialogConfirmation.DefaultButton(winrt::Windows::UI::Xaml::Controls::ContentDialogButton::Primary);
+
+			auto result = co_await dialogConfirmation.ShowAsync();
+
+			if (result == winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary)
+			{
+				for (size_t i{}; i != settings.size(); ++i)
+				{
+					if (settings.at(i).newValue != settings.at(i).savedValue)
+					{
+						settings.at(i).newValue = settings.at(i).savedValue;
+					}
+				}
+
+				FrameContent().Navigate(FrameContent().SourcePageType());
+			}
+		}
+
+		else
+		{
+			winrt::Windows::UI::Xaml::Controls::ContentDialog dialogInformation;
+			dialogInformation.Title(box_value(L"There are no settings to discard."));
+			dialogInformation.CloseButtonText(L"OK");
+			dialogInformation.DefaultButton(winrt::Windows::UI::Xaml::Controls::ContentDialogButton::Close);
+
+			auto result = co_await dialogInformation.ShowAsync();
+		}
 	}
 }

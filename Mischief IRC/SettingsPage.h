@@ -4,6 +4,7 @@
 #include "Core/Settings/Settings.h"
 #include "SettingsPage.g.h"
 #include "winrt/Windows.UI.Text.h"
+#include "winrt/Windows.Foundation.h"
 
 using std::make_pair;
 using std::pair;
@@ -37,8 +38,8 @@ namespace winrt::Mischief_IRC::implementation
         void NavigationView_Navigate(wstring navItemTag, winrt::Windows::UI::Xaml::Media::Animation::NavigationTransitionInfo const& navigationTransitionInfo);
         void On_Navigated(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs const& args);
         void FrameContent_NavigationFailed(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const& e);
-        void ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
-        void ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        winrt::Windows::Foundation::IAsyncAction ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        winrt::Windows::Foundation::IAsyncAction ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
 
         vector<Setting> settings{};
     };
