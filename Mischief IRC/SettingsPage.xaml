@@ -37,8 +37,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ButtonDiscard" Grid.Column="0" Content="Discard" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonDiscard_Click"/>
-            <Button x:Name="ButtonSave" Grid.Column="1" Content="Save" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonSave" Grid.Column="0" Content="Save" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonDiscard" Grid.Column="1" Content="Discard" Margin="12,12,0,12" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonDiscard_Click"/>
         </Grid>
     </Grid>
 </Page>
