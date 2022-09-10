@@ -110,7 +110,7 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::MainPage::IrcConnect()
 	{
-		_ircClient.Connect("bouncer.lan", "6667", "[REDACTED]", "JuliusZet", "JuliusZet", "JuliusZet");
+		_ircClient.Connect(Settings::Get("ircHost"), Settings::Get("ircPort"), Settings::Get("ircPass"), Settings::Get("ircNick"), Settings::Get("ircUser"), Settings::Get("ircRealname"));
 	}
 
 	void winrt::Mischief_IRC::implementation::MainPage::IrcDisconnect()
