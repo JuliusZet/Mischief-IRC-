@@ -7,7 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <muxc:RadioButtons x:Name="RadioButtonsTheme" Grid.Row="0" Header="Theme" MaxColumns="3" Loaded="RadioButtonsTheme_Loaded" SelectionChanged="RadioButtonsTheme_SelectionChanged">
+                <x:String>Light</x:String>
+                <x:String>Dark</x:String>
+                <x:String>System</x:String>
+            </muxc:RadioButtons>
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -14,4 +14,47 @@ namespace winrt::Mischief_IRC::implementation
         // Xaml objects should not call InitializeComponent during construction.
         // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
     }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::RadioButtonsTheme_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "appearanceTheme")
+            {
+                _theme = i;
+                break;
+            }
+        }
+
+        if (SettingsPage::Current->settings.at(_theme).newValue == L"Light")
+        {
+            RadioButtonsTheme().SelectedIndex(0);
+        }
+        else if (SettingsPage::Current->settings.at(_theme).newValue == L"Dark")
+        {
+            RadioButtonsTheme().SelectedIndex(1);
+        }
+        else
+        {
+            RadioButtonsTheme().SelectedIndex(2);
+        }
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::RadioButtonsTheme_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::SelectionChangedEventArgs const& e)
+    {
+        switch (RadioButtonsTheme().SelectedIndex())
+        {
+        case 0:
+            SettingsPage::Current->settings.at(_theme).newValue = L"Light";
+            break;
+        case 1:
+            SettingsPage::Current->settings.at(_theme).newValue = L"Dark";
+            break;
+        case 2:
+            SettingsPage::Current->settings.at(_theme).newValue = L"System";
+            break;
+        default:
+            break;
+        }
+    }
 }

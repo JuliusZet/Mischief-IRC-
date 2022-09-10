@@ -1,7 +1,6 @@
 ﻿#include "pch.h"
 
 #include "App.h"
-#include "MainPage.h"
 
 using namespace winrt;
 using namespace Windows::ApplicationModel;
@@ -20,6 +19,15 @@ using namespace Mischief_IRC::implementation;
 App::App()
 {
     Suspending({ this, &App::OnSuspending });
+
+    if (Settings::Get("appearanceTheme") == "Light")
+    {
+        this->RequestedTheme(winrt::Windows::UI::Xaml::ApplicationTheme::Light);
+    }
+    else if (Settings::Get("appearanceTheme") == "Dark")
+    {
+        this->RequestedTheme(winrt::Windows::UI::Xaml::ApplicationTheme::Dark);
+    }
 
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
     UnhandledException([this](IInspectable const&, UnhandledExceptionEventArgs const& e)

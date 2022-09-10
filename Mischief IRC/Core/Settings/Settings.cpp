@@ -19,8 +19,14 @@ string Settings::Get(string key)
 
 string Settings::GetDefault(string key)
 {
-	// ToDo: Add default values
-	return "";
+	if (key == "appearanceTheme")
+	{
+		return "System";
+	}
+	else
+	{
+		return "";
+	}
 }
 
 byte Settings::Set(string key, string value)
