@@ -81,61 +81,116 @@ namespace winrt::Mischief_IRC::implementation
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::PasswordBoxPass_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircPass")
+            {
+                _pass = i;
+                break;
+            }
+        }
 
-    }
-
-    void winrt::Mischief_IRC::implementation::IrcSettingsPage::PasswordBoxPass_PasswordChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
-    {
-
+        PasswordBoxPass().Password(SettingsPage::Current->settings.at(_pass).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::PasswordBoxPass_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-
+        SettingsPage::Current->settings.at(_pass).newValue = PasswordBoxPass().Password();
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxNick_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircNick")
+            {
+                _nick = i;
+                break;
+            }
+        }
 
+        TextBoxNick().Text(SettingsPage::Current->settings.at(_nick).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxNick_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {
+        if (TextBoxNick().Text() != SettingsPage::Current->settings.at(_nick).savedValue)
+        {
+            TextBoxNick().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
 
+        else
+        {
+            TextBoxNick().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxNick_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-
+        SettingsPage::Current->settings.at(_nick).newValue = TextBoxNick().Text();
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxUser_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircUser")
+            {
+                _user = i;
+                break;
+            }
+        }
 
+        TextBoxUser().Text(SettingsPage::Current->settings.at(_user).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxUser_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {
+        if (TextBoxUser().Text() != SettingsPage::Current->settings.at(_user).savedValue)
+        {
+            TextBoxUser().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
 
+        else
+        {
+            TextBoxUser().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxUser_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-
+        SettingsPage::Current->settings.at(_user).newValue = TextBoxUser().Text();
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxRealname_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "ircRealname")
+            {
+                _realname = i;
+                break;
+            }
+        }
 
+        TextBoxRealname().Text(SettingsPage::Current->settings.at(_realname).newValue);
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxRealname_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {
+        if (TextBoxRealname().Text() != SettingsPage::Current->settings.at(_realname).savedValue)
+        {
+            TextBoxRealname().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
 
+        else
+        {
+            TextBoxRealname().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
     }
 
     void winrt::Mischief_IRC::implementation::IrcSettingsPage::TextBoxRealname_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-
+        SettingsPage::Current->settings.at(_realname).newValue = TextBoxRealname().Text();
     }
 }

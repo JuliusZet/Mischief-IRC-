@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <TextBox x:Name="TextBoxHost" Grid.Row="0" Grid.Column="0" Header="Host" Loaded="TextBoxHost_Loaded" TextChanged="TextBoxHost_TextChanged" LostFocus="TextBoxHost_LostFocus"/>
             <TextBox x:Name="TextBoxPort" Grid.Row="0" Grid.Column="1" Margin="12,0,0,12" Header="Port" Loaded="TextBoxPort_Loaded" TextChanged="TextBoxPort_TextChanged" LostFocus="TextBoxPort_LostFocus"/>
-            <PasswordBox x:Name="PasswordBoxPass" Grid.Row="1" Grid.ColumnSpan="2" Header="Password" Loaded="PasswordBoxPass_Loaded" PasswordChanged="PasswordBoxPass_PasswordChanged" LostFocus="PasswordBoxPass_LostFocus"/>
+            <PasswordBox x:Name="PasswordBoxPass" Grid.Row="1" Grid.ColumnSpan="2" Header="Password" Loaded="PasswordBoxPass_Loaded" LostFocus="PasswordBoxPass_LostFocus"/>
             <TextBox x:Name="TextBoxNick" Grid.Row="2" Grid.ColumnSpan="2" Header="Nickname" Loaded="TextBoxNick_Loaded" TextChanged="TextBoxNick_TextChanged" LostFocus="TextBoxNick_LostFocus"/>
             <TextBox x:Name="TextBoxUser" Grid.Row="3" Grid.ColumnSpan="2" Header="Username" Loaded="TextBoxUser_Loaded" TextChanged="TextBoxUser_TextChanged" LostFocus="TextBoxUser_LostFocus"/>
             <TextBox x:Name="TextBoxRealname" Grid.Row="4" Grid.ColumnSpan="2" Header="Realname" Loaded="TextBoxRealname_Loaded" TextChanged="TextBoxRealname_TextChanged" LostFocus="TextBoxRealname_LostFocus"/>
