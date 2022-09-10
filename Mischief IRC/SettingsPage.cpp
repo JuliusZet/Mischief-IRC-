@@ -100,12 +100,12 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonDiscard_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		for (Setting eachSetting : settings)
+		for (size_t i{}; i != settings.size(); ++i)
 		{
-			eachSetting.newValue = eachSetting.savedValue;
+			settings.at(i).newValue = settings.at(i).savedValue;
 		}
 
-		// ToDo: Make the UI refresh somehow
+		FrameContent().Navigate(FrameContent().SourcePageType());
 	}
 
 	void winrt::Mischief_IRC::implementation::SettingsPage::ButtonSave_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -118,6 +118,6 @@ namespace winrt::Mischief_IRC::implementation
 			}
 		}
 
-		// ToDo: Make the UI refresh somehow
+		FrameContent().Navigate(FrameContent().SourcePageType());
 	}
 }
