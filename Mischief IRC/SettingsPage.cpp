@@ -141,6 +141,13 @@ namespace winrt::Mischief_IRC::implementation
 					{
 						settings.at(i).savedValue = settings.at(i).newValue;
 						Settings::Set(settings.at(i).key, to_string(settings.at(i).newValue));
+
+						if (settings.at(i).key == "appearanceTheme")
+						{
+							MainPage::Current->InfoBar().Title(L"App restart required");
+							MainPage::Current->InfoBar().Message(L"Please restart the application to apply the new theme.");
+							MainPage::Current->InfoBar().IsOpen(true);
+						}
 					}
 				}
 
