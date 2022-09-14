@@ -78,6 +78,9 @@
     <Page Include="AppearanceSettingsPage.xaml">
       <Filter>Pages\SettingsPages</Filter>
     </Page>
+    <Page Include="IrcPage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

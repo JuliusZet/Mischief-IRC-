@@ -21,12 +21,12 @@
                         <SymbolIcon Symbol="Home"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Content="#fuelrats">
+                <muxc:NavigationViewItem Tag="ircChannelFuelrats" Content="#fuelrats">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="#fr" FontFamily="Segoe UI"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Content="#ratchat">
+                <muxc:NavigationViewItem Tag="ircChannelRatchat" Content="#ratchat">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="#rc" FontFamily="Segoe UI"/>
                     </muxc:NavigationViewItem.Icon>

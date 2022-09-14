@@ -17,7 +17,8 @@ namespace winrt::Mischief_IRC::implementation
 		Current = this;
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"home", winrt::xaml_typename<Mischief_IRC::HomePage>()));
-		//_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircChannelFuelrats", winrt::xaml_typename<Mischief_IRC::IrcPage>()));
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircChannelFuelrats", winrt::xaml_typename<Mischief_IRC::IrcPage>()));
+		//_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircChannelRatchat", winrt::xaml_typename<Mischief_IRC::IrcPage>()));
 	}
 
 	void winrt::Mischief_IRC::implementation::MainPage::NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
