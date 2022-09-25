@@ -8,7 +8,6 @@ namespace winrt::Mischief_IRC::implementation
     struct HomePage : HomePageT<HomePage>
     {
     private:
-        IrcClient _ircClient;
 
     public:
         HomePage();
