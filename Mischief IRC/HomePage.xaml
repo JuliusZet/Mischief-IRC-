@@ -13,6 +13,6 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Button Grid.Row="0" x:Name="ButtonIrcConnect" Content="Conntect to IRC" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonIrcConnect_Click"/>
-        <Button Grid.Row="1" x:Name="ButtonIrcDisconnect" Content="Disconnect from IRC" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonIrcDisconnect_Click"/>
+        <Button Grid.Row="1" x:Name="ButtonIrcDisconnect" Content="Disconnect from IRC" Style="{ThemeResource ButtonRevealStyle}" Margin="0,12,0,0" Click="ButtonIrcDisconnect_Click"/>
     </Grid>
 </Page>
