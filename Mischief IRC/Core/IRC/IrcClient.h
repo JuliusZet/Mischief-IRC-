@@ -1,10 +1,12 @@
 #pragma once
 
+#include <boost/signals2.hpp>
 #include <sstream>
 #include <thread>
 #include "Core/IRC/IrcMessage.h"
 #include "Core/IRC/IrcSocket.h"
 
+using boost::signals2::signal;
 using std::chrono::system_clock;
 using std::istringstream;
 using std::thread;
@@ -20,11 +22,18 @@ public:
 	byte SendPrivmsg(string receiver, string text);
 	bool IsConnected();
 
+	signal<void()> OnConnecting;
+	signal<void()> OnConnected;
+	signal<void()> OnDisconnecting;
+	signal<void()> OnDisconnected;
+	signal<void(IrcMessage)> OnPrivmsg;
+
 private:
 	byte Send(string data);
 	byte Receive();
 	thread ReceiveAsync();
-	byte Process(string message);
+	byte Parse(string message);
+	byte Process(IrcMessage ircMessage);
 
 	IrcSocket _ircSocket{};
 	vector<IrcMessage> _messages{};

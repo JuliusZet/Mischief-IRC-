@@ -3,6 +3,8 @@
 
 byte IrcClient::Connect(string host, string port, string pass, string nick, string user, string realname)
 {
+	OnConnecting();
+
 	if (_ircSocket.Connect(host, port) == 0)
 	{
 		if (Send("PASS :" + pass) == 0)
@@ -12,8 +14,11 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
 					_isConnected = true;
+					OnConnected();
+
 					_receiveThread = ReceiveAsync();
 					_receiveThread.detach();
+
 					return 0;
 				}
 
@@ -44,6 +49,8 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 
 byte IrcClient::Disconnect(string quitMessage)
 {
+	OnDisconnecting();
+
 	if (_isConnected)
 	{
 		if (!quitMessage.empty())
@@ -60,14 +67,12 @@ byte IrcClient::Disconnect(string quitMessage)
 		{
 			_receiveThread.join();
 		}
+
 		_isConnected = false;
-		return _ircSocket.Disconnect();
 	}
 
-	else
-	{
-		return _ircSocket.Disconnect();
-	}
+	OnDisconnected();
+	return _ircSocket.Disconnect();
 }
 
 byte IrcClient::Disconnect()
@@ -112,14 +117,15 @@ byte IrcClient::Receive()
 				message.pop_back();
 			}
 
-			Process(message);
+			Parse(message);
+			Process(_messages.back());
 		}
 	}
 
 	return 0;
 }
 
-byte IrcClient::Process(string message)
+byte IrcClient::Parse(string message)
 {
 	IrcMessage ircMessage{};
 	ircMessage.time = system_clock::to_time_t(system_clock::now());
@@ -161,7 +167,17 @@ byte IrcClient::Process(string message)
 
 	_messages.push_back(ircMessage);
 
-	if (ircMessage.command == "PING")
+	return 0;
+}
+
+byte IrcClient::Process(IrcMessage ircMessage)
+{
+	if (ircMessage.command == "PRIVMSG")
+	{
+		OnPrivmsg(ircMessage);
+	}
+
+	else if (ircMessage.command == "PING")
 	{
 		return Send("PONG :" + ircMessage.parameters.front());
 	}
