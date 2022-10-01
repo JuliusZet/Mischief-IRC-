@@ -167,6 +167,32 @@ byte IrcClient::Parse(string message)
 
 	_messages.push_back(ircMessage);
 
+	if (ircMessage.command == "PRIVMSG" || ircMessage.command == "JOIN" || ircMessage.command == "PART" || ircMessage.command == "MODE")
+	{
+		bool channelAlreadyExists = false;
+
+		for (size_t i{}; i < _channel.size(); ++i)
+		{
+			if (_channel.at(i).channelName == ircMessage.parameters.front())
+			{
+				channelAlreadyExists = true;
+				_channel.at(i).messages.push_back(ircMessage);
+				break;
+			}
+		}
+
+		if (!channelAlreadyExists)
+		{
+			_channel.push_back(IrcChannel{ ircMessage.parameters.front() });
+
+			OnNewChannel(ircMessage.parameters.front());
+
+			_channel.back().messages.push_back(ircMessage);
+		}
+
+		OnChannelEvent(ircMessage);
+	}
+
 	return 0;
 }
 

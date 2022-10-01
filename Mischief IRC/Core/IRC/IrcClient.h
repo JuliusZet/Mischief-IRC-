@@ -3,7 +3,7 @@
 #include <boost/signals2.hpp>
 #include <sstream>
 #include <thread>
-#include "Core/IRC/IrcMessage.h"
+#include "Core/IRC/IrcChannel.h"
 #include "Core/IRC/IrcSocket.h"
 
 using boost::signals2::signal;
@@ -26,6 +26,8 @@ public:
 	signal<void()> OnConnected;
 	signal<void()> OnDisconnecting;
 	signal<void()> OnDisconnected;
+	signal<void(string)> OnNewChannel;
+	signal<void(IrcMessage)> OnChannelEvent;
 	signal<void(IrcMessage)> OnPrivmsg;
 
 private:
@@ -37,6 +39,7 @@ private:
 
 	IrcSocket _ircSocket{};
 	vector<IrcMessage> _messages{};
+	vector<IrcChannel> _channel{};
 	thread _receiveThread{};
 	bool _isConnected{};
 };
