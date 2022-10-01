@@ -128,6 +128,7 @@
       <DependentUpon>AppearanceSettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="Core\IRC\IrcChannel.h" />
     <ClInclude Include="Core\IRC\IrcClient.h" />
     <ClInclude Include="Core\IRC\IrcMessage.h" />
     <ClInclude Include="Core\IRC\IrcSocket.h" />

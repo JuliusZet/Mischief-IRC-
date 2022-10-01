@@ -30,6 +30,9 @@
     <ClInclude Include="Core\Settings\Settings.h">
       <Filter>Core\Settings</Filter>
     </ClInclude>
+    <ClInclude Include="Core\IRC\IrcChannel.h">
+      <Filter>Core\IRC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
