@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "Core/IRC/IrcMessage.h"
 #include "IrcPage.g.h"
 #include "MainPage.h"
 

@@ -6,7 +6,6 @@
 
 using std::make_pair;
 using std::pair;
-using std::vector;
 using std::wstring;
 
 namespace winrt::Mischief_IRC::implementation

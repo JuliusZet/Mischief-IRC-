@@ -1,16 +1,9 @@
 ﻿#pragma once
 
-#include <vector>
-#include "Core/Settings/Settings.h"
 #include "MainPage.h"
 #include "SettingsPage.g.h"
 #include "winrt/Windows.UI.Text.h"
 #include "winrt/Windows.Foundation.h"
-
-using std::make_pair;
-using std::pair;
-using std::vector;
-using std::wstring;
 
 namespace winrt::Mischief_IRC::implementation
 {
