@@ -32,8 +32,6 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::SettingsPage::NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		FrameContent().Navigated({ this, &SettingsPage::On_Navigated });
-
 		NavigationView().SelectedItem(NavigationView().MenuItems().GetAt(0));
 	}
 
@@ -58,39 +56,9 @@ namespace winrt::Mischief_IRC::implementation
 			}
 		}
 
-		if (page.Name != L"" && page.Name != FrameContent().CurrentSourcePageType().Name)
+		if (page.Name != L"")
 		{
 			FrameContent().Navigate(page, nullptr, navigationTransitionInfo);
-		}
-	}
-
-	void winrt::Mischief_IRC::implementation::SettingsPage::On_Navigated(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationEventArgs const& args)
-	{
-		if (FrameContent().SourcePageType().Name != L"")
-		{
-			for (pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName> eachPage : _pages)
-			{
-				if (eachPage.second.Name == args.SourcePageType().Name)
-				{
-					for (winrt::Windows::Foundation::IInspectable eachMenuItem : NavigationView().MenuItems())
-					{
-						winrt::Microsoft::UI::Xaml::Controls::NavigationViewItem navigationViewItem = eachMenuItem.try_as<winrt::Microsoft::UI::Xaml::Controls::NavigationViewItem>();
-
-						if (navigationViewItem)
-						{
-							winrt::hstring hstringValue = winrt::unbox_value_or<winrt::hstring>(navigationViewItem.Tag(), L"");
-
-							if (hstringValue == eachPage.first)
-							{
-								NavigationView().SelectedItem(navigationViewItem);
-								NavigationView().Header(navigationViewItem.Content());
-							}
-						}
-					}
-
-					break;
-				}
-			}
 		}
 	}
 
