@@ -8,14 +8,6 @@ namespace winrt::Mischief_IRC::implementation
 {
     struct IrcSettingsPage : IrcSettingsPageT<IrcSettingsPage>
     {
-    private:
-        size_t _host{};
-        size_t _port{};
-        size_t _pass{};
-        size_t _nick{};
-        size_t _user{};
-        size_t _realname{};
-
     public:
         IrcSettingsPage();
         void TextBoxHost_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
@@ -35,6 +27,14 @@ namespace winrt::Mischief_IRC::implementation
         void TextBoxRealname_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void TextBoxRealname_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e);
         void TextBoxRealname_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+
+    private:
+        size_t _host{};
+        size_t _port{};
+        size_t _pass{};
+        size_t _nick{};
+        size_t _user{};
+        size_t _realname{};
     };
 }
 
