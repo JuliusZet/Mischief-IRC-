@@ -117,4 +117,37 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		IrcClient.Disconnect("Bye!");
 	}
+
+	void winrt::Mischief_IRC::implementation::MainPage::IrcAddChannel(string channelName)
+	{
+		Microsoft::UI::Xaml::Controls::NavigationViewItem navigationViewItem;
+		navigationViewItem.Tag(winrt::box_value(to_hstring(channelName)));
+		navigationViewItem.Content(navigationViewItem.Tag());
+
+		winrt::Windows::UI::Xaml::Controls::FontIcon fontIcon = winrt::Windows::UI::Xaml::Controls::FontIcon{};
+		fontIcon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
+
+		if (channelName == "#fuelrats")
+		{
+			fontIcon.Glyph(L"#fr");
+		}
+		else if (channelName == "#ratchat")
+		{
+			fontIcon.Glyph(L"#rc");
+		}
+		else if (channelName == "#debrief")
+		{
+			fontIcon.Glyph(L"#db");
+		}
+		else
+		{
+			fontIcon.Glyph(to_hstring(channelName.substr(0, 3)));
+		}
+
+		navigationViewItem.Icon(fontIcon);
+
+		NavigationView().MenuItems().Append(navigationViewItem);
+
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(wstring(to_hstring(channelName)), winrt::xaml_typename<Mischief_IRC::IrcPage>()));
+	}
 }
