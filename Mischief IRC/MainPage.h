@@ -13,9 +13,6 @@ namespace winrt::Mischief_IRC::implementation
 {
     struct MainPage : MainPageT<MainPage>
     {
-    private:
-        vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages;
-        IrcClient _ircClient;
     public:
         MainPage();
         static winrt::Mischief_IRC::implementation::MainPage* Current;
@@ -26,6 +23,11 @@ namespace winrt::Mischief_IRC::implementation
         void FrameContent_NavigationFailed(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const& e);
         void IrcConnect();
         void IrcDisconnect();
+
+        IrcClient IrcClient{};
+
+    private:
+        vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages{};
     };
 }
 

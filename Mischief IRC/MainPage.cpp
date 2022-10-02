@@ -111,11 +111,11 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::MainPage::IrcConnect()
 	{
-		_ircClient.Connect(Settings::Get("ircHost"), Settings::Get("ircPort"), Settings::Get("ircPass"), Settings::Get("ircNick"), Settings::Get("ircUser"), Settings::Get("ircRealname"));
+		IrcClient.Connect(Settings::Get("ircHost"), Settings::Get("ircPort"), Settings::Get("ircPass"), Settings::Get("ircNick"), Settings::Get("ircUser"), Settings::Get("ircRealname"));
 	}
 
 	void winrt::Mischief_IRC::implementation::MainPage::IrcDisconnect()
 	{
-		_ircClient.Disconnect("Bye!");
+		IrcClient.Disconnect("Bye!");
 	}
 }
