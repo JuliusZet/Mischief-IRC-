@@ -1,15 +1,20 @@
 ﻿#pragma once
 
+#include "Core/IRC/IrcMessage.h"
 #include "IrcPage.g.h"
+#include "MainPage.h"
 
 namespace winrt::Mischief_IRC::implementation
 {
     struct IrcPage : IrcPageT<IrcPage>
     {
-    private:
-
     public:
         IrcPage();
+        void Grid_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void AddIrcMessage(IrcMessage);
+
+    private:
+        string _channelName{};
     };
 }
 
