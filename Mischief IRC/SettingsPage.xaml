@@ -14,17 +14,17 @@
         </Grid.RowDefinitions>
         <muxc:NavigationView x:Name="NavigationView" Grid.Row="0" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsBackEnabled="False" IsSettingsVisible="False" AlwaysShowHeader="False" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged">
             <muxc:NavigationView.MenuItems>
-                <!--<muxc:NavigationViewItem Tag="generalSettings" Content="General">
+                <!--<muxc:NavigationViewItem Tag="General" Content="General">
                     <muxc:NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Repair"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>-->
-                <muxc:NavigationViewItem Tag="appearanceSettings" Content="Appearance">
+                <muxc:NavigationViewItem Tag="Appearance" Content="Appearance">
                     <muxc:NavigationViewItem.Icon>
                         <SymbolIcon Symbol="View"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="ircSettings" Content="IRC">
+                <muxc:NavigationViewItem Tag="IRC" Content="IRC">
                     <muxc:NavigationViewItem.Icon>
                         <SymbolIcon Symbol="World"/>
                     </muxc:NavigationViewItem.Icon>

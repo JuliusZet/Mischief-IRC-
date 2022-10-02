@@ -18,8 +18,8 @@ namespace winrt::Mischief_IRC::implementation
 
 		Current = this;
 
-		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"appearanceSettings", winrt::xaml_typename<Mischief_IRC::AppearanceSettingsPage>()));
-		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"ircSettings", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"Appearance", winrt::xaml_typename<Mischief_IRC::AppearanceSettingsPage>()));
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"IRC", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
 
 		settings.push_back(Setting("appearanceTheme"));
 		settings.push_back(Setting("ircHost"));
