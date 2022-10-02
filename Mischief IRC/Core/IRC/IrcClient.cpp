@@ -171,23 +171,23 @@ byte IrcClient::Parse(string message)
 	{
 		bool channelAlreadyExists = false;
 
-		for (size_t i{}; i < _channel.size(); ++i)
+		for (size_t i{}; i < Channels.size(); ++i)
 		{
-			if (_channel.at(i).channelName == ircMessage.parameters.front())
+			if (Channels.at(i).channelName == ircMessage.parameters.front())
 			{
 				channelAlreadyExists = true;
-				_channel.at(i).messages.push_back(ircMessage);
+				Channels.at(i).messages.push_back(ircMessage);
 				break;
 			}
 		}
 
 		if (!channelAlreadyExists)
 		{
-			_channel.push_back(IrcChannel{ ircMessage.parameters.front() });
+			Channels.push_back(IrcChannel{ ircMessage.parameters.front() });
 
 			OnNewChannel(ircMessage.parameters.front());
 
-			_channel.back().messages.push_back(ircMessage);
+			Channels.back().messages.push_back(ircMessage);
 		}
 
 		OnChannelEvent(ircMessage);

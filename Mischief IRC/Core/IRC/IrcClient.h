@@ -22,6 +22,8 @@ public:
 	byte SendPrivmsg(string receiver, string text);
 	bool IsConnected();
 
+	vector<IrcChannel> Channels{};
+
 	signal<void()> OnConnecting;
 	signal<void()> OnConnected;
 	signal<void()> OnDisconnecting;
@@ -39,7 +41,6 @@ private:
 
 	IrcSocket _ircSocket{};
 	vector<IrcMessage> _messages{};
-	vector<IrcChannel> _channel{};
 	thread _receiveThread{};
 	bool _isConnected{};
 };
