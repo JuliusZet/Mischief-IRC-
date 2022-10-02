@@ -24,4 +24,14 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		MainPage::Current->IrcDisconnect();
 	}
+
+	void winrt::Mischief_IRC::implementation::HomePage::ButtonIrcAddChannelFuelrats_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+		MainPage::Current->IrcAddChannel("#fuelrats");
+	}
+
+	void winrt::Mischief_IRC::implementation::HomePage::ButtonIrcAddChannelRatchat_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+		MainPage::Current->IrcAddChannel("#ratchat");
+	}
 }
