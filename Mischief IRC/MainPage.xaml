@@ -16,19 +16,15 @@
         <muxc:InfoBar x:Name="InfoBar"/>
         <muxc:NavigationView x:Name="NavigationView" Grid.Row="1" PaneTitle="Mischief IRC" IsBackButtonVisible="Collapsed" IsBackEnabled="False" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Tag="home" Content="Home">
+                <muxc:NavigationViewItem Tag="Home" Content="Home">
                     <muxc:NavigationViewItem.Icon>
                         <SymbolIcon Symbol="Home"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="ircChannelFuelrats" Content="#fuelrats">
+                <muxc:NavigationViewItemSeparator/>
+                <muxc:NavigationViewItem Tag="IRC" Content="IRC">
                     <muxc:NavigationViewItem.Icon>
-                        <FontIcon Glyph="#fr" FontFamily="Segoe UI"/>
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="ircChannelRatchat" Content="#ratchat">
-                    <muxc:NavigationViewItem.Icon>
-                        <FontIcon Glyph="#rc" FontFamily="Segoe UI"/>
+                        <SymbolIcon Symbol="World"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
