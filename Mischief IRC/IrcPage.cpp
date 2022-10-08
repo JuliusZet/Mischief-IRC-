@@ -27,7 +27,7 @@ namespace winrt::Mischief_IRC::implementation
         if (Grid().IsLoaded())
         {
             Grid().RowDefinitions().Append(winrt::Windows::UI::Xaml::Controls::RowDefinition());
-            Grid().RowDefinitions().GetAt(Grid().RowDefinitions().Size() - 1).Height(winrt::Windows::UI::Xaml::GridLength(0, winrt::Windows::UI::Xaml::GridUnitType::Auto));
+            Grid().RowDefinitions().GetAt(Grid().RowDefinitions().Size() - 1).Height(winrt::Windows::UI::Xaml::GridLengthHelper::Auto());
 
             winrt::Windows::UI::Xaml::Controls::TextBlock time;
             time.Text(to_hstring(ircMessage.time));
@@ -54,6 +54,9 @@ namespace winrt::Mischief_IRC::implementation
             Grid().Children().Append(message);
             Grid().SetColumn(message, 4);
             Grid().SetRow(message, Grid().RowDefinitions().Size() - 1);
+
+            ScrollViewer().UpdateLayout();
+            ScrollViewer().ScrollToVerticalOffset(ScrollViewer().ScrollableHeight());
         }
     }
 
