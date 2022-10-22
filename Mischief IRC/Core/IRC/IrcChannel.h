@@ -4,6 +4,11 @@
 
 struct IrcChannel
 {
-	string channelName{};
-	vector<IrcMessage> messages{};
+	void AddMessage(IrcMessage ircMessage)
+	{
+		Messages.push_back(ircMessage);
+	}
+
+	string Name{};
+	vector<IrcMessage> Messages{};
 };

@@ -10,10 +10,11 @@ namespace winrt::Mischief_IRC::implementation
     public:
         IrcPage();
         void Grid_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
-        void AddIrcMessage(IrcMessage);
+        void AddIrcMessage(IrcMessage ircMessage);
 
     private:
         string _channelName{};
+        size_t _channelIndex{};
     };
 }
 

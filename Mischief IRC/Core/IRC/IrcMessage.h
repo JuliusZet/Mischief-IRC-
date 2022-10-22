@@ -4,14 +4,15 @@
 #include <string>
 #include <vector>
 
+using std::chrono::system_clock;
 using std::time_t;
 using std::string;
 using std::vector;
 
 struct IrcMessage
 {
-	time_t time{};
-	string prefix{};
-	string command{};
-	vector<string> parameters{};
+	time_t Time{};
+	string Prefix{};
+	string Command{};
+	vector<string> Parameters{};
 };

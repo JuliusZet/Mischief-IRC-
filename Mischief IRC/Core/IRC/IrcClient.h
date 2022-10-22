@@ -5,7 +5,6 @@
 #include "Core/IRC/IrcChannel.h"
 #include "Core/IRC/IrcSocket.h"
 
-using std::chrono::system_clock;
 using std::istringstream;
 using std::thread;
 

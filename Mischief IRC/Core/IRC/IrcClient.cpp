@@ -15,7 +15,7 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 
 					_receiveThread = ReceiveAsync();
 					_receiveThread.detach();
-
+					
 					return 0;
 				}
 
@@ -122,7 +122,7 @@ byte IrcClient::Receive()
 byte IrcClient::Parse(string message)
 {
 	IrcMessage ircMessage{};
-	ircMessage.time = system_clock::to_time_t(system_clock::now());
+	ircMessage.Time = system_clock::to_time_t(system_clock::now());
 
 	size_t currentPosStart{};
 	size_t currentPosEnd{};
@@ -133,13 +133,13 @@ byte IrcClient::Parse(string message)
 
 		// Get prefix
 		currentPosEnd = message.find(' ', currentPosStart);
-		ircMessage.prefix = message.substr(1, currentPosEnd - 1);
+		ircMessage.Prefix = message.substr(1, currentPosEnd - 1);
 		currentPosStart = message.find_first_not_of(' ', currentPosEnd + 1);
 	}
 
 	// Get command
 	currentPosEnd = message.find(' ', currentPosStart);
-	ircMessage.command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
+	ircMessage.Command = message.substr(currentPosStart, currentPosEnd - currentPosStart);
 	currentPosStart = message.find_first_not_of(' ', currentPosEnd + 1);
 
 	// Get parameter(s)
@@ -148,38 +148,38 @@ byte IrcClient::Parse(string message)
 		if (message.at(currentPosStart) != ':')
 		{
 			currentPosEnd = message.find(' ', currentPosStart);
-			ircMessage.parameters.push_back(message.substr(currentPosStart, currentPosEnd - currentPosStart));
+			ircMessage.Parameters.push_back(message.substr(currentPosStart, currentPosEnd - currentPosStart));
 		}
 
 		else
 		{
 			++currentPosStart;
-			ircMessage.parameters.push_back(message.substr(currentPosStart));
+			ircMessage.Parameters.push_back(message.substr(currentPosStart));
 			break;
 		}
 	}
 
 	_messages.push_back(ircMessage);
 
-	if (ircMessage.command == "PRIVMSG" || ircMessage.command == "JOIN" || ircMessage.command == "PART" || ircMessage.command == "MODE")
+	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || ircMessage.Command == "MODE")
 	{
 		bool channelAlreadyExists = false;
 
-		for (size_t i{}; i < Channels.size(); ++i)
+		for (IrcChannel &channel : Channels)
 		{
-			if (Channels.at(i).channelName == ircMessage.parameters.front())
+			if (channel.Name == ircMessage.Parameters.front())
 			{
 				channelAlreadyExists = true;
-				Channels.at(i).messages.push_back(ircMessage);
+				channel.AddMessage(ircMessage);
 				break;
 			}
 		}
 
 		if (!channelAlreadyExists)
 		{
-			Channels.push_back(IrcChannel{ ircMessage.parameters.front() });
+			Channels.push_back(IrcChannel{ ircMessage.Parameters.front() });
 
-			Channels.back().messages.push_back(ircMessage);
+			Channels.back().AddMessage(ircMessage);
 		}
 	}
 
@@ -188,14 +188,14 @@ byte IrcClient::Parse(string message)
 
 byte IrcClient::Process(IrcMessage ircMessage)
 {
-	if (ircMessage.command == "PRIVMSG")
+	if (ircMessage.Command == "PRIVMSG")
 	{
 
 	}
 
-	else if (ircMessage.command == "PING")
+	else if (ircMessage.Command == "PING")
 	{
-		return Send("PONG :" + ircMessage.parameters.front());
+		return Send("PONG :" + ircMessage.Parameters.front());
 	}
 
 	return 0;
