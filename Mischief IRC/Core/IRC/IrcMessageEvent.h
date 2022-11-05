@@ -3,9 +3,11 @@
 #include <functional>
 #include "Core/IRC/IrcMessage.h"
 
+using std::bind;
 using std::function;
 using std::make_pair;
 using std::pair;
+using namespace std::placeholders;
 
 class IrcMessageEvent
 {

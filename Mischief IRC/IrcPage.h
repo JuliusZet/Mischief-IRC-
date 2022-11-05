@@ -3,9 +3,6 @@
 #include "IrcPage.g.h"
 #include "MainPage.h"
 
-using std::bind;
-using namespace std::placeholders;
-
 namespace winrt::Mischief_IRC::implementation
 {
     struct IrcPage : IrcPageT<IrcPage>
