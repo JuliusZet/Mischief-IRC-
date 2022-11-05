@@ -5,7 +5,9 @@
 #include <vector>
 
 using std::chrono::system_clock;
+using std::put_time;
 using std::time_t;
+using std::tm;
 using std::string;
 using std::vector;
 

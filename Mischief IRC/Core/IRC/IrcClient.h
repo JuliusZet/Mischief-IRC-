@@ -6,6 +6,7 @@
 #include "Core/IRC/IrcSocket.h"
 
 using std::istringstream;
+using std::stringstream;
 using std::thread;
 
 class IrcClient

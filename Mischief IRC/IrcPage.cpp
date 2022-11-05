@@ -54,19 +54,55 @@ namespace winrt::Mischief_IRC::implementation
                     Grid().RowDefinitions().GetAt(Grid().RowDefinitions().Size() - 1).Height(winrt::Windows::UI::Xaml::GridLengthHelper::Auto());
 
                     winrt::Windows::UI::Xaml::Controls::TextBlock time;
-                    time.Text(to_hstring(ircMessage.Time));
                     winrt::Windows::UI::Xaml::Controls::TextBlock sender;
-                    sender.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
-                    sender.HorizontalAlignment(winrt::Windows::UI::Xaml::HorizontalAlignment::Right);
                     winrt::Windows::UI::Xaml::Controls::TextBlock message;
+
+                    tm tm{};
+                    stringstream stringstream{};
+                    gmtime_s(&tm, &ircMessage.Time);
+                    stringstream << put_time(&tm, "%H:%M:%S");
+                    time.Text(to_hstring(stringstream.str()));
+                    
+                    sender.HorizontalAlignment(winrt::Windows::UI::Xaml::HorizontalAlignment::Right);
 
                     if (ircMessage.Command == "PRIVMSG")
                     {
-                        message.Text(to_hstring(ircMessage.Parameters.at(1)));
+                        if (ircMessage.Parameters.at(1).starts_with("ACTION ") && ircMessage.Parameters.at(1).ends_with(''))
+                        {
+                            sender.Text(L"*");
+                            message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
+                        }
+
+                        else
+                        {
+                            sender.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
+                            message.Text(to_hstring(ircMessage.Parameters.at(1)));
+                        }
                     }
-                    else
+
+                    else if (ircMessage.Command == "JOIN")
                     {
-                        message.Text(to_hstring(ircMessage.Command + ' ' + ircMessage.Parameters.front()));
+                        sender.Text(L"*");
+                        message.Text(to_hstring(ircMessage.Prefix + " has joined"));
+                    }
+
+                    else if (ircMessage.Command == "PART")
+                    {
+                        sender.Text(L"*");
+                        if (ircMessage.Parameters.size() > 1)
+                        {
+                            message.Text(to_hstring(ircMessage.Prefix + " has left (" + ircMessage.Parameters.at(1) + ')'));
+                        }
+                        else
+                        {
+                            message.Text(to_hstring(ircMessage.Prefix + " has left"));
+                        }
+                    }
+
+                    else if (ircMessage.Command == "MODE")
+                    {
+                        sender.Text(L"*");
+                        message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + " gives " + ircMessage.Parameters.at(1) + " to " + ircMessage.Parameters.at(2)));
                     }
 
                     Grid().Children().Append(time);
