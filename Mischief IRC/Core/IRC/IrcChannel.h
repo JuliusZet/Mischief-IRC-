@@ -1,13 +1,16 @@
 #pragma once
 
 #include "Core/IRC/IrcMessage.h"
+#include "Core/IRC/IrcMessageEvent.h"
 
-struct IrcChannel
+class IrcChannel
 {
-	void AddMessage(IrcMessage ircMessage)
-	{
-		Messages.push_back(ircMessage);
-	}
+public:
+	IrcChannel(){}
+	IrcChannel(string name);
+	void AddMessage(IrcMessage ircMessage);
+
+	IrcMessageEvent OnChannelEvent;
 
 	string Name{};
 	vector<IrcMessage> Messages{};

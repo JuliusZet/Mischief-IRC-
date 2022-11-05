@@ -123,6 +123,7 @@
     <ClInclude Include="Core\IRC\IrcChannel.h" />
     <ClInclude Include="Core\IRC\IrcClient.h" />
     <ClInclude Include="Core\IRC\IrcMessage.h" />
+    <ClInclude Include="Core\IRC\IrcMessageEvent.h" />
     <ClInclude Include="Core\IRC\IrcSocket.h" />
     <ClInclude Include="Core\Settings\Settings.h" />
     <ClInclude Include="HomePage.h">
@@ -191,7 +192,9 @@
       <DependentUpon>AppearanceSettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="Core\IRC\IrcChannel.cpp" />
     <ClCompile Include="Core\IRC\IrcClient.cpp" />
+    <ClCompile Include="Core\IRC\IrcMessageEvent.cpp" />
     <ClCompile Include="Core\IRC\IrcSocket.cpp" />
     <ClCompile Include="Core\Settings\Settings.cpp" />
     <ClCompile Include="HomePage.cpp">

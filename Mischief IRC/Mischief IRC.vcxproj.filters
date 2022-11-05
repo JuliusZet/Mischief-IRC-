@@ -15,6 +15,12 @@
     <ClCompile Include="Core\Settings\Settings.cpp">
       <Filter>Core\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="Core\IRC\IrcMessageEvent.cpp">
+      <Filter>Core\IRC</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\IRC\IrcChannel.cpp">
+      <Filter>Core\IRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -31,6 +37,9 @@
       <Filter>Core\Settings</Filter>
     </ClInclude>
     <ClInclude Include="Core\IRC\IrcChannel.h">
+      <Filter>Core\IRC</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\IRC\IrcMessageEvent.h">
       <Filter>Core\IRC</Filter>
     </ClInclude>
   </ItemGroup>

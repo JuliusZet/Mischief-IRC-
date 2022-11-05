@@ -177,7 +177,7 @@ byte IrcClient::Parse(string message)
 
 		if (!channelAlreadyExists)
 		{
-			Channels.push_back(IrcChannel{ ircMessage.Parameters.front() });
+			Channels.push_back(IrcChannel(ircMessage.Parameters.front()));
 
 			Channels.back().AddMessage(ircMessage);
 		}
