@@ -23,6 +23,10 @@ string Settings::GetDefault(string key)
 	{
 		return "System";
 	}
+	if (key == "appearanceTimestampFormat")
+	{
+		return "%H:%M:%S";
+	}
 	else
 	{
 		return "";

@@ -57,4 +57,36 @@ namespace winrt::Mischief_IRC::implementation
             break;
         }
     }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::TextBoxTimestampFormat_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "appearanceTimestampFormat")
+            {
+                _timestampFormat = i;
+                break;
+            }
+        }
+
+        TextBoxTimestampFormat().Text(SettingsPage::Current->settings.at(_timestampFormat).newValue);
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::TextBoxTimestampFormat_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
+    {
+        if (TextBoxTimestampFormat().Text() != SettingsPage::Current->settings.at(_timestampFormat).savedValue)
+        {
+            TextBoxTimestampFormat().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
+
+        else
+        {
+            TextBoxTimestampFormat().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::TextBoxTimestampFormat_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        SettingsPage::Current->settings.at(_timestampFormat).newValue = TextBoxTimestampFormat().Text();
+    }
 }

@@ -22,6 +22,7 @@ namespace winrt::Mischief_IRC::implementation
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"IRC", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
 
 		settings.push_back(Setting("appearanceTheme"));
+		settings.push_back(Setting("appearanceTimestampFormat"));
 		settings.push_back(Setting("ircHost"));
 		settings.push_back(Setting("ircPort"));
 		settings.push_back(Setting("ircPass"));

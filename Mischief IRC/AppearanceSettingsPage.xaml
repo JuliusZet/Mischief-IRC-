@@ -7,9 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="IsSpellCheckEnabled" Value="False"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+        <Style TargetType="muxc:RadioButtons">
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+    </Page.Resources>
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <muxc:RadioButtons x:Name="RadioButtonsTheme" Grid.Row="0" Header="Theme" MaxColumns="3" Loaded="RadioButtonsTheme_Loaded" SelectionChanged="RadioButtonsTheme_SelectionChanged">
@@ -17,6 +27,7 @@
                 <x:String>Dark</x:String>
                 <x:String>System</x:String>
             </muxc:RadioButtons>
+            <TextBox x:Name="TextBoxTimestampFormat" Grid.Row="1" Header="Timestamp Format" Loaded="TextBoxTimestampFormat_Loaded" TextChanged="TextBoxTimestampFormat_TextChanged" LostFocus="TextBoxTimestampFormat_LostFocus"/>
         </Grid>
     </ScrollViewer>
 </Page>

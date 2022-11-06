@@ -19,28 +19,33 @@ namespace winrt::Mischief_IRC::implementation
         if (selectedItem)
         {
             _channelName = to_string(unbox_value_or<hstring>(selectedItem.Tag(), L""));
+
+            for (size_t i{}; i != MainPage::Current->IrcClient.Channels.size(); ++i)
+            {
+                if (MainPage::Current->IrcClient.Channels.at(i).Name == _channelName)
+                {
+                    _channelIndex = i;
+                    _channelExists = true;
+                }
+            }
         }
+
+        _timestampFormat = Settings::Get("appearanceTimestampFormat");
     }
 
     void winrt::Mischief_IRC::implementation::IrcPage::Grid_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
         // If the channel exists, then load all messages
-        for (size_t i{}; i != MainPage::Current->IrcClient.Channels.size(); ++i)
+        if (_channelExists)
         {
-            if (MainPage::Current->IrcClient.Channels.at(i).Name == _channelName)
+            for (IrcMessage& eachMessage : MainPage::Current->IrcClient.Channels.at(_channelIndex).Messages)
             {
-                _channelIndex = i;
-                _channelExists = true;
-
-                for (IrcMessage& eachMessage : MainPage::Current->IrcClient.Channels.at(_channelIndex).Messages)
-                {
-                    AddIrcMessage(eachMessage);
-                }
-
-                _eventFunctionId = MainPage::Current->IrcClient.Channels.at(_channelIndex).OnChannelEvent.AddFunction(bind(&winrt::Mischief_IRC::implementation::IrcPage::AddIrcMessage, this, _1));
-
-                return;
+                AddIrcMessage(eachMessage);
             }
+
+            _eventFunctionId = MainPage::Current->IrcClient.Channels.at(_channelIndex).OnChannelEvent.AddFunction(bind(&winrt::Mischief_IRC::implementation::IrcPage::AddIrcMessage, this, _1));
+
+            return;
         }
     }
 
@@ -60,7 +65,7 @@ namespace winrt::Mischief_IRC::implementation
                     tm tm{};
                     stringstream stringstream{};
                     gmtime_s(&tm, &ircMessage.Time);
-                    stringstream << put_time(&tm, "%H:%M:%S");
+                    stringstream << put_time(&tm, _timestampFormat.c_str());
                     time.Text(to_hstring(stringstream.str()));
                     
                     sender.HorizontalAlignment(winrt::Windows::UI::Xaml::HorizontalAlignment::Right);

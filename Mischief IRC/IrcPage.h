@@ -18,6 +18,7 @@ namespace winrt::Mischief_IRC::implementation
         size_t _channelIndex{};
         bool _channelExists{};
         size_t _eventFunctionId{};
+        string _timestampFormat{};
     };
 }
 
