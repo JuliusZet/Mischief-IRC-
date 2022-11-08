@@ -3,6 +3,7 @@
 #include "AppearanceSettingsPage.g.h"
 #include "Core/Settings/Settings.h"
 #include "SettingsPage.h"
+#include "TimestampFormatHelpDialog.h"
 
 namespace winrt::Mischief_IRC::implementation
 {
@@ -15,6 +16,7 @@ namespace winrt::Mischief_IRC::implementation
         void TextBoxTimestampFormat_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void TextBoxTimestampFormat_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e);
         void TextBoxTimestampFormat_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void ButtonTimestampFormatHelp_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void ButtonTimestampFormatReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
 
     private:

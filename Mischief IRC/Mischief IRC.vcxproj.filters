@@ -93,6 +93,9 @@
     <Page Include="IrcPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="TimestampFormatHelpDialog.xaml">
+      <Filter>Pages\SettingsPages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

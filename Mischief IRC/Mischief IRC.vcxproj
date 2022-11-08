@@ -149,6 +149,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="TimestampFormatHelpDialog.h">
+      <DependentUpon>TimestampFormatHelpDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -170,6 +174,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TimestampFormatHelpDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -223,6 +230,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="TimestampFormatHelpDialog.cpp">
+      <DependentUpon>TimestampFormatHelpDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
@@ -249,6 +260,10 @@
     </Midl>
     <Midl Include="SettingsPage.idl">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="TimestampFormatHelpDialog.idl">
+      <DependentUpon>TimestampFormatHelpDialog.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
   </ItemGroup>

@@ -1,0 +1,8 @@
+namespace Mischief_IRC
+{
+    [default_interface]
+    runtimeclass TimestampFormatHelpDialog : Windows.UI.Xaml.Controls.ContentDialog
+    {
+        TimestampFormatHelpDialog();
+    }
+}
