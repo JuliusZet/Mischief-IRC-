@@ -89,4 +89,10 @@ namespace winrt::Mischief_IRC::implementation
     {
         SettingsPage::Current->settings.at(_timestampFormat).newValue = TextBoxTimestampFormat().Text();
     }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::ButtonTimestampFormatReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        SettingsPage::Current->settings.at(_timestampFormat).newValue = to_hstring(Settings::GetDefault("appearanceTimestampFormat"));
+        TextBoxTimestampFormat().Text(SettingsPage::Current->settings.at(_timestampFormat).newValue);
+    }
 }

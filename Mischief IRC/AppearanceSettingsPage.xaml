@@ -27,7 +27,14 @@
                 <x:String>Dark</x:String>
                 <x:String>System</x:String>
             </muxc:RadioButtons>
-            <TextBox x:Name="TextBoxTimestampFormat" Grid.Row="1" Header="Timestamp Format" Loaded="TextBoxTimestampFormat_Loaded" TextChanged="TextBoxTimestampFormat_TextChanged" LostFocus="TextBoxTimestampFormat_LostFocus"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TextBoxTimestampFormat" Grid.Column="0" Header="Timestamp Format" Loaded="TextBoxTimestampFormat_Loaded" TextChanged="TextBoxTimestampFormat_TextChanged" LostFocus="TextBoxTimestampFormat_LostFocus"/>
+                <Button x:Name="ButtonTimestampFormatReset" Grid.Column="1" Content="Reset to default" Margin="12,0,0,12" VerticalAlignment="Bottom" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonTimestampFormatReset_Click"/>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Page>
