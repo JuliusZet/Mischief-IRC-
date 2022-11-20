@@ -1,7 +1,11 @@
 ﻿#pragma once
 
+#include <format>
 #include "IrcPage.g.h"
 #include "MainPage.h"
+
+using std::make_format_args;
+using std::vformat;
 
 namespace winrt::Mischief_IRC::implementation
 {

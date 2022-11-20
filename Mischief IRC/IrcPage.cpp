@@ -62,11 +62,8 @@ namespace winrt::Mischief_IRC::implementation
                     winrt::Windows::UI::Xaml::Controls::TextBlock sender;
                     winrt::Windows::UI::Xaml::Controls::TextBlock message;
 
-                    tm tm{};
-                    stringstream stringstream{};
-                    gmtime_s(&tm, &ircMessage.Time);
-                    stringstream << put_time(&tm, _timestampFormat.c_str());
-                    time.Text(to_hstring(stringstream.str()));
+                    zoned_time zonedTime{ "UTC", floor<seconds>(ircMessage.Time) };
+                    time.Text(to_hstring(vformat(_timestampFormat, make_format_args(zonedTime))));
                     
                     sender.HorizontalAlignment(winrt::Windows::UI::Xaml::HorizontalAlignment::Right);
 

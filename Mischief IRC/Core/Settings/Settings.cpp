@@ -25,7 +25,7 @@ string Settings::GetDefault(string key)
 	}
 	if (key == "appearanceTimestampFormat")
 	{
-		return "%T";
+		return "{0:%T}{0:%z}";
 	}
 	else
 	{

@@ -122,7 +122,7 @@ byte IrcClient::Receive()
 byte IrcClient::Parse(string message)
 {
 	IrcMessage ircMessage{};
-	ircMessage.Time = system_clock::to_time_t(system_clock::now());
+	ircMessage.Time = system_clock::now();
 
 	size_t currentPosStart{};
 	size_t currentPosEnd{};
