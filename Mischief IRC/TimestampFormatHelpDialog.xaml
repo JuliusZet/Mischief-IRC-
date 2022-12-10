@@ -20,8 +20,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0">The full list of format specifiers is available <Hyperlink NavigateUri="https://en.cppreference.com/w/cpp/chrono/system_clock/formatter#Format_specification">here</Hyperlink>.<LineBreak/>But here are the most common ones:<LineBreak/></TextBlock>
-        <Grid Grid.Row="1" ColumnSpacing="12">
+        <TextBlock Grid.Row="0">The <Run Foreground="Blue">format specifiers</Run> have to be prefixed with "<Run Foreground="Red">{0:</Run>" and suffixed with "<Run Foreground="Green">}</Run>".<LineBreak/>Fox example: "<Run Foreground="Red">{0:</Run><Run Foreground="Blue">%T</Run><Run Foreground="Green">}</Run>".<LineBreak/>The full list of format specifiers is available <Hyperlink NavigateUri="https://en.cppreference.com/w/cpp/chrono/system_clock/formatter#Format_specification">here</Hyperlink>.<LineBreak/>But here are the most common ones:<LineBreak/></TextBlock>
+        <Grid Grid.Row="1" ColumnSpacing="12" Margin="0,0,12,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
@@ -32,7 +32,7 @@
             <TextBlock Grid.Column="2" FontWeight="Bold">Example</TextBlock>
         </Grid>
         <ScrollViewer Grid.Row="2">
-            <Grid ColumnSpacing="12">
+            <Grid ColumnSpacing="12" Margin="0,0,12,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition/>
