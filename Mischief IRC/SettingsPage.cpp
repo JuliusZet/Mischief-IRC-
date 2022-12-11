@@ -23,6 +23,7 @@ namespace winrt::Mischief_IRC::implementation
 
 		settings.push_back(Setting("appearanceTheme"));
 		settings.push_back(Setting("appearanceTimestampFormat"));
+		settings.push_back(Setting("appearanceTimeZone"));
 		settings.push_back(Setting("ircHost"));
 		settings.push_back(Setting("ircPort"));
 		settings.push_back(Setting("ircPass"));

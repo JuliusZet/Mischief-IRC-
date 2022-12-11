@@ -12,6 +12,9 @@
             <Setter Property="IsSpellCheckEnabled" Value="False"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
+        <Style TargetType="AutoSuggestBox">
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
         <Style TargetType="muxc:RadioButtons">
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
@@ -19,6 +22,7 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
@@ -36,6 +40,20 @@
                 <TextBox x:Name="TextBoxTimestampFormat" Grid.Column="0" Header="Timestamp Format" Loaded="TextBoxTimestampFormat_Loaded" TextChanged="TextBoxTimestampFormat_TextChanged" LostFocus="TextBoxTimestampFormat_LostFocus"/>
                 <Button x:Name="ButtonTimestampFormatHelp" Grid.Column="1" Content="?" Margin="0,0,0,12" VerticalAlignment="Bottom" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonTimestampFormatHelp_Click"/>
                 <Button x:Name="ButtonTimestampFormatReset" Grid.Column="2" Content="Reset to default" Margin="12,0,0,12" VerticalAlignment="Bottom" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonTimestampFormatReset_Click"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <AutoSuggestBox x:Name="AutoSuggestBoxTimeZone" Grid.Column="0" Header="Timezone" Loaded="AutoSuggestBoxTimeZone_Loaded" TextChanged="AutoSuggestBoxTimeZone_TextChanged" SuggestionChosen="AutoSuggestBoxTimeZone_SuggestionChosen" LostFocus="AutoSuggestBoxTimeZone_LostFocus">
+                    <AutoSuggestBox.TextBoxStyle>
+                        <Style TargetType="TextBox">
+                            <Setter Property="TextAlignment" Value="Left"/>
+                        </Style>
+                    </AutoSuggestBox.TextBoxStyle>
+                </AutoSuggestBox>
+                <Button x:Name="ButtonTimeZoneReset" Grid.Column="1" Content="Reset to default" Margin="12,0,0,12" VerticalAlignment="Bottom" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonTimeZoneReset_Click"/>
             </Grid>
         </Grid>
     </ScrollViewer>

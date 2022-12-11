@@ -4,7 +4,11 @@
 #include <string>
 #include "winrt/Windows.Storage.h"
 
+using std::chrono::current_zone;
+using std::chrono::get_tzdb;
 using std::chrono::system_clock;
+using std::chrono::time_zone;
+using std::chrono::tzdb;
 using std::string;
 using winrt::box_value;
 using winrt::hstring;

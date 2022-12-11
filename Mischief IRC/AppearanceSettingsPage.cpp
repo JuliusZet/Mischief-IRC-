@@ -101,4 +101,76 @@ namespace winrt::Mischief_IRC::implementation
         SettingsPage::Current->settings.at(_timestampFormat).newValue = to_hstring(Settings::GetDefault("appearanceTimestampFormat"));
         TextBoxTimestampFormat().Text(SettingsPage::Current->settings.at(_timestampFormat).newValue);
     }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::AutoSuggestBoxTimeZone_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        for (size_t i{}; i != SettingsPage::Current->settings.size(); ++i)
+        {
+            if (SettingsPage::Current->settings.at(i).key == "appearanceTimeZone")
+            {
+                _timeZone = i;
+                break;
+            }
+        }
+
+        AutoSuggestBoxTimeZone().Text(SettingsPage::Current->settings.at(_timeZone).newValue);
+
+        _timeZones = single_threaded_vector<IInspectable>();
+
+        for (const time_zone& tz : _tzdb.zones)
+        {
+            _timeZones.Append(box_value(to_hstring(tz.name())));
+        }
+
+        AutoSuggestBoxTimeZone().ItemsSource(_timeZones);
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::AutoSuggestBoxTimeZone_TextChanged(winrt::Windows::UI::Xaml::Controls::AutoSuggestBox const& sender, winrt::Windows::UI::Xaml::Controls::AutoSuggestBoxTextChangedEventArgs const& args)
+    {
+        if (AutoSuggestBoxTimeZone().Text() != SettingsPage::Current->settings.at(_timeZone).savedValue)
+        {
+            AutoSuggestBoxTimeZone().FontWeight(winrt::Windows::UI::Text::FontWeights::Bold());
+        }
+
+        else
+        {
+            AutoSuggestBoxTimeZone().FontWeight(winrt::Windows::UI::Text::FontWeights::Normal());
+        }
+
+        if (args.Reason() == winrt::Windows::UI::Xaml::Controls::AutoSuggestionBoxTextChangeReason::UserInput)
+        {
+            IVector<IInspectable> suitableTimeZones{ single_threaded_vector<IInspectable>() };
+
+            for (const time_zone& tz : _tzdb.zones)
+            {
+                if (tz.name().find(to_string(sender.Text())) != string::npos)
+                {
+                    suitableTimeZones.Append(box_value(to_hstring(tz.name())));
+                }
+            }
+
+            if (suitableTimeZones.Size() == 0)
+            {
+                suitableTimeZones.Append(box_value(L"Timezone not found"));
+            }
+
+            AutoSuggestBoxTimeZone().ItemsSource(suitableTimeZones);
+        }
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::AutoSuggestBoxTimeZone_SuggestionChosen(winrt::Windows::UI::Xaml::Controls::AutoSuggestBox const& sender, winrt::Windows::UI::Xaml::Controls::AutoSuggestBoxSuggestionChosenEventArgs const& args)
+    {
+        AutoSuggestBoxTimeZone().Text(unbox_value_or<hstring>(args.SelectedItem(), L""));
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::AutoSuggestBoxTimeZone_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        SettingsPage::Current->settings.at(_timeZone).newValue = AutoSuggestBoxTimeZone().Text();
+    }
+
+    void winrt::Mischief_IRC::implementation::AppearanceSettingsPage::ButtonTimeZoneReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        SettingsPage::Current->settings.at(_timeZone).newValue = to_hstring(Settings::GetDefault("appearanceTimeZone"));
+        AutoSuggestBoxTimeZone().Text(SettingsPage::Current->settings.at(_timeZone).newValue);
+    }
 }

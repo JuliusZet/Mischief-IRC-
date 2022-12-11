@@ -5,6 +5,9 @@
 #include "SettingsPage.h"
 #include "TimestampFormatHelpDialog.h"
 
+using winrt::single_threaded_vector;
+using winrt::Windows::Foundation::Collections::IVector;
+
 namespace winrt::Mischief_IRC::implementation
 {
     struct AppearanceSettingsPage : AppearanceSettingsPageT<AppearanceSettingsPage>
@@ -18,10 +21,18 @@ namespace winrt::Mischief_IRC::implementation
         void TextBoxTimestampFormat_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void ButtonTimestampFormatHelp_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void ButtonTimestampFormatReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void AutoSuggestBoxTimeZone_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void AutoSuggestBoxTimeZone_TextChanged(winrt::Windows::UI::Xaml::Controls::AutoSuggestBox const& sender, winrt::Windows::UI::Xaml::Controls::AutoSuggestBoxTextChangedEventArgs const& args);
+        void AutoSuggestBoxTimeZone_SuggestionChosen(winrt::Windows::UI::Xaml::Controls::AutoSuggestBox const& sender, winrt::Windows::UI::Xaml::Controls::AutoSuggestBoxSuggestionChosenEventArgs const& args);
+        void AutoSuggestBoxTimeZone_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void ButtonTimeZoneReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
 
     private:
         size_t _theme{};
         size_t _timestampFormat{};
+        size_t _timeZone{};
+        IVector<IInspectable> _timeZones{};
+        const tzdb& _tzdb = get_tzdb();
     };
 }
 

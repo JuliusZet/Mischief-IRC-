@@ -31,6 +31,7 @@ namespace winrt::Mischief_IRC::implementation
         }
 
         _timestampFormat = Settings::Get("appearanceTimestampFormat");
+        _timeZone = Settings::Get("appearanceTimeZone");
     }
 
     void winrt::Mischief_IRC::implementation::IrcPage::Grid_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -62,7 +63,7 @@ namespace winrt::Mischief_IRC::implementation
                     winrt::Windows::UI::Xaml::Controls::TextBlock sender;
                     winrt::Windows::UI::Xaml::Controls::TextBlock message;
 
-                    zoned_time zonedTime{ "UTC", floor<seconds>(ircMessage.Time) };
+                    zoned_time zonedTime{ _timeZone, floor<seconds>(ircMessage.Time) };
                     time.Text(to_hstring(vformat(_timestampFormat, make_format_args(zonedTime))));
                     
                     sender.HorizontalAlignment(winrt::Windows::UI::Xaml::HorizontalAlignment::Right);

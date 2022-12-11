@@ -23,6 +23,7 @@ namespace winrt::Mischief_IRC::implementation
         bool _channelExists{};
         size_t _eventFunctionId{};
         string _timestampFormat{};
+        string _timeZone{};
     };
 }
 

@@ -23,9 +23,13 @@ string Settings::GetDefault(string key)
 	{
 		return "System";
 	}
-	if (key == "appearanceTimestampFormat")
+	else if (key == "appearanceTimestampFormat")
 	{
 		return "{0:%T}{0:%z}";
+	}
+	else if (key == "appearanceTimeZone")
+	{
+		return string{ current_zone()->name() };
 	}
 	else
 	{
