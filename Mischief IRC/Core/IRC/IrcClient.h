@@ -36,4 +36,5 @@ private:
 	vector<IrcMessage> _messages{};
 	thread _receiveThread{};
 	bool _isConnected{};
+	string _nick{};
 };

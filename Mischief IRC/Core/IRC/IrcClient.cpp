@@ -9,6 +9,8 @@ byte IrcClient::Connect(string host, string port, string pass, string nick, stri
 		{
 			if (Send("NICK :" + nick) == 0)
 			{
+				_nick = nick;
+
 				if (Send("USER " + user + " 0 * :" + realname) == 0)
 				{
 					_isConnected = true;
@@ -93,12 +95,12 @@ void IrcClient::AddChannel(IrcChannel ircChannel)
 
 byte IrcClient::Send(string data)
 {
-	Parse(data);
 	return _ircSocket.SendData(data + '\n');
 }
 
 byte IrcClient::SendPrivmsg(string receiver, string text)
 {
+	Process(IrcMessage(_nick, "PRIVMSG", vector<string>{receiver, text}));
 	return Send("PRIVMSG " + receiver + " :" + text);
 }
 
@@ -168,26 +170,63 @@ byte IrcClient::Parse(string message)
 
 	_messages.push_back(ircMessage);
 
-	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || (ircMessage.Command == "MODE" && ircMessage.Parameters.front().front() == '#'))
-	{
-		bool channelAlreadyExists = false;
+	return 0;
+}
 
-		for (IrcChannel &channel : Channels)
+byte IrcClient::Process(IrcMessage ircMessage)
+{
+	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || ircMessage.Command == "MODE")
+	{
+
+		// If it is a user-related message, that did not originate from us
+		if (!ircMessage.Parameters.front().starts_with('#') && ircMessage.Prefix != _nick)
 		{
-			if (channel.Name == ircMessage.Parameters.front())
+			bool channelAlreadyExists = false;
+
+			for (IrcChannel& channel : Channels)
 			{
-				channelAlreadyExists = true;
-				channel.AddMessage(ircMessage);
-				break;
+				if (channel.Name == ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')))
+				{
+					channelAlreadyExists = true;
+					channel.AddMessage(ircMessage);
+					break;
+				}
+			}
+
+			if (!channelAlreadyExists)
+			{
+				AddChannel(IrcChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
+
+				Channels.back().AddMessage(ircMessage);
 			}
 		}
 
-		if (!channelAlreadyExists)
+		else
 		{
-			AddChannel(IrcChannel(ircMessage.Parameters.front()));
+			bool channelAlreadyExists = false;
 
-			Channels.back().AddMessage(ircMessage);
+			for (IrcChannel& channel : Channels)
+			{
+				if (channel.Name == ircMessage.Parameters.front())
+				{
+					channelAlreadyExists = true;
+					channel.AddMessage(ircMessage);
+					break;
+				}
+			}
+
+			if (!channelAlreadyExists)
+			{
+				AddChannel(IrcChannel(ircMessage.Parameters.front()));
+
+				Channels.back().AddMessage(ircMessage);
+			}
 		}
+	}
+
+	else if (ircMessage.Command == "PING")
+	{
+		return Send("PONG :" + ircMessage.Parameters.front());
 	}
 
 	else
@@ -210,21 +249,7 @@ byte IrcClient::Parse(string message)
 			Channels.back().AddMessage(ircMessage);
 		}
 	}
-
-	return 0;
-}
-
-byte IrcClient::Process(IrcMessage ircMessage)
-{
-	if (ircMessage.Command == "PRIVMSG")
-	{
-
-	}
-
-	else if (ircMessage.Command == "PING")
-	{
-		return Send("PONG :" + ircMessage.Parameters.front());
-	}
+	
 
 	return 0;
 }
