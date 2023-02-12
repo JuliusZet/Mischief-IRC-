@@ -93,6 +93,7 @@ void IrcClient::AddChannel(IrcChannel ircChannel)
 
 byte IrcClient::Send(string data)
 {
+	Parse(data);
 	return _ircSocket.SendData(data + '\n');
 }
 
