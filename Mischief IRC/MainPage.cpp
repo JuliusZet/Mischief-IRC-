@@ -17,6 +17,8 @@ namespace winrt::Mischief_IRC::implementation
 		Current = this;
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"Home", winrt::xaml_typename<Mischief_IRC::HomePage>()));
+	
+		_eventFunctionId = IrcClient.OnNewChannel.AddFunction(bind(&winrt::Mischief_IRC::implementation::MainPage::IrcAddChannel, this, _1));
 	}
 
 	void winrt::Mischief_IRC::implementation::MainPage::NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

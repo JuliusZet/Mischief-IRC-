@@ -28,6 +28,7 @@ namespace winrt::Mischief_IRC::implementation
 
     private:
         vector<pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>> _pages{};
+        size_t _eventFunctionId{};
     };
 }
 

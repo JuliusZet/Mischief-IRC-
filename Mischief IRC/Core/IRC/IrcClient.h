@@ -2,7 +2,7 @@
 
 #include <sstream>
 #include <thread>
-#include "Core/IRC/IrcChannel.h"
+#include "Core/IRC/IrcChannelEvent.h"
 #include "Core/IRC/IrcSocket.h"
 
 using std::istringstream;
@@ -20,6 +20,8 @@ public:
 	void AddChannel(IrcChannel ircChannel);
 	byte SendPrivmsg(string receiver, string text);
 	bool IsConnected();
+
+	IrcChannelEvent OnNewChannel;
 
 	vector<IrcChannel> Channels{};
 

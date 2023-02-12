@@ -88,6 +88,7 @@ byte IrcClient::Reconnect(string host, string port, string pass, string nick, st
 void IrcClient::AddChannel(IrcChannel ircChannel)
 {
 	Channels.push_back(ircChannel);
+	OnNewChannel.InvokeFunctions(ircChannel);
 }
 
 byte IrcClient::Send(string data)
