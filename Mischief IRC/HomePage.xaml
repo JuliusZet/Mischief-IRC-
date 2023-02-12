@@ -16,7 +16,5 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" x:Name="ButtonIrcConnect" Content="Conntect to IRC" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonIrcConnect_Click"/>
         <Button Grid.Row="1" x:Name="ButtonIrcDisconnect" Content="Disconnect from IRC" Style="{ThemeResource ButtonRevealStyle}" Margin="0,12,0,0" Click="ButtonIrcDisconnect_Click"/>
-        <Button Grid.Row="2" x:Name="ButtonIrcAddChannelFuelrats" Content="Add #fuelrats" Style="{ThemeResource ButtonRevealStyle}" Margin="0,12,0,0" Click="ButtonIrcAddChannelFuelrats_Click"/>
-        <Button Grid.Row="3" x:Name="ButtonIrcAddChannelRatchat" Content="Add #ratchat" Style="{ThemeResource ButtonRevealStyle}" Margin="0,12,0,0" Click="ButtonIrcAddChannelRatchat_Click"/>
     </Grid>
 </Page>
