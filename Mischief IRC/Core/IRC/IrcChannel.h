@@ -10,7 +10,7 @@ public:
 	IrcChannel(string name);
 	void AddMessage(IrcMessage ircMessage);
 
-	IrcMessageEvent OnChannelEvent;
+	IrcMessageEvent OnNewMessage;
 
 	string Name{};
 	vector<IrcMessage> Messages{};

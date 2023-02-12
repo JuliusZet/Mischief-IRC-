@@ -44,7 +44,7 @@ namespace winrt::Mischief_IRC::implementation
                 AddIrcMessage(eachMessage);
             }
 
-            _eventFunctionId = MainPage::Current->IrcClient.Channels.at(_channelIndex).OnChannelEvent.AddFunction(bind(&winrt::Mischief_IRC::implementation::IrcPage::AddIrcMessage, this, _1));
+            _eventFunctionId = MainPage::Current->IrcClient.Channels.at(_channelIndex).OnNewMessage.AddFunction(bind(&winrt::Mischief_IRC::implementation::IrcPage::AddIrcMessage, this, _1));
 
             return;
         }
@@ -129,7 +129,7 @@ namespace winrt::Mischief_IRC::implementation
     {
         if (_channelExists)
         {
-            MainPage::Current->IrcClient.Channels.at(_channelIndex).OnChannelEvent.RemoveFunction(_eventFunctionId);
+            MainPage::Current->IrcClient.Channels.at(_channelIndex).OnNewMessage.RemoveFunction(_eventFunctionId);
         }
     }
 }

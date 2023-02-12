@@ -9,5 +9,5 @@ IrcChannel::IrcChannel(string name)
 void IrcChannel::AddMessage(IrcMessage ircMessage)
 {
 	Messages.push_back(ircMessage);
-	OnChannelEvent.InvokeFunctions(ircMessage);
+	OnNewMessage.InvokeFunctions(ircMessage);
 }
