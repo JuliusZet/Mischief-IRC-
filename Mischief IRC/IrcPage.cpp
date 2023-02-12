@@ -177,4 +177,19 @@ namespace winrt::Mischief_IRC::implementation
             MainPage::Current->IrcClient.Channels.at(_channelIndex).OnNewMessage.RemoveFunction(_eventFunctionId);
         }
     }
+
+    void winrt::Mischief_IRC::implementation::IrcPage::TextBoxMessage_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+    {
+        if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+        {
+            MainPage::Current->IrcClient.SendPrivmsg(_channelName, to_string(TextBoxMessage().Text()));
+            TextBoxMessage().Text(L"");
+        }
+    }
+
+    void winrt::Mischief_IRC::implementation::IrcPage::ButtonSend_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+    {
+        MainPage::Current->IrcClient.SendPrivmsg(_channelName, to_string(TextBoxMessage().Text()));
+        TextBoxMessage().Text(L"");
+    }
 }

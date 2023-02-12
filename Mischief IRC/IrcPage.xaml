@@ -36,8 +36,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" FontFamily="Courier New" IsSpellCheckEnabled="False"/>
-            <Button Grid.Column="1" Margin="12,0,0,0" Style="{ThemeResource ButtonRevealStyle}">
+            <TextBox x:Name="TextBoxMessage" Grid.Column="0" FontFamily="Courier New" IsSpellCheckEnabled="False" KeyDown="TextBoxMessage_KeyDown"/>
+            <Button x:Name="ButtonSend" Grid.Column="1" Margin="12,0,0,0" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonSend_Click">
                 <SymbolIcon Symbol="Send"/>
             </Button>
         </Grid>
