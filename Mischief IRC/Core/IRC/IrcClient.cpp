@@ -85,6 +85,11 @@ byte IrcClient::Reconnect(string host, string port, string pass, string nick, st
 	return Reconnect("", host, port, pass, nick, user, realname);
 }
 
+void IrcClient::AddChannel(IrcChannel ircChannel)
+{
+	Channels.push_back(ircChannel);
+}
+
 byte IrcClient::Send(string data)
 {
 	return _ircSocket.SendData(data + '\n');
@@ -177,7 +182,7 @@ byte IrcClient::Parse(string message)
 
 		if (!channelAlreadyExists)
 		{
-			Channels.push_back(IrcChannel(ircMessage.Parameters.front()));
+			AddChannel(IrcChannel(ircMessage.Parameters.front()));
 
 			Channels.back().AddMessage(ircMessage);
 		}

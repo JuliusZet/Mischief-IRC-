@@ -17,6 +17,7 @@ public:
 	byte Disconnect();
 	byte Reconnect(string quitMessage, string host, string port, string pass, string nick, string user, string realname);
 	byte Reconnect(string host, string port, string pass, string nick, string user, string realname);
+	void AddChannel(IrcChannel ircChannel);
 	byte SendPrivmsg(string receiver, string text);
 	bool IsConnected();
 
