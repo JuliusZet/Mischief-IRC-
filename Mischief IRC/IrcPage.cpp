@@ -106,8 +106,19 @@ namespace winrt::Mischief_IRC::implementation
 
                     else if (ircMessage.Command == "MODE")
                     {
-                        sender.Text(L"*");
-                        message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + " gives " + ircMessage.Parameters.at(1) + " to " + ircMessage.Parameters.at(2)));
+                        // Channel Mode
+                        if (ircMessage.Parameters.front().front() == '#')
+                        {
+                            sender.Text(L"*");
+                            message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + " gives " + ircMessage.Parameters.at(1) + " to " + ircMessage.Parameters.at(2)));
+                        }
+
+                        // User Mode
+                        else
+                        {
+                            sender.Text(L"*");
+                            message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + " gives " + ircMessage.Parameters.at(1) + " to " + ircMessage.Parameters.at(0)));
+                        }
                     }
 
                     Grid().Children().Append(time);
