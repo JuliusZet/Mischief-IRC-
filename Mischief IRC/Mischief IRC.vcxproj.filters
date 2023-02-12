@@ -21,6 +21,9 @@
     <ClCompile Include="Core\IRC\IrcChannel.cpp">
       <Filter>Core\IRC</Filter>
     </ClCompile>
+    <ClCompile Include="Core\IRC\IrcChannelEvent.cpp">
+      <Filter>Core\IRC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -40,6 +43,9 @@
       <Filter>Core\IRC</Filter>
     </ClInclude>
     <ClInclude Include="Core\IRC\IrcMessageEvent.h">
+      <Filter>Core\IRC</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\IRC\IrcChannelEvent.h">
       <Filter>Core\IRC</Filter>
     </ClInclude>
   </ItemGroup>
