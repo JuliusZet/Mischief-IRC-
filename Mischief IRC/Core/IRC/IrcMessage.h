@@ -12,8 +12,18 @@ using std::chrono::zoned_time;
 using std::string;
 using std::vector;
 
-struct IrcMessage
+class IrcMessage
 {
+public:
+	IrcMessage() {}
+	IrcMessage(string prefix, string command, vector<string> parameters)
+	{
+		Time = system_clock::now();
+		Prefix = prefix;
+		Command = command;
+		Parameters = parameters;
+	}
+
 	time_point<system_clock> Time{};
 	string Prefix{};
 	string Command{};
