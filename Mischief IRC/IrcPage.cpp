@@ -134,6 +134,25 @@ namespace winrt::Mischief_IRC::implementation
                         }
                     }
 
+                    else
+                    {
+                        if (ircMessage.Prefix.find('!') == string::npos)
+                        {
+                            sender.Text(L"*");
+                        }
+                        else
+                        {
+                            sender.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
+                        }
+
+                        message.Text(to_hstring(ircMessage.Command));
+
+                        for (string parameter : ircMessage.Parameters)
+                        {
+                            message.Text(message.Text() + ' ' + to_hstring(parameter));
+                        }
+                    }
+
                     Grid().Children().Append(time);
                     Grid().SetColumn(time, 0);
                     Grid().SetRow(time, Grid().RowDefinitions().Size() - 1);
