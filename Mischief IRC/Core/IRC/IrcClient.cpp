@@ -166,7 +166,7 @@ byte IrcClient::Parse(string message)
 
 	_messages.push_back(ircMessage);
 
-	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || ircMessage.Command == "MODE")
+	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || (ircMessage.Command == "MODE" && ircMessage.Parameters.front().front() == '#'))
 	{
 		bool channelAlreadyExists = false;
 
@@ -184,6 +184,27 @@ byte IrcClient::Parse(string message)
 		{
 			AddChannel(IrcChannel(ircMessage.Parameters.front()));
 
+			Channels.back().AddMessage(ircMessage);
+		}
+	}
+
+	else
+	{
+		bool channelAlreadyExists = false;
+
+		for (IrcChannel& channel : Channels)
+		{
+			if (channel.Name == "IRC")
+			{
+				channelAlreadyExists = true;
+				channel.AddMessage(ircMessage);
+				break;
+			}
+		}
+
+		if (!channelAlreadyExists)
+		{
+			AddChannel(IrcChannel("IRC"));
 			Channels.back().AddMessage(ircMessage);
 		}
 	}
