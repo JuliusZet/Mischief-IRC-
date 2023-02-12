@@ -91,36 +91,51 @@ namespace winrt::Mischief_IRC::implementation
 		IrcClient.Disconnect("Bye!");
 	}
 
-	void winrt::Mischief_IRC::implementation::MainPage::IrcAddChannel(string channelName)
+	void winrt::Mischief_IRC::implementation::MainPage::IrcAddChannel(IrcChannel ircChannel)
 	{
-		Microsoft::UI::Xaml::Controls::NavigationViewItem navigationViewItem;
-		navigationViewItem.Tag(winrt::box_value(to_hstring(channelName)));
-		navigationViewItem.Content(navigationViewItem.Tag());
+		Dispatcher().RunAsync(winrt::Windows::UI::Core::CoreDispatcherPriority::Normal, [this, ircChannel]
+			{
+				Microsoft::UI::Xaml::Controls::NavigationViewItem navigationViewItem;
+				navigationViewItem.Tag(winrt::box_value(to_hstring(ircChannel.Name)));
+				navigationViewItem.Content(navigationViewItem.Tag());
 
-		winrt::Windows::UI::Xaml::Controls::FontIcon fontIcon = winrt::Windows::UI::Xaml::Controls::FontIcon{};
-		fontIcon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
+				if (ircChannel.Name == "IRC")
+				{
+					winrt::Windows::UI::Xaml::Controls::SymbolIcon symbolIcon = winrt::Windows::UI::Xaml::Controls::SymbolIcon{};
+					symbolIcon.Symbol(winrt::Windows::UI::Xaml::Controls::Symbol::World);
 
-		if (channelName == "#fuelrats")
-		{
-			fontIcon.Glyph(L"#fr");
-		}
-		else if (channelName == "#ratchat")
-		{
-			fontIcon.Glyph(L"#rc");
-		}
-		else if (channelName == "#debrief")
-		{
-			fontIcon.Glyph(L"#db");
-		}
-		else
-		{
-			fontIcon.Glyph(to_hstring(channelName.substr(0, 3)));
-		}
+					navigationViewItem.Icon(symbolIcon);
+				}
 
-		navigationViewItem.Icon(fontIcon);
+				else
+				{
+					winrt::Windows::UI::Xaml::Controls::FontIcon fontIcon = winrt::Windows::UI::Xaml::Controls::FontIcon{};
+					fontIcon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily{ L"Segoe UI" });
 
-		NavigationView().MenuItems().Append(navigationViewItem);
+					if (ircChannel.Name == "#fuelrats")
+					{
+						fontIcon.Glyph(L"#fr");
+					}
+					else if (ircChannel.Name == "#ratchat")
+					{
+						fontIcon.Glyph(L"#rc");
+					}
+					else if (ircChannel.Name == "#debrief")
+					{
+						fontIcon.Glyph(L"#db");
+					}
+					else
+					{
+						fontIcon.Glyph(to_hstring(ircChannel.Name.substr(0, 3)));
+					}
 
-		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(wstring(to_hstring(channelName)), winrt::xaml_typename<Mischief_IRC::IrcPage>()));
+					navigationViewItem.Icon(fontIcon);
+				}
+
+				NavigationView().MenuItems().Append(navigationViewItem);
+
+				_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(wstring(to_hstring(ircChannel.Name)), winrt::xaml_typename<Mischief_IRC::IrcPage>()));
+			}
+		);
 	}
 }

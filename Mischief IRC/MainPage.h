@@ -22,7 +22,7 @@ namespace winrt::Mischief_IRC::implementation
         void FrameContent_NavigationFailed(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const& e);
         void IrcConnect();
         void IrcDisconnect();
-        void IrcAddChannel(string channelName);
+        void IrcAddChannel(IrcChannel ircChannel);
 
         IrcClient IrcClient{};
 
