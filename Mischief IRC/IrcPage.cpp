@@ -107,7 +107,7 @@ namespace winrt::Mischief_IRC::implementation
                     else if (ircMessage.Command == "MODE")
                     {
                         // Channel Mode
-                        if (ircMessage.Parameters.front().front() == '#')
+                        if (ircMessage.Parameters.front().starts_with('#'))
                         {
                             sender.Text(L"*");
                             message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + " gives " + ircMessage.Parameters.at(1) + " to " + ircMessage.Parameters.at(2)));
@@ -124,9 +124,9 @@ namespace winrt::Mischief_IRC::implementation
                     else if (ircMessage.Command == "QUIT")
                     {
                         sender.Text(L"*");
-                        if (ircMessage.Parameters.size() > 1)
+                        if (ircMessage.Parameters.size() > 0)
                         {
-                            message.Text(to_hstring(ircMessage.Prefix + " has quit (" + ircMessage.Parameters.at(1) + ')'));
+                            message.Text(to_hstring(ircMessage.Prefix + " has quit (" + ircMessage.Parameters.front() + ')'));
                         }
                         else
                         {
