@@ -121,6 +121,19 @@ namespace winrt::Mischief_IRC::implementation
                         }
                     }
 
+                    else if (ircMessage.Command == "QUIT")
+                    {
+                        sender.Text(L"*");
+                        if (ircMessage.Parameters.size() > 1)
+                        {
+                            message.Text(to_hstring(ircMessage.Prefix + " has quit (" + ircMessage.Parameters.at(1) + ')'));
+                        }
+                        else
+                        {
+                            message.Text(to_hstring(ircMessage.Prefix + " has quit"));
+                        }
+                    }
+
                     Grid().Children().Append(time);
                     Grid().SetColumn(time, 0);
                     Grid().SetRow(time, Grid().RowDefinitions().Size() - 1);
