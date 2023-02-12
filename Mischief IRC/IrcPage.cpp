@@ -26,6 +26,8 @@ namespace winrt::Mischief_IRC::implementation
                 {
                     _channelIndex = i;
                     _channelExists = true;
+
+                    break;
                 }
             }
         }
