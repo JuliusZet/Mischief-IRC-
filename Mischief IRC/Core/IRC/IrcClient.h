@@ -31,6 +31,7 @@ private:
 	thread ReceiveAsync();
 	IrcMessage Parse(string message);
 	byte Process(IrcMessage ircMessage);
+	byte AddMessageToChannel(IrcMessage ircMessage, string channelName);
 
 	IrcSocket _ircSocket{};
 	thread _receiveThread{};

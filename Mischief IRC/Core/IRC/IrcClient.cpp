@@ -246,9 +246,26 @@ byte IrcClient::Process(IrcMessage ircMessage)
 			Channels.back().AddMessage(ircMessage);
 		}
 	}
-	
+
 
 	return 0;
+}
+
+byte IrcClient::AddMessageToChannel(IrcMessage ircMessage, string channelName)
+{
+	for (IrcChannel& channel : Channels)
+	{
+		if (channel.Name == channelName)
+		{
+			channel.AddMessage(ircMessage);
+			return 0;
+		}
+	}
+
+	AddChannel(IrcChannel(channelName));
+	Channels.back().AddMessage(ircMessage);
+
+	return 1;
 }
 
 thread IrcClient::ReceiveAsync()
