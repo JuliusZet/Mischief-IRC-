@@ -120,15 +120,14 @@ byte IrcClient::Receive()
 				message.pop_back();
 			}
 
-			Parse(message);
-			Process(_messages.back());
+			Process(Parse(message));
 		}
 	}
 
 	return 0;
 }
 
-byte IrcClient::Parse(string message)
+IrcMessage IrcClient::Parse(string message)
 {
 	IrcMessage ircMessage{};
 	ircMessage.Time = system_clock::now();
@@ -168,9 +167,7 @@ byte IrcClient::Parse(string message)
 		}
 	}
 
-	_messages.push_back(ircMessage);
-
-	return 0;
+	return ircMessage;
 }
 
 byte IrcClient::Process(IrcMessage ircMessage)

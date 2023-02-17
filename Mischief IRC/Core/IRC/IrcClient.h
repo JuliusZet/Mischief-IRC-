@@ -29,11 +29,10 @@ private:
 	byte Send(string data);
 	byte Receive();
 	thread ReceiveAsync();
-	byte Parse(string message);
+	IrcMessage Parse(string message);
 	byte Process(IrcMessage ircMessage);
 
 	IrcSocket _ircSocket{};
-	vector<IrcMessage> _messages{};
 	thread _receiveThread{};
 	bool _isConnected{};
 	string _nick{};
