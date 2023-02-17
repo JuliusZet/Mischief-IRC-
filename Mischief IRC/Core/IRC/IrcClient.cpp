@@ -172,52 +172,75 @@ IrcMessage IrcClient::Parse(string message)
 
 byte IrcClient::Process(IrcMessage ircMessage)
 {
-	if (ircMessage.Command == "PRIVMSG" || ircMessage.Command == "JOIN" || ircMessage.Command == "PART" || ircMessage.Command == "MODE")
+	if (ircMessage.Command == "PRIVMSG")
 	{
 
-		// If it is a user-related message, that did not originate from us
-		if (!ircMessage.Parameters.front().starts_with('#') && ircMessage.Prefix != _nick)
+		// If it is a channel message or a direct message from us, add the message to a channel named after the receiver
+		if (ircMessage.Parameters.front() != _nick)
 		{
-			bool channelAlreadyExists = false;
-
-			for (IrcChannel& channel : Channels)
-			{
-				if (channel.Name == ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')))
-				{
-					channelAlreadyExists = true;
-					channel.AddMessage(ircMessage);
-					break;
-				}
-			}
-
-			if (!channelAlreadyExists)
-			{
-				AddChannel(IrcChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
-
-				Channels.back().AddMessage(ircMessage);
-			}
+			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
 		}
 
+		// If it is a direct message for us, add the message to a direct message channel, named after the sender
 		else
 		{
-			bool channelAlreadyExists = false;
+			AddMessageToChannel(ircMessage, ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')));
+		}
+	}
 
-			for (IrcChannel& channel : Channels)
+	else if (ircMessage.Command == "JOIN")
+	{
+
+		// 1 channel
+		if (ircMessage.Parameters.front().find(',') == string::npos)
+		{
+			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
+		}
+
+		// >= 2 channels
+		else
+		{
+			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != ircMessage.Parameters.front().size() && currentPosEnd != string::npos; currentPosStart = ircMessage.Parameters.front().find_first_not_of(',', currentPosEnd + 1))
 			{
-				if (channel.Name == ircMessage.Parameters.front())
-				{
-					channelAlreadyExists = true;
-					channel.AddMessage(ircMessage);
-					break;
-				}
+				currentPosEnd = ircMessage.Parameters.front().find(',', currentPosStart);
+				AddMessageToChannel(ircMessage, ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 			}
+		}
+	}
 
-			if (!channelAlreadyExists)
+	else if (ircMessage.Command == "PART")
+	{
+
+		// 1 channel
+		if (ircMessage.Parameters.front().find(',') == string::npos)
+		{
+			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
+		}
+
+		// >= 2 channels
+		else
+		{
+			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != ircMessage.Parameters.front().size() && currentPosEnd != string::npos; currentPosStart = ircMessage.Parameters.front().find_first_not_of(',', currentPosEnd + 1))
 			{
-				AddChannel(IrcChannel(ircMessage.Parameters.front()));
-
-				Channels.back().AddMessage(ircMessage);
+				currentPosEnd = ircMessage.Parameters.front().find(',', currentPosStart);
+				AddMessageToChannel(ircMessage, ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 			}
+		}
+	}
+
+	else if (ircMessage.Command == "MODE")
+	{
+
+		// Channel mode
+		if (ircMessage.Parameters.front().starts_with('#'))
+		{
+			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
+		}
+
+		// User mode
+		else
+		{
+			AddMessageToChannel(ircMessage, "IRC");
 		}
 	}
 
@@ -228,25 +251,8 @@ byte IrcClient::Process(IrcMessage ircMessage)
 
 	else
 	{
-		bool channelAlreadyExists = false;
-
-		for (IrcChannel& channel : Channels)
-		{
-			if (channel.Name == "IRC")
-			{
-				channelAlreadyExists = true;
-				channel.AddMessage(ircMessage);
-				break;
-			}
-		}
-
-		if (!channelAlreadyExists)
-		{
-			AddChannel(IrcChannel("IRC"));
-			Channels.back().AddMessage(ircMessage);
-		}
+		AddMessageToChannel(ircMessage, "IRC");
 	}
-
 
 	return 0;
 }
