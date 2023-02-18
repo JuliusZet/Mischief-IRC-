@@ -2,6 +2,7 @@
 
 #include "Core/IRC/IrcMessage.h"
 #include "Core/IRC/IrcMessageEvent.h"
+#include "Core/IRC/IrcChannelUser.h"
 
 class IrcChannel
 {
@@ -15,4 +16,5 @@ public:
 	string Name{};
 	string Topic{};
 	vector<IrcMessage> Messages{};
+	vector<IrcChannelUser> Users{};
 };

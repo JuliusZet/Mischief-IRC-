@@ -126,6 +126,7 @@
     <ClInclude Include="Core\IRC\IrcMessage.h" />
     <ClInclude Include="Core\IRC\IrcMessageEvent.h" />
     <ClInclude Include="Core\IRC\IrcSocket.h" />
+    <ClInclude Include="Core\IRC\IrcChannelUser.h" />
     <ClInclude Include="Core\Settings\Settings.h" />
     <ClInclude Include="HomePage.h">
       <DependentUpon>HomePage.xaml</DependentUpon>
