@@ -281,6 +281,12 @@ byte IrcClient::Process(IrcMessage ircMessage)
 		SetTopicOfChannel(ircMessage.Parameters.at(2), ircMessage.Parameters.at(1));
 	}
 
+	// RPL_NAMREPLY
+	else if (ircMessage.Command == "353")
+	{
+		AddUsersToChannel(ircMessage.Parameters.at(3), ircMessage.Parameters.at(2));
+	}
+
 	else
 	{
 		AddMessageToChannel(ircMessage, "IRC");
@@ -319,6 +325,32 @@ byte IrcClient::SetTopicOfChannel(string topic, string channelName)
 
 	AddChannel(IrcChannel(channelName));
 	Channels.back().Topic = topic;
+
+	return 1;
+}
+
+byte IrcClient::AddUsersToChannel(string users, string channelName)
+{
+	for (IrcChannel& channel : Channels)
+	{
+		if (channel.Name == channelName)
+		{
+			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != users.size() && currentPosEnd != string::npos; currentPosStart = users.find_first_not_of(' ', currentPosEnd + 1))
+			{
+				currentPosEnd = users.find(' ', currentPosStart);
+				channel.Users.push_back(IrcChannelUser(users.substr(currentPosStart, currentPosEnd - currentPosStart)));
+			}
+
+			return 0;
+		}
+	}
+
+	AddChannel(IrcChannel(channelName));
+	for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != users.size() && currentPosEnd != string::npos; currentPosStart = users.find_first_not_of(' ', currentPosEnd + 1))
+	{
+		currentPosEnd = users.find(' ', currentPosStart);
+		Channels.back().Users.push_back(IrcChannelUser(users.substr(currentPosStart, currentPosEnd - currentPosStart)));
+	}
 
 	return 1;
 }
