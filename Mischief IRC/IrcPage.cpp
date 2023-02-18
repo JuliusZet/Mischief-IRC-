@@ -74,13 +74,35 @@ namespace winrt::Mischief_IRC::implementation
                     {
                         if (ircMessage.Parameters.at(1).starts_with("ACTION ") && ircMessage.Parameters.at(1).ends_with(''))
                         {
+                            string nick{ ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) };
+
                             sender.Text(L"*");
-                            message.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
+
+                            for (IrcChannelUser& eachUser : MainPage::Current->IrcClient.Channels.at(_channelIndex).Users)
+                            {
+                                if (eachUser.Nick == nick)
+                                {
+                                    message.Text(to_hstring(eachUser.Mode + eachUser.Nick + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
+
+                                    break;
+                                }
+                            }
                         }
 
                         else
                         {
-                            sender.Text(to_hstring(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!'))));
+                            string nick{ ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) };
+
+                            for (IrcChannelUser& eachUser : MainPage::Current->IrcClient.Channels.at(_channelIndex).Users)
+                            {
+                                if (eachUser.Nick == nick)
+                                {
+                                    sender.Text(to_hstring(eachUser.Mode + eachUser.Nick));
+
+                                    break;
+                                }
+                            }
+
                             message.Text(to_hstring(ircMessage.Parameters.at(1)));
                         }
                     }
