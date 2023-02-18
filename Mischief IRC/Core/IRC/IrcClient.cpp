@@ -275,6 +275,12 @@ byte IrcClient::Process(IrcMessage ircMessage)
 		return Send("PONG :" + ircMessage.Parameters.front());
 	}
 
+	// RPL_TOPIC
+	else if (ircMessage.Command == "332")
+	{
+		SetTopicOfChannel(ircMessage.Parameters.at(2), ircMessage.Parameters.at(1));
+	}
+
 	else
 	{
 		AddMessageToChannel(ircMessage, "IRC");
@@ -296,6 +302,23 @@ byte IrcClient::AddMessageToChannel(IrcMessage ircMessage, string channelName)
 
 	AddChannel(IrcChannel(channelName));
 	Channels.back().AddMessage(ircMessage);
+
+	return 1;
+}
+
+byte IrcClient::SetTopicOfChannel(string topic, string channelName)
+{
+	for (IrcChannel& channel : Channels)
+	{
+		if (channel.Name == channelName)
+		{
+			channel.Topic = topic;
+			return 0;
+		}
+	}
+
+	AddChannel(IrcChannel(channelName));
+	Channels.back().Topic = topic;
 
 	return 1;
 }

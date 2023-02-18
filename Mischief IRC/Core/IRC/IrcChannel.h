@@ -13,5 +13,6 @@ public:
 	IrcMessageEvent OnNewMessage;
 
 	string Name{};
+	string Topic{};
 	vector<IrcMessage> Messages{};
 };
