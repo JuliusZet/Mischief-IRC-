@@ -175,16 +175,42 @@ byte IrcClient::Process(IrcMessage ircMessage)
 	if (ircMessage.Command == "PRIVMSG")
 	{
 
-		// If it is a channel message or a direct message from us, add the message to a channel named after the receiver
-		if (ircMessage.Parameters.front() != _nick)
+		// 1 receiver
+		if (ircMessage.Parameters.front().find(',') == string::npos)
 		{
-			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
+
+			// If it is a channel message or a direct message from us, add the message to a channel named after the receiver
+			if (ircMessage.Parameters.front() != _nick)
+			{
+				AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
+			}
+
+			// If it is a direct message for us, add the message to a direct message channel, named after the sender
+			else
+			{
+				AddMessageToChannel(ircMessage, ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')));
+			}
 		}
 
-		// If it is a direct message for us, add the message to a direct message channel, named after the sender
+		// >= 2 receivers
 		else
 		{
-			AddMessageToChannel(ircMessage, ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')));
+			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != ircMessage.Parameters.front().size() && currentPosEnd != string::npos; currentPosStart = ircMessage.Parameters.front().find_first_not_of(',', currentPosEnd + 1))
+			{
+				currentPosEnd = ircMessage.Parameters.front().find(',', currentPosStart);
+
+				// If it is a channel message or a direct message from us, add the message to a channel named after the receiver
+				if (ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart) != _nick)
+				{
+					AddMessageToChannel(ircMessage, ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
+				}
+
+				// If it is a direct message for us, add the message to a direct message channel, named after the sender
+				else
+				{
+					AddMessageToChannel(ircMessage, ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')));
+				}
+			}
 		}
 	}
 
