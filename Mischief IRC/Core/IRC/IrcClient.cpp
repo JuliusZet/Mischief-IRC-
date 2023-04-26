@@ -95,13 +95,35 @@ void IrcClient::AddChannel(IrcChannel ircChannel)
 
 byte IrcClient::Send(string data)
 {
-	return _ircSocket.SendData(data + '\n');
+	if (data.length() < 511)
+	{
+		return _ircSocket.SendData(data + "\r\n");
+	}
+
+	else
+	{
+		return 3;
+	}
 }
 
 byte IrcClient::SendPrivmsg(string receiver, string text)
 {
-	Process(IrcMessage(_nick, "PRIVMSG", vector<string>{receiver, text}));
-	return Send("PRIVMSG " + receiver + " :" + text);
+	if (receiver.length() + text.length() < 501)
+	{
+		Process(IrcMessage(_nick, "PRIVMSG", vector<string>{receiver, text}));
+		return Send("PRIVMSG " + receiver + " :" + text);
+	}
+
+	else
+	{
+		size_t maxTextLength{ 500 - receiver.length() };
+
+		for (size_t currentPos{}; currentPos < text.length(); currentPos += maxTextLength)
+		{
+			Process(IrcMessage(_nick, "PRIVMSG", vector<string>{receiver, text.substr(currentPos, maxTextLength)}));
+			Send("PRIVMSG " + receiver + " :" + text.substr(currentPos, maxTextLength));
+		}
+	}
 }
 
 byte IrcClient::Receive()
