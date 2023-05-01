@@ -117,12 +117,15 @@ byte IrcClient::SendPrivmsg(string receiver, string text)
 	else
 	{
 		size_t maxTextLength{ 500 - receiver.length() };
+		byte returnValue{};
 
-		for (size_t currentPos{}; currentPos < text.length(); currentPos += maxTextLength)
+		for (size_t currentPos{}; currentPos < text.length() && returnValue == 0; currentPos += maxTextLength)
 		{
 			Process(IrcMessage(_nick, "PRIVMSG", vector<string>{receiver, text.substr(currentPos, maxTextLength)}));
-			Send("PRIVMSG " + receiver + " :" + text.substr(currentPos, maxTextLength));
+			returnValue = Send("PRIVMSG " + receiver + " :" + text.substr(currentPos, maxTextLength));
 		}
+
+		return returnValue;
 	}
 }
 
