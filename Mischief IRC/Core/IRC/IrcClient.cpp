@@ -267,6 +267,7 @@ byte IrcClient::Process(IrcMessage ircMessage)
 		// 1 channel
 		if (ircMessage.Parameters.front().find(',') == string::npos)
 		{
+			RemoveUserFromChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')), ircMessage.Parameters.front());
 			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
 		}
 
@@ -276,6 +277,7 @@ byte IrcClient::Process(IrcMessage ircMessage)
 			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != ircMessage.Parameters.front().size() && currentPosEnd != string::npos; currentPosStart = ircMessage.Parameters.front().find_first_not_of(',', currentPosEnd + 1))
 			{
 				currentPosEnd = ircMessage.Parameters.front().find(',', currentPosStart);
+				RemoveUserFromChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')), ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 				AddMessageToChannel(ircMessage, ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 			}
 		}
@@ -380,6 +382,28 @@ byte IrcClient::AddUsersToChannel(string users, string channelName)
 	}
 
 	return 1;
+}
+
+byte IrcClient::RemoveUserFromChannel(string user, string channelName)
+{
+	for (IrcChannel& channel : Channels)
+	{
+		if (channel.Name == channelName)
+		{
+			for (size_t i{}; i != channel.Users.size(); ++i)
+			{
+				if (channel.Users.at(i).Nick == user)
+				{
+					channel.Users.erase(channel.Users.begin() + i);
+					return 0;
+				}
+
+				return 1;
+}
+		}
+
+		return 2;
+	}
 }
 
 thread IrcClient::ReceiveAsync()

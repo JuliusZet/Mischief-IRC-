@@ -34,6 +34,7 @@ private:
 	byte AddMessageToChannel(IrcMessage ircMessage, string channelName);
 	byte SetTopicOfChannel(string topic, string channelName);
 	byte AddUsersToChannel(string users, string channelName);
+	byte RemoveUserFromChannel(string user, string channelName);
 
 	IrcSocket _ircSocket{};
 	thread _receiveThread{};
