@@ -3,6 +3,8 @@
 
 byte IrcClient::Connect(string host, string port, string pass, string nick, string user, string realname)
 {
+	RemoveAllUsersAndMessagesFromAllChannels();
+
 	if (_ircSocket.Connect(host, port) == 0)
 	{
 		if (Send("PASS :" + pass) == 0)
@@ -429,6 +431,15 @@ byte IrcClient::RemoveUserFromChannel(string user, string channelName)
 		}
 
 		return 2;
+	}
+}
+
+void IrcClient::RemoveAllUsersAndMessagesFromAllChannels()
+{
+	for (IrcChannel& channel : Channels)
+	{
+		channel.Users.clear();
+		channel.Messages.clear();
 	}
 }
 
