@@ -12,9 +12,14 @@ public:
 	IrcChannelUser() {}
 	IrcChannelUser(string user)
 	{
+		// + Voice
+		// % Halfop
+		// @ Operator
+		// & Protected
+		// ~ Founder
 		if (user.starts_with('+') || user.starts_with('%') || user.starts_with('@') || user.starts_with('&') || user.starts_with('~'))
 		{
-			Mode = user.front();
+			ChannelMembershipPrefix = user.front();
 			Nick = user.substr(1, user.size() - 1);
 		}
 
@@ -24,6 +29,6 @@ public:
 		}
 	}
 
-	char Mode{};
+	char ChannelMembershipPrefix{};
 	string Nick{};
 };

@@ -82,7 +82,7 @@ namespace winrt::Mischief_IRC::implementation
                             {
                                 if (eachUser.Nick == nick)
                                 {
-                                    message.Text(to_hstring(eachUser.Mode + eachUser.Nick + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
+                                    message.Text(to_hstring(eachUser.ChannelMembershipPrefix + eachUser.Nick + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
 
                                     break;
                                 }
@@ -97,7 +97,7 @@ namespace winrt::Mischief_IRC::implementation
                             {
                                 if (eachUser.Nick == nick)
                                 {
-                                    sender.Text(to_hstring(eachUser.Mode + eachUser.Nick));
+                                    sender.Text(to_hstring(eachUser.ChannelMembershipPrefix + eachUser.Nick));
 
                                     break;
                                 }
