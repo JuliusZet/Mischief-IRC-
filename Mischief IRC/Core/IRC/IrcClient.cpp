@@ -152,6 +152,16 @@ byte IrcClient::Receive()
 	return 0;
 }
 
+thread IrcClient::ReceiveAsync()
+{
+	return thread{ [this] {
+		while (_isConnected)
+		{
+			Receive();
+		}
+	} };
+}
+
 IrcMessage IrcClient::Parse(string message)
 {
 	IrcMessage ircMessage{};
@@ -420,16 +430,6 @@ byte IrcClient::RemoveUserFromChannel(string user, string channelName)
 
 		return 2;
 	}
-}
-
-thread IrcClient::ReceiveAsync()
-{
-	return thread{ [this] {
-		while (_isConnected)
-		{
-			Receive();
-		}
-	} };
 }
 
 bool IrcClient::IsConnected()
