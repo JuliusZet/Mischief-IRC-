@@ -283,6 +283,22 @@ byte IrcClient::Process(IrcMessage ircMessage)
 		}
 	}
 
+	else if (ircMessage.Command == "QUIT")
+	{
+		for (IrcChannel& channel : Channels)
+		{
+			for (IrcChannelUser& user : channel.Users)
+			{
+				if (user.Nick == ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')))
+				{
+					RemoveUserFromChannel(user.Nick, channel.Name);
+					AddMessageToChannel(ircMessage, channel.Name);
+					break;
+				}
+			}
+		}
+	}
+
 	else if (ircMessage.Command == "MODE")
 	{
 
@@ -399,7 +415,7 @@ byte IrcClient::RemoveUserFromChannel(string user, string channelName)
 				}
 
 				return 1;
-}
+			}
 		}
 
 		return 2;
