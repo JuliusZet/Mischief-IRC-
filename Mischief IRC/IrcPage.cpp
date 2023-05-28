@@ -77,12 +77,14 @@ namespace winrt::Mischief_IRC::implementation
                             string nick{ ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) };
 
                             sender.Text(L"*");
+                            message.Text(to_hstring(nick + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
 
+                            // Try to find the ChannelMembershipPrefix for this nick
                             for (IrcChannelUser& eachUser : MainPage::Current->IrcClient.Channels.at(_channelIndex).Users)
                             {
                                 if (eachUser.Nick == nick)
                                 {
-                                    message.Text(to_hstring(eachUser.ChannelMembershipPrefix + eachUser.Nick + ' ' + ircMessage.Parameters.at(1).substr(8, ircMessage.Parameters.at(1).size() - 9)));
+                                    message.Text(to_hstring(eachUser.ChannelMembershipPrefix) + message.Text());
 
                                     break;
                                 }
@@ -93,6 +95,9 @@ namespace winrt::Mischief_IRC::implementation
                         {
                             string nick{ ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')) };
 
+                            sender.Text(to_hstring(nick));
+
+                            // Try to find the ChannelMembershipPrefix for this nick
                             for (IrcChannelUser& eachUser : MainPage::Current->IrcClient.Channels.at(_channelIndex).Users)
                             {
                                 if (eachUser.Nick == nick)
