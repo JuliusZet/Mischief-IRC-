@@ -245,6 +245,7 @@ byte IrcClient::Process(IrcMessage ircMessage)
 		// 1 channel
 		if (ircMessage.Parameters.front().find(',') == string::npos)
 		{
+			AddUsersToChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')), ircMessage.Parameters.front());
 			AddMessageToChannel(ircMessage, ircMessage.Parameters.front());
 		}
 
@@ -254,6 +255,7 @@ byte IrcClient::Process(IrcMessage ircMessage)
 			for (size_t currentPosStart{}, currentPosEnd{}; currentPosStart != ircMessage.Parameters.front().size() && currentPosEnd != string::npos; currentPosStart = ircMessage.Parameters.front().find_first_not_of(',', currentPosEnd + 1))
 			{
 				currentPosEnd = ircMessage.Parameters.front().find(',', currentPosStart);
+				AddUsersToChannel(ircMessage.Prefix.substr(0, ircMessage.Prefix.find_first_of('!')), ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 				AddMessageToChannel(ircMessage, ircMessage.Parameters.front().substr(currentPosStart, currentPosEnd - currentPosStart));
 			}
 		}
