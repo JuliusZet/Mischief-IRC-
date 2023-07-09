@@ -17,6 +17,7 @@ namespace winrt::Mischief_IRC::implementation
 		Current = this;
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"Home", winrt::xaml_typename<Mischief_IRC::HomePage>()));
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"CalloutCreator", winrt::xaml_typename<Mischief_IRC::CalloutCreatorPage>()));
 	
 		_eventFunctionId = IrcClient.OnNewChannel.AddFunction(bind(&winrt::Mischief_IRC::implementation::MainPage::IrcAddChannel, this, _1));
 	}

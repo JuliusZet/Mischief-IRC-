@@ -105,6 +105,9 @@
     <Page Include="TimestampFormatHelpDialog.xaml">
       <Filter>Pages\SettingsPages</Filter>
     </Page>
+    <Page Include="CalloutCreatorPage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

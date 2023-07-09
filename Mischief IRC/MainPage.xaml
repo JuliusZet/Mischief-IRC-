@@ -21,6 +21,11 @@
                         <SymbolIcon Symbol="Home"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Tag="CalloutCreator" Content="Callout Creator">
+                    <muxc:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Comment"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator/>
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="FrameContent" Padding="12" IsTabStop="True" NavigationFailed="FrameContent_NavigationFailed"/>
