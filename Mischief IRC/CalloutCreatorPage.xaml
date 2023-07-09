@@ -297,6 +297,150 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource ToggleButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ToggleButtonRevealBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="{ThemeResource ButtonPadding}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <Setter Property="FocusVisualMargin" Value="-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
+                                            <!--<Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundPointerOver}"/>-->
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushPointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundPointerOver}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundPressed}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushPressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundPressed}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundDisabled}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundChecked}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushChecked}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundChecked}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundCheckedPointerOver}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundCheckedPressed}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedPressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPressed}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedDisabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundCheckedDisabled}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushCheckedDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundIndeterminate}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushIndeterminate}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundIndeterminate}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminatePointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundIndeterminatePointerOver}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushIndeterminatePointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundIndeterminatePointerOver}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminatePressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundIndeterminatePressed}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushIndeterminatePressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundIndeterminatePressed}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminateDisabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundIndeterminateDisabled}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrushIndeterminateDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundIndeterminateDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -313,7 +457,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
-            <Grid>
+            <Grid Margin="0,0,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -328,6 +472,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <!-- Case number -->
                 <CheckBox x:Name="CheckBoxCasenumber" Grid.Column="0" Grid.Row="0" Checked="CheckBoxCasenumber_Checked" Unchecked="CheckBoxCasenumber_Unchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -335,9 +480,232 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="#"/>
-                        <TextBox x:Name="TextBoxCasenumber" Grid.Column="1" PlaceholderText="Casenumber" TextChanged="TextBoxCasenumber_TextChanged" KeyDown="TextBoxMessage_KeyDown"/>
+                        <TextBox x:Name="TextBoxCasenumber" Grid.Column="1" PlaceholderText="Casenumber" Margin="0,0,5,0" TextChanged="TextBoxCasenumber_TextChanged" KeyDown="TextBoxMessage_KeyDown"/>
                     </Grid>
                 </CheckBox>
+                <!-- Acknowledgement -->
+                <CheckBox x:Name="CheckBoxRgr" Grid.Column="1" Grid.Row="0" Checked="CheckBoxRgr_Checked" Unchecked="CheckBoxRgr_Unchecked">
+                    <TextBlock Text="rgr" Margin="17,0,5,0"/>
+                </CheckBox>
+                <!-- Readiness confirmation -->
+                <CheckBox x:Name="CheckBoxRdy" Grid.Column="2" Grid.Row="0" Checked="CheckBoxRdy_Checked" Unchecked="CheckBoxRdy_Unchecked">
+                    <TextBlock Text="rdy" Margin="17,0,5,0"/>
+                </CheckBox>
+                <!-- Jump callout -->
+                <CheckBox x:Name="CheckBoxJumpcallout" Grid.Column="0" Grid.Row="1" Checked="CheckBoxJumpcallout_Checked" Unchecked="CheckBoxJumpcallout_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TextBoxJumpcallout" Grid.Column="0" PlaceholderText="Number of jumps" Margin="5,0,0,0" TextChanged="TextBoxJumpcallout_TextChanged" KeyDown="TextBoxJumpcallout_KeyDown"/>
+                        <TextBlock Grid.Column="1" Text="j"/>
+                    </Grid>
+                </CheckBox>
+                <!-- Own position -->
+                <CheckBox x:Name="CheckBoxOwnPos" Grid.Column="1" Grid.Row="1" Checked="CheckBoxOwnPos_Checked" Unchecked="CheckBoxOwnPos_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonSysPlus" Grid.Column="0" GroupName="OwnPos" Checked="RadioButtonSysPlus_Checked">
+                            <TextBlock Text="sys+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonPosPlus" Grid.Column="1" GroupName="OwnPos" Checked="RadioButtonPosPlus_Checked">
+                            <TextBlock Text="pos+"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Friend request status -->
+                <CheckBox x:Name="CheckBoxFr" Grid.Column="0" Grid.Row="2" Checked="CheckBoxFr_Checked" Unchecked="CheckBoxFr_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonFrPlus" Grid.Column="0" GroupName="Fr" Checked="RadioButtonFrPlus_Checked">
+                            <TextBlock Text="fr+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonFrMinus" Grid.Column="1" GroupName="Fr" Checked="RadioButtonFrMinus_Checked">
+                            <TextBlock Text="fr-"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Client online status -->
+                <CheckBox x:Name="CheckBoxClientOnlineStatus" Grid.Column="1" Grid.Row="2" Checked="CheckBoxClientOnlineStatus_Checked" Unchecked="CheckBoxClientOnlineStatus_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="17,0,5,0" Text="client in ..."/>
+                        <RadioButton x:Name="RadioButtonClientInOpen" Grid.Column="0" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInOpen_Checked">
+                            <TextBlock Text="open"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonClientInPg" Grid.Column="1" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInPg_Checked">
+                            <TextBlock Text="pg"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonClientInSolo" Grid.Column="0" Grid.Row="2" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInSolo_Checked">
+                            <TextBlock Text="solo"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonClientInMm" Grid.Column="1" Grid.Row="2" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInMm_Checked">
+                            <TextBlock Text="mm"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- System confirmation / correction -->
+                <CheckBox x:Name="CheckBoxSysconf" Grid.Column="2" Grid.Row="2" Checked="CheckBoxSysconf_Checked" Unchecked="CheckBoxSysconf_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonSysconf" Grid.Column="0" GroupName="Sysconf" Checked="RadioButtonSysconf_Checked">
+                            <TextBlock Text="sysconf"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonSyscorr" Grid.Column="1" GroupName="Sysconf" Checked="RadioButtonSyscorr_Checked">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="syscorr:"/>
+                                <TextBox x:Name="TextBoxSyscorr" Grid.Column="1" PlaceholderText="Actual system" Margin="0,0,5,0" TextChanged="TextBoxSyscorr_TextChanged" KeyDown="TextBoxSyscorr_KeyDown"/>
+                            </Grid>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Team status -->
+                <CheckBox x:Name="CheckBoxTm" Grid.Column="0" Grid.Row="3" Checked="CheckBoxTm_Checked" Unchecked="CheckBoxTm_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonTmPlus" Grid.Column="0" GroupName="Tm" Checked="RadioButtonTmPlus_Checked">
+                            <TextBlock Text="tm+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonTmMinus" Grid.Column="1" GroupName="Tm" Checked="RadioButtonTmMinus_Checked">
+                            <TextBlock Text="tm-"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Preparation status -->
+                <CheckBox x:Name="CheckBoxPrep" Grid.Column="1" Grid.Row="3" Checked="CheckBoxPrep_Checked" Unchecked="CheckBoxPrep_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonPrepPlus" Grid.Column="0" GroupName="Prep" Checked="RadioButtonPrepPlus_Checked">
+                            <TextBlock Text="prep+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonPrepMinus" Grid.Column="1" GroupName="Prep" Checked="RadioButtonPrepMinus_Checked">
+                            <TextBlock Text="prep-"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Navigation panel check -->
+                <CheckBox x:Name="CheckBoxNavcheck" Grid.Column="2" Grid.Row="3" Checked="CheckBoxNavcheck_Checked" Unchecked="CheckBoxNavcheck_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonNavcheckCanNotJump" Grid.Column="0" GroupName="Navcheck" Checked="RadioButtonNavcheckCanNotJump_Checked">
+                            <TextBlock Text="can not jump"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonNavcheckCanJump" Grid.Column="1" GroupName="Navcheck" Checked="RadioButtonNavcheckCanJump_Checked">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="can jump"/>
+                                <TextBox x:Name="TextBoxNavcheckCanJump" Grid.Column="1" PlaceholderText="Distance" TextChanged="TextBoxNavcheckCanJump_TextChanged" KeyDown="TextBoxNavcheckCanJump_KeyDown"/>
+                                <TextBlock Grid.Column="2" Text="ly"/>
+                            </Grid>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Beacon status -->
+                <CheckBox x:Name="CheckBoxBc" Grid.Column="0" Grid.Row="4" Checked="CheckBoxBc_Checked" Unchecked="CheckBoxBc_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonBcPlus" Grid.Column="0" GroupName="Bc" Checked="RadioButtonBcPlus_Checked">
+                            <TextBlock Text="bc+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonBcMinus" Grid.Column="1" GroupName="Bc" Checked="RadioButtonBcMinus_Checked">
+                            <TextBlock Text="bc-"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Instance status -->
+                <CheckBox x:Name="CheckBoxInst" Grid.Column="0" Grid.Row="5" Checked="CheckBoxInst_Checked" Unchecked="CheckBoxInst_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonInstPlus" Grid.Column="0" GroupName="Inst" Checked="RadioButtonInstPlus_Checked">
+                            <TextBlock Text="inst+"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonInstMinus" Grid.Column="1" GroupName="Inst" Checked="RadioButtonInstMinus_Checked">
+                            <TextBlock Text="inst-"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Client position -->
+                <CheckBox x:Name="CheckBoxClientPos" Grid.Column="1" Grid.Row="5" Checked="CheckBoxClientPos_Checked" Unchecked="CheckBoxClientPos_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton x:Name="RadioButtonClientPosInEz" Grid.Column="0" GroupName="ClientPos" Checked="RadioButtonClientPosInEz_Checked">
+                            <TextBlock Text="in ez"/>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioButtonClientPosInSc" Grid.Column="1" GroupName="ClientPos" Checked="RadioButtonClientPosInSc_Checked">
+                            <TextBlock Text="in sc"/>
+                        </RadioButton>
+                    </Grid>
+                </CheckBox>
+                <!-- Distance -->
+                <CheckBox x:Name="CheckBoxDistance" Grid.Column="2" Grid.Row="5" Checked="CheckBoxDistance_Checked" Unchecked="CheckBoxDistance_Unchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TextBoxDistance" Grid.Column="0" PlaceholderText="Distance" Margin="5,0,0,0" TextChanged="TextBoxDistance_TextChanged" PreviewKeyDown="TextBoxDistance_PreviewKeyDown" KeyDown="TextBoxDistance_KeyDown"/>
+                        <ComboBox x:Name="ComboBoxDistance" Grid.Column="1" Margin="0,0,5,0" Loaded="ComboBoxDistance_Loaded" SelectionChanged="ComboBoxDistance_SelectionChanged"/>
+                    </Grid>
+                </CheckBox>
+                <!-- Fuel status -->
+                <CheckBox x:Name="CheckBoxFuelPlus" Grid.Column="0" Grid.Row="6" Checked="CheckBoxFuelPlus_Checked" Unchecked="CheckBoxFuelPlus_Unchecked">
+                    <TextBlock Text="fuel+" Margin="17,0,5,0"/>
+                </CheckBox>
+                <!-- Show case / case list / Reset -->
+                <Grid Grid.Column="2" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonShowCase" Grid.Column="0" Content="Show case" Margin="5,0,0,5" IsEnabled="False" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonShowCase_Click"/>
+                    <Button x:Name="ButtonShowCaseList" Grid.Column="1" Content="Show case list" Margin="5,0,0,5" IsEnabled="False" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonShowCaseList_Click"/>
+                    <Button x:Name="ButtonReset" Grid.Column="2" Content="Reset" Margin="5,0,5,5" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonReset_Click"/>
+                </Grid>
             </Grid>
         </ScrollViewer>
         <Grid Grid.Row="1">
