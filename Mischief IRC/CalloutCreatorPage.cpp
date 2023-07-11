@@ -77,22 +77,38 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxJumpcallout_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Append("Jumpcallout");
+		TextBoxJumpcallout().Focus(FocusState::Programmatic);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxJumpcallout_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Jumpcallout");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBoxJumpcallout().Text(L"");
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxJumpcallout_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
 	{
+		if (TextBoxJumpcallout().Text() != L"")
+		{
+			CheckBoxJumpcallout().IsChecked(true);
+			Callout::Replace("Jumpcallout", to_string(TextBoxJumpcallout().Text()) + 'j');
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 
+		else
+		{
+			CheckBoxJumpcallout().IsChecked(false);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxJumpcallout_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
-
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxMessage().Focus(FocusState::Programmatic);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxOwnPos_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
