@@ -68,6 +68,7 @@ string Callout::Generate()
 		callout += eachCalloutPart.Text + ' ';
 	}
 
+	// Remove the last space character
 	if (!callout.empty())
 	{
 		callout.pop_back();
