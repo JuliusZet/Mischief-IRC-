@@ -540,22 +540,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="17,0,5,0" Text="client in ..."/>
-                        <RadioButton x:Name="RadioButtonClientInOpen" Grid.Column="0" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInOpen_Checked">
-                            <TextBlock Text="open"/>
+                        <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" Text="client ..."/>
+                        <RadioButton x:Name="RadioButtonClientInOpen" Grid.Column="0" Grid.Row="0" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInOpen_Checked">
+                            <TextBlock Text="in open"/>
                         </RadioButton>
-                        <RadioButton x:Name="RadioButtonClientInPg" Grid.Column="1" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInPg_Checked">
-                            <TextBlock Text="pg"/>
+                        <RadioButton x:Name="RadioButtonClientInPg" Grid.Column="1" Grid.Row="0" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInPg_Checked">
+                            <TextBlock Text="in pg"/>
                         </RadioButton>
-                        <RadioButton x:Name="RadioButtonClientInSolo" Grid.Column="0" Grid.Row="2" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInSolo_Checked">
-                            <TextBlock Text="solo"/>
+                        <RadioButton x:Name="RadioButtonClientInSolo" Grid.Column="0" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInSolo_Checked">
+                            <TextBlock Text="in solo"/>
                         </RadioButton>
-                        <RadioButton x:Name="RadioButtonClientInMm" Grid.Column="1" Grid.Row="2" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInMm_Checked">
-                            <TextBlock Text="mm"/>
+                        <RadioButton x:Name="RadioButtonClientInMm" Grid.Column="1" Grid.Row="1" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInMm_Checked">
+                            <TextBlock Text="in mm"/>
                         </RadioButton>
                     </Grid>
                 </CheckBox>
@@ -615,11 +614,11 @@
                 <CheckBox x:Name="CheckBoxNavcheck" Grid.Column="2" Grid.Row="3" Checked="CheckBoxNavcheck_Checked" Unchecked="CheckBoxNavcheck_Unchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <RadioButton x:Name="RadioButtonNavcheckCanNotJump" Grid.Column="0" GroupName="Navcheck" Checked="RadioButtonNavcheckCanNotJump_Checked">
-                            <TextBlock Text="can not jump"/>
+                            <TextBlock Text="navcheck: client&#10;can not jump"/>
                         </RadioButton>
                         <RadioButton x:Name="RadioButtonNavcheckCanJump" Grid.Column="1" GroupName="Navcheck" Checked="RadioButtonNavcheckCanJump_Checked">
                             <Grid>
@@ -669,11 +668,11 @@
                 <CheckBox x:Name="CheckBoxClientPos" Grid.Column="1" Grid.Row="5" Checked="CheckBoxClientPos_Checked" Unchecked="CheckBoxClientPos_Unchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <RadioButton x:Name="RadioButtonClientPosInEz" Grid.Column="0" GroupName="ClientPos" Checked="RadioButtonClientPosInEz_Checked">
-                            <TextBlock Text="in ez"/>
+                            <TextBlock Text="client in ez"/>
                         </RadioButton>
                         <RadioButton x:Name="RadioButtonClientPosInSc" Grid.Column="1" GroupName="ClientPos" Checked="RadioButtonClientPosInSc_Checked">
                             <TextBlock Text="in sc"/>
