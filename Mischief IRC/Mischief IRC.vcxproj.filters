@@ -24,6 +24,9 @@
     <ClCompile Include="Core\IRC\IrcChannelEvent.cpp">
       <Filter>Core\IRC</Filter>
     </ClCompile>
+    <ClCompile Include="Core\CalloutCreator\Callout.cpp">
+      <Filter>Core\CalloutCreator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -50,6 +53,12 @@
     </ClInclude>
     <ClInclude Include="Core\IRC\IrcChannelUser.h">
       <Filter>Core\IRC</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CalloutCreator\Callout.h">
+      <Filter>Core\CalloutCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CalloutCreator\CalloutPart.h">
+      <Filter>Core\CalloutCreator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +136,9 @@
     </Filter>
     <Filter Include="Pages\SettingsPages">
       <UniqueIdentifier>{da3c9953-95c1-4c4d-b3c0-d5c77e1f5315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\CalloutCreator">
+      <UniqueIdentifier>{13f47f39-2c6a-4994-aa85-e55243d2a26a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

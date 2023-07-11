@@ -124,6 +124,8 @@
       <DependentUpon>CalloutCreatorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="Core\CalloutCreator\Callout.h" />
+    <ClInclude Include="Core\CalloutCreator\CalloutPart.h" />
     <ClInclude Include="Core\IRC\IrcChannel.h" />
     <ClInclude Include="Core\IRC\IrcChannelEvent.h" />
     <ClInclude Include="Core\IRC\IrcClient.h" />
@@ -212,6 +214,7 @@
       <DependentUpon>CalloutCreatorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="Core\CalloutCreator\Callout.cpp" />
     <ClCompile Include="Core\IRC\IrcChannel.cpp" />
     <ClCompile Include="Core\IRC\IrcChannelEvent.cpp" />
     <ClCompile Include="Core\IRC\IrcClient.cpp" />
