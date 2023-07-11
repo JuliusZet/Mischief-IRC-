@@ -17,17 +17,38 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxCasenumber_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Prepend("Casenumber");
+		TextBoxCasenumber().Focus(FocusState::Programmatic);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxCasenumber_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Casenumber");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBoxCasenumber().Text(L"");
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxCasenumber_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
 	{
+		if (TextBoxCasenumber().Text() != L"")
+		{
+			CheckBoxCasenumber().IsChecked(true);
+			Callout::Replace("Casenumber", '#' + to_string(TextBoxCasenumber().Text()));
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 
+		else
+		{
+			CheckBoxCasenumber().IsChecked(false);
+		}
+	}
+
+	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxCasenumber_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+	{
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxJumpcallout().Focus(FocusState::Programmatic);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxRgr_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
