@@ -177,32 +177,55 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxClientOnlineStatus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("ClientOnlineStatus");
 
+		if (RadioButtonClientInPg().IsChecked().GetBoolean() == false && RadioButtonClientInSolo().IsChecked().GetBoolean() == false && RadioButtonClientInMm().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonClientInOpen().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxClientOnlineStatus_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("ClientOnlineStatus");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonClientInOpen().IsChecked(false);
+		RadioButtonClientInPg().IsChecked(false);
+		RadioButtonClientInSolo().IsChecked(false);
+		RadioButtonClientInMm().IsChecked(false);
+		TextBlockClientOnlineStatus().Opacity(1.0);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientInOpen_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientOnlineStatus().IsChecked(true);
+		Callout::Replace("ClientOnlineStatus", "client in open");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBlockClientOnlineStatus().Opacity(0.0);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientInPg_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientOnlineStatus().IsChecked(true);
+		Callout::Replace("ClientOnlineStatus", "client in pg");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBlockClientOnlineStatus().Opacity(0.0);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientInSolo_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientOnlineStatus().IsChecked(true);
+		Callout::Replace("ClientOnlineStatus", "client in solo");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBlockClientOnlineStatus().Opacity(0.0);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientInMm_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientOnlineStatus().IsChecked(true);
+		Callout::Replace("ClientOnlineStatus", "client in mm");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBlockClientOnlineStatus().Opacity(0.0);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxSysconf_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

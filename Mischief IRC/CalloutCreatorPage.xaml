@@ -543,7 +543,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" Text="client ..."/>
+                        <TextBlock x:Name="TextBlockClientOnlineStatus" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" Text="client ..."/>
                         <RadioButton x:Name="RadioButtonClientInOpen" Grid.Column="0" Grid.Row="0" GroupName="ClientOnlinestatus" Checked="RadioButtonClientInOpen_Checked">
                             <TextBlock Text="in open"/>
                         </RadioButton>
