@@ -113,22 +113,34 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxOwnPos_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("OwnPos");
 
+		if (RadioButtonPosPlus().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonSysPlus().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxOwnPos_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("OwnPos");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonSysPlus().IsChecked(false);
+		RadioButtonPosPlus().IsChecked(false);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonSysPlus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxOwnPos().IsChecked(true);
+		Callout::Replace("OwnPos", "sys+");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonPosPlus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxOwnPos().IsChecked(true);
+		Callout::Replace("OwnPos", "pos+");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxFr_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
