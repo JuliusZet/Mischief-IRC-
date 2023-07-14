@@ -351,32 +351,59 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxNavcheck_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("Navcheck");
 
+		if (RadioButtonNavcheckCanJump().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonNavcheckCanNotJump().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxNavcheck_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Navcheck");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonNavcheckCanNotJump().IsChecked(false);
+		RadioButtonNavcheckCanJump().IsChecked(false);
+		TextBoxNavcheckCanJump().Text(L"");
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonNavcheckCanNotJump_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxNavcheck().IsChecked(true);
+		Callout::Replace("Navcheck", "navcheck: client can not jump");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonNavcheckCanJump_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxNavcheck().IsChecked(true);
+		TextBoxNavcheckCanJump().Focus(FocusState::Programmatic);
+		Callout::Replace("Navcheck", "navcheck: client can jump " + to_string(TextBoxNavcheckCanJump().Text()) + " ly");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxNavcheckCanJump_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
 	{
+		if (TextBoxNavcheckCanJump().Text() != L"")
+		{
+			RadioButtonNavcheckCanJump().IsChecked(true);
+			Callout::Replace("Navcheck", "navcheck: client can jump " + to_string(TextBoxNavcheckCanJump().Text()) + " ly");
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 
+		else
+		{
+			CheckBoxNavcheck().IsChecked(false);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxNavcheckCanJump_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
-
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxMessage().Focus(FocusState::Programmatic);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxBc_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
