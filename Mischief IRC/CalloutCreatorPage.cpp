@@ -230,32 +230,59 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxSysconf_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("Sysconf");
 
+		if (RadioButtonSyscorr().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonSysconf().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxSysconf_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Sysconf");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonSysconf().IsChecked(false);
+		RadioButtonSyscorr().IsChecked(false);
+		TextBoxSyscorr().Text(L"");
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonSysconf_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxSysconf().IsChecked(true);
+		Callout::Replace("Sysconf", "sysconf");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonSyscorr_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxSysconf().IsChecked(true);
+		TextBoxSyscorr().Focus(FocusState::Programmatic);
+		Callout::Replace("Sysconf", "sys " + to_string(TextBoxCasenumber().Text()) + ' ' + to_string(TextBoxSyscorr().Text()));
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxSyscorr_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
 	{
+		if (TextBoxSyscorr().Text() != L"")
+		{
+			RadioButtonSyscorr().IsChecked(true);
+			Callout::Replace("Sysconf", "sys " + to_string(TextBoxCasenumber().Text()) + ' ' + to_string(TextBoxSyscorr().Text()));
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 
+		else
+		{
+			CheckBoxSysconf().IsChecked(false);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxSyscorr_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
-
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxMessage().Focus(FocusState::Programmatic);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxTm_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
