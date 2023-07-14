@@ -319,22 +319,34 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxPrep_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("Prep");
 
+		if (RadioButtonPrepMinus().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonPrepPlus().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxPrep_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Prep");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonPrepPlus().IsChecked(false);
+		RadioButtonPrepMinus().IsChecked(false);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonPrepPlus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxPrep().IsChecked(true);
+		Callout::Replace("Prep", "prep+");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonPrepMinus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxPrep().IsChecked(true);
+		Callout::Replace("Prep", "prep-");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxNavcheck_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
