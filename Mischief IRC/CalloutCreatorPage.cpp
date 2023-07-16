@@ -491,11 +491,6 @@ namespace winrt::Mischief_IRC::implementation
 
 	}
 
-	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ComboBoxDistance_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
-	{
-
-	}
-
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ComboBoxDistance_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::SelectionChangedEventArgs const& e)
 	{
 
