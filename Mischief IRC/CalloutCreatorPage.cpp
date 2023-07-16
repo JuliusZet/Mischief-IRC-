@@ -689,11 +689,20 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxMessage_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
-
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxMessage_LostFocus(nullptr, nullptr);
+			ButtonSend_Click(nullptr, nullptr);
+			TextBoxMessage_GettingFocus(nullptr, nullptr);
+			TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ButtonSend_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		if (MainPage::Current->IrcClient.SendPrivmsg("#fuelrats", to_string(TextBoxMessage().Text())) == 0)
+		{
+			ButtonReset_Click(nullptr, nullptr);
+		}
 	}
 }

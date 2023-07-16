@@ -3,6 +3,7 @@
 #include <array>
 #include "CalloutCreatorPage.g.h"
 #include "Core/CalloutCreator/Callout.h"
+#include "MainPage.h"
 
 namespace winrt::Mischief_IRC::implementation
 {
