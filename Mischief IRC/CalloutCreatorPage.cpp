@@ -478,22 +478,36 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxClientPos_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("ClientPos");
 
+		if (RadioButtonClientPosInSc().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonClientPosInEz().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxClientPos_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("ClientPos");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonClientPosInEz().IsChecked(false);
+		RadioButtonClientPosInSc().IsChecked(false);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientPosInEz_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientPos().IsChecked(true);
+		TextBoxDistance().Focus(FocusState::Programmatic);
+		ComboBoxDistance().SelectedIndex(3); // ls
+		Callout::Replace("ClientPos", "client in ez");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonClientPosInSc_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxClientPos().IsChecked(true);
+		Callout::Replace("ClientPos", "client in sc");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxDistance_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
