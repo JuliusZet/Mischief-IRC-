@@ -442,22 +442,38 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxInst_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
+		Callout::Append("Inst");
 
+		if (RadioButtonInstMinus().IsChecked().GetBoolean() == false)
+		{
+			RadioButtonInstPlus().IsChecked(true);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxInst_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Inst");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		RadioButtonInstPlus().IsChecked(false);
+		RadioButtonInstMinus().IsChecked(false);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonInstPlus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxInst().IsChecked(true);
+		TextBoxDistance().Focus(FocusState::Programmatic);
+		ComboBoxDistance().SelectedIndex(1); // km
+		Callout::Replace("Inst", "inst+");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::RadioButtonInstMinus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		CheckBoxInst().IsChecked(true);
+		TextBoxDistance().Focus(FocusState::Programmatic);
+		ComboBoxDistance().SelectedIndex(0); // m
+		Callout::Replace("Inst", "inst-");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxClientPos_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
