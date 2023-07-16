@@ -117,6 +117,9 @@
     <Page Include="CalloutCreatorPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="CalloutCreatorSettingsPage.xaml">
+      <Filter>Pages\SettingsPages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

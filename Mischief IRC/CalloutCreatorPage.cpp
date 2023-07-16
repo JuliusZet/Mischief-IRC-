@@ -13,6 +13,8 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		// Xaml objects should not call InitializeComponent during construction.
 		// See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
+
+		_channelName = Settings::Get("calloutCreatorChannelName");
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::UncheckCheckboxes()
@@ -700,7 +702,7 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ButtonSend_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		if (MainPage::Current->IrcClient.SendPrivmsg("#fuelrats", to_string(TextBoxMessage().Text())) == 0)
+		if (MainPage::Current->IrcClient.SendPrivmsg(_channelName, to_string(TextBoxMessage().Text())) == 0)
 		{
 			ButtonReset_Click(nullptr, nullptr);
 		}

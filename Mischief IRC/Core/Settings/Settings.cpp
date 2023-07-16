@@ -31,6 +31,10 @@ string Settings::GetDefault(string key)
 	{
 		return string{ current_zone()->name() };
 	}
+	else if (key == "calloutCreatorChannelName")
+	{
+		return "#fuelrats";
+	}
 	else
 	{
 		return "";

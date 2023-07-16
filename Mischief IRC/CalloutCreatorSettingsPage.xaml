@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="Mischief_IRC.CalloutCreatorSettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Mischief_IRC"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="IsSpellCheckEnabled" Value="False"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+    </Page.Resources>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TextBoxChannelName" Grid.Column="0" Header="Channel Name where to send the callout" Loaded="TextBoxChannelName_Loaded" TextChanged="TextBoxChannelName_TextChanged" LostFocus="TextBoxChannelName_LostFocus"/>
+                <Button x:Name="ButtonChannelNameReset" Grid.Column="1" Content="Reset to default" Margin="12,0,0,12" VerticalAlignment="Bottom" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonChannelNameReset_Click"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

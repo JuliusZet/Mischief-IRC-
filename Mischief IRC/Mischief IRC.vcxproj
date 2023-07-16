@@ -124,6 +124,10 @@
       <DependentUpon>CalloutCreatorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="CalloutCreatorSettingsPage.h">
+      <DependentUpon>CalloutCreatorSettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="Core\CalloutCreator\Callout.h" />
     <ClInclude Include="Core\CalloutCreator\CalloutPart.h" />
     <ClInclude Include="Core\IRC\IrcChannel.h" />
@@ -172,6 +176,9 @@
     <Page Include="CalloutCreatorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="CalloutCreatorSettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -212,6 +219,10 @@
     </ClCompile>
     <ClCompile Include="CalloutCreatorPage.cpp">
       <DependentUpon>CalloutCreatorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="CalloutCreatorSettingsPage.cpp">
+      <DependentUpon>CalloutCreatorSettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="Core\CalloutCreator\Callout.cpp" />
@@ -262,6 +273,10 @@
     </Midl>
     <Midl Include="CalloutCreatorPage.idl">
       <DependentUpon>CalloutCreatorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="CalloutCreatorSettingsPage.idl">
+      <DependentUpon>CalloutCreatorSettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="HomePage.idl">

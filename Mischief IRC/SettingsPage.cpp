@@ -20,6 +20,7 @@ namespace winrt::Mischief_IRC::implementation
 
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"Appearance", winrt::xaml_typename<Mischief_IRC::AppearanceSettingsPage>()));
 		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"IRC", winrt::xaml_typename<Mischief_IRC::IrcSettingsPage>()));
+		_pages.push_back(make_pair<wstring, winrt::Windows::UI::Xaml::Interop::TypeName>(L"Callout Creator", winrt::xaml_typename<Mischief_IRC::CalloutCreatorSettingsPage>()));
 
 		settings.push_back(Setting("appearanceTheme"));
 		settings.push_back(Setting("appearanceTimestampFormat"));
@@ -30,6 +31,7 @@ namespace winrt::Mischief_IRC::implementation
 		settings.push_back(Setting("ircNick"));
 		settings.push_back(Setting("ircUser"));
 		settings.push_back(Setting("ircRealname"));
+		settings.push_back(Setting("calloutCreatorChannelName"));
 	}
 
 	void winrt::Mischief_IRC::implementation::SettingsPage::NavigationView_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

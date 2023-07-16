@@ -13,6 +13,7 @@ namespace winrt::Mischief_IRC::implementation
         void UncheckCheckboxes();
 
         std::array<string, 7> _distanceUnits{ "m", "km", "Mm", "ls", "kls", "Mls", "ly" };
+        std::string _channelName{};
 
     public:
         CalloutCreatorPage();
