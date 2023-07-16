@@ -9,7 +9,10 @@ namespace winrt::Mischief_IRC::implementation
     struct CalloutCreatorPage : CalloutCreatorPageT<CalloutCreatorPage>
     {
     private:
+        void UncheckCheckboxes();
+
         std::array<string, 7> _distanceUnits{ "m", "km", "Mm", "ls", "kls", "Mls", "ly" };
+
     public:
         CalloutCreatorPage();
         void CheckBoxCasenumber_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);

@@ -15,6 +15,46 @@ namespace winrt::Mischief_IRC::implementation
 		// See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
 	}
 
+	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::UncheckCheckboxes()
+	{
+		bool anyCheckboxWasChecked{};
+		std::array<Controls::CheckBox, 15> checkboxes
+		{
+			CheckBoxRgr(),
+				CheckBoxRdy(),
+				CheckBoxJumpcallout(),
+				CheckBoxOwnPos(),
+				CheckBoxFr(),
+				CheckBoxClientOnlineStatus(),
+				CheckBoxSysconf(),
+				CheckBoxTm(),
+				CheckBoxPrep(),
+				CheckBoxNavcheck(),
+				CheckBoxBc(),
+				CheckBoxInst(),
+				CheckBoxClientPos(),
+				CheckBoxDistance(),
+				CheckBoxFuelPlus()
+		};
+
+		for (Controls::CheckBox& eachCheckbox : checkboxes)
+		{
+			if (eachCheckbox.IsChecked().GetBoolean() == true)
+			{
+				eachCheckbox.IsChecked(false);
+				anyCheckboxWasChecked = true;
+			}
+		}
+
+		if (!anyCheckboxWasChecked)
+		{
+			CheckBoxCasenumber().IsChecked(false);
+			Callout::Clear();
+			TextBoxMessage().Text(L"");
+			TextBoxCasenumber().Focus(FocusState::Programmatic);
+		}
+	}
+
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxCasenumber_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
 		Callout::Prepend("Casenumber");
@@ -602,7 +642,8 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ButtonReset_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		UncheckCheckboxes();
+		ComboBoxDistance().SelectedIndex(3); // ls
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxMessage_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
