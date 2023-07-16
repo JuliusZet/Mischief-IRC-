@@ -52,6 +52,7 @@ namespace winrt::Mischief_IRC::implementation
 			Callout::Clear();
 			TextBoxMessage().Text(L"");
 			TextBoxCasenumber().Focus(FocusState::Programmatic);
+			TextBoxCasenumber().SelectionStart(TextBoxCasenumber().Text().size());
 		}
 	}
 
@@ -59,6 +60,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		Callout::Prepend("Casenumber");
 		TextBoxCasenumber().Focus(FocusState::Programmatic);
+		TextBoxCasenumber().SelectionStart(TextBoxCasenumber().Text().size());
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxCasenumber_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -88,6 +90,7 @@ namespace winrt::Mischief_IRC::implementation
 		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
 		{
 			TextBoxJumpcallout().Focus(FocusState::Programmatic);
+			TextBoxJumpcallout().SelectionStart(TextBoxJumpcallout().Text().size());
 		}
 	}
 
@@ -119,6 +122,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		Callout::Append("Jumpcallout");
 		TextBoxJumpcallout().Focus(FocusState::Programmatic);
+		TextBoxJumpcallout().SelectionStart(TextBoxJumpcallout().Text().size());
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxJumpcallout_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -148,6 +152,7 @@ namespace winrt::Mischief_IRC::implementation
 		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
 		{
 			TextBoxMessage().Focus(FocusState::Programmatic);
+			TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
 		}
 	}
 
@@ -298,6 +303,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxSysconf().IsChecked(true);
 		TextBoxSyscorr().Focus(FocusState::Programmatic);
+		TextBoxSyscorr().SelectionStart(TextBoxSyscorr().Text().size());
 		Callout::Replace("Sysconf", "sys " + to_string(TextBoxCasenumber().Text()) + ' ' + to_string(TextBoxSyscorr().Text()));
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
@@ -322,6 +328,7 @@ namespace winrt::Mischief_IRC::implementation
 		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
 		{
 			TextBoxMessage().Focus(FocusState::Programmatic);
+			TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
 		}
 	}
 
@@ -419,6 +426,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxNavcheck().IsChecked(true);
 		TextBoxNavcheckCanJump().Focus(FocusState::Programmatic);
+		TextBoxNavcheckCanJump().SelectionStart(TextBoxNavcheckCanJump().Text().size());
 		Callout::Replace("Navcheck", "navcheck: client can jump " + to_string(TextBoxNavcheckCanJump().Text()) + " ly");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 	}
@@ -443,6 +451,7 @@ namespace winrt::Mischief_IRC::implementation
 		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
 		{
 			TextBoxMessage().Focus(FocusState::Programmatic);
+			TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
 		}
 	}
 
@@ -468,6 +477,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxBc().IsChecked(true);
 		TextBoxDistance().Focus(FocusState::Programmatic);
+		TextBoxDistance().SelectionStart(TextBoxDistance().Text().size());
 		ComboBoxDistance().SelectedIndex(3); // ls
 		Callout::Replace("Bc", "bc+");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
@@ -502,6 +512,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxInst().IsChecked(true);
 		TextBoxDistance().Focus(FocusState::Programmatic);
+		TextBoxDistance().SelectionStart(TextBoxDistance().Text().size());
 		ComboBoxDistance().SelectedIndex(1); // km
 		Callout::Replace("Inst", "inst+");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
@@ -511,6 +522,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxInst().IsChecked(true);
 		TextBoxDistance().Focus(FocusState::Programmatic);
+		TextBoxDistance().SelectionStart(TextBoxDistance().Text().size());
 		ComboBoxDistance().SelectedIndex(0); // m
 		Callout::Replace("Inst", "inst-");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
@@ -538,6 +550,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		CheckBoxClientPos().IsChecked(true);
 		TextBoxDistance().Focus(FocusState::Programmatic);
+		TextBoxDistance().SelectionStart(TextBoxDistance().Text().size());
 		ComboBoxDistance().SelectedIndex(3); // ls
 		Callout::Replace("ClientPos", "client in ez");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
@@ -554,6 +567,7 @@ namespace winrt::Mischief_IRC::implementation
 	{
 		Callout::Append("Distance");
 		TextBoxDistance().Focus(FocusState::Programmatic);
+		TextBoxDistance().SelectionStart(TextBoxDistance().Text().size());
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxDistance_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -605,6 +619,7 @@ namespace winrt::Mischief_IRC::implementation
 		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
 		{
 			TextBoxMessage().Focus(FocusState::Programmatic);
+			TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
 		}
 	}
 
@@ -622,6 +637,7 @@ namespace winrt::Mischief_IRC::implementation
 		Callout::Append("Fuel", "fuel+");
 		TextBoxMessage().Text(to_hstring(Callout::Generate()));
 		TextBoxMessage().Focus(FocusState::Programmatic);
+		TextBoxMessage().SelectionStart(TextBoxMessage().Text().size());
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxFuelPlus_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
