@@ -468,32 +468,69 @@ namespace winrt::Mischief_IRC::implementation
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxDistance_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Append("Distance");
+		TextBoxDistance().Focus(FocusState::Programmatic);
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxDistance_Unchecked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-
+		Callout::Remove("Distance");
+		TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		TextBoxDistance().Text(L"");
+		ComboBoxDistance().SelectedIndex(3); // ls
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxDistance_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::TextChangedEventArgs const& e)
 	{
+		if (TextBoxDistance().Text() != L"")
+		{
+			CheckBoxDistance().IsChecked(true);
+			Callout::Replace("Distance", to_string(TextBoxDistance().Text()) + ' ' + _distanceUnits.at(ComboBoxDistance().SelectedIndex()));
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 
+		else
+		{
+			CheckBoxDistance().IsChecked(false);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxDistance_PreviewKeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
+		if (e.Key() == winrt::Windows::System::VirtualKey::Add)
+		{
+			e.Handled(true);
+			if (ComboBoxDistance().SelectedIndex() != ComboBoxDistance().Items().Size() - 1)
+			{
+				ComboBoxDistance().SelectedIndex(ComboBoxDistance().SelectedIndex() + 1);
+			}
+		}
 
+		else if (e.Key() == winrt::Windows::System::VirtualKey::Subtract)
+		{
+			e.Handled(true);
+			if (ComboBoxDistance().SelectedIndex() != 0)
+			{
+				ComboBoxDistance().SelectedIndex(ComboBoxDistance().SelectedIndex() - 1);
+			}
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxDistance_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
-
+		if (e.Key() == winrt::Windows::System::VirtualKey::Enter)
+		{
+			TextBoxMessage().Focus(FocusState::Programmatic);
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::ComboBoxDistance_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Controls::SelectionChangedEventArgs const& e)
 	{
-
+		if (CheckBoxDistance().IsChecked().GetBoolean() == true)
+		{
+			Callout::Replace("Distance", to_string(TextBoxDistance().Text()) + ' ' + _distanceUnits.at(ComboBoxDistance().SelectedIndex()));
+			TextBoxMessage().Text(to_hstring(Callout::Generate()));
+		}
 	}
 
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::CheckBoxFuelPlus_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)

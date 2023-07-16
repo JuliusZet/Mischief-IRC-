@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <array>
 #include "CalloutCreatorPage.g.h"
 #include "Core/CalloutCreator/Callout.h"
 
@@ -8,7 +9,7 @@ namespace winrt::Mischief_IRC::implementation
     struct CalloutCreatorPage : CalloutCreatorPageT<CalloutCreatorPage>
     {
     private:
-
+        std::array<string, 7> _distanceUnits{ "m", "km", "Mm", "ls", "kls", "Mls", "ly" };
     public:
         CalloutCreatorPage();
         void CheckBoxCasenumber_Checked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
