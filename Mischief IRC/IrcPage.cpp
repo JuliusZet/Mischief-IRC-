@@ -84,7 +84,7 @@ namespace winrt::Mischief_IRC::implementation
                             {
                                 if (eachUser.Nick == nick)
                                 {
-                                    message.Text(to_hstring(eachUser.ChannelMembershipPrefix) + message.Text());
+                                    message.Text(eachUser.ChannelMembershipPrefix + message.Text());
 
                                     break;
                                 }
