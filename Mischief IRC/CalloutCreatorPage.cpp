@@ -646,6 +646,31 @@ namespace winrt::Mischief_IRC::implementation
 		ComboBoxDistance().SelectedIndex(3); // ls
 	}
 
+	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxMessage_GettingFocus(winrt::Windows::UI::Xaml::UIElement const& sender, winrt::Windows::UI::Xaml::Input::GettingFocusEventArgs const& args)
+	{
+		if (TextBoxMessage().Text() != L"" && !TextBoxMessage().Text().ends_with(' '))
+		{
+			TextBoxMessage().Text(TextBoxMessage().Text() + ' ');
+		}
+	}
+
+	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxMessage_LostFocus(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
+	{
+		if (TextBoxMessage().Text() != L"" && TextBoxMessage().Text().ends_with(' '))
+		{
+			std::string message{ to_string(TextBoxMessage().Text()) };
+			message.pop_back();
+
+			// Remove all trailing whitespaces
+			while (message != "" && message.back() == ' ')
+			{
+				message.pop_back();
+			}
+
+			TextBoxMessage().Text(to_hstring(message));
+		}
+	}
+
 	void winrt::Mischief_IRC::implementation::CalloutCreatorPage::TextBoxMessage_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& e)
 	{
 

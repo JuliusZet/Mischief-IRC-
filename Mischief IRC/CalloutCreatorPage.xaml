@@ -720,7 +720,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextBoxMessage" Grid.Column="0" KeyDown="TextBoxMessage_KeyDown"/>
+            <TextBox x:Name="TextBoxMessage" Grid.Column="0" GettingFocus="TextBoxMessage_GettingFocus" LostFocus="TextBoxMessage_LostFocus" KeyDown="TextBoxMessage_KeyDown"/>
             <Button x:Name="ButtonSend" Grid.Column="1" Margin="12,0,0,0" Style="{ThemeResource ButtonRevealStyle}" Click="ButtonSend_Click">
                 <SymbolIcon Symbol="Send"/>
             </Button>
